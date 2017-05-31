@@ -1,0 +1,13 @@
+.ui.form.inline.fields.nested-fields
+    .field
+        = f.input :skill_id, as: :select, collection: Core::Skill.where(skill_type: skill_type.id), label_method: :name, value_method: :id,  label: false,  placeholder: 'Add Skills'
+    .field
+        = f.input :rating, as: :select, collection: Core::Rating::RATING_VALUES,  include_blank: false, label: false
+    .field
+        = f.input :experience, placeholder: 'Experience (In Years)', label: false, input_html: {class: 'input-experience'}
+    .field
+        = f.check_box :show_on_profile, as: :boolean
+        = label_tag :show_on_profile
+    .column
+        .links.skill-remove-link
+            = link_to_remove_association '<i class="trash medium icon icon"></i>'.html_safe, f

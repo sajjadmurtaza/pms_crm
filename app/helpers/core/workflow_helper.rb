@@ -1,0 +1,2 @@
+module Core::WorkflowHelper
+end

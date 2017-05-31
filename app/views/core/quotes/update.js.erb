@@ -1,0 +1,6 @@
+$('[data-quote="<%= @quote.id%>"]').remove()
+$('.quotes-list').prepend("<%= escape_javascript(render( partial: 'quote', locals: {quote: @quote})) %>");
+
+$('#show-box').replaceWith("<%= escape_javascript(render( template: 'core/quotes/show', locals: {quote: @quote})) %>");
+
+Heyday.UI.initJSElements();

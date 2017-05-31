@@ -1,0 +1,6 @@
+.nested-fields
+  .fields
+    .inline.fields.optional.select.type-select
+      = f.input :contact_id, label: false, input_html: { class:'select-create-field', data: { options: Directory::Contact.all , path: new_contact_path} }, include_blank: false, placeholder: 'Add Contact'
+      .field
+        = link_to_remove_association semantic_icon('trash icon') , f

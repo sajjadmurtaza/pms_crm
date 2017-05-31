@@ -1,0 +1,9 @@
+= simple_form_for [:core_skill, @skill], url: @skill.new_record? ? skills_path : skill_path(@skill), html: {class: 'skill-form', remote: true} do |f|
+  = f.error_notification
+  .ui.grid
+    .column
+      = f.input :name, placeholder: 'Skill Name'
+      = f.input :skill_type_id,  collection: Core::SkillType.all, value_method: :id, label_method: :name, label: 'Skill Type'
+      .actions
+        = f.submit f.object.new_record? ? 'Create' : 'Update', class: 'ui blue small submit button ok'
+        .ui.small.black.button.cancel Cancel

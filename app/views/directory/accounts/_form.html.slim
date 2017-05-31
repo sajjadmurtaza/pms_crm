@@ -1,0 +1,29 @@
+- content_for :sub_action_bar
+  = form_submit_button 'Save', '.account-form'
+  = link_to 'Cancel', url_for(:back), class: 'ui black button'
+
+= simple_form_for [:account, @account], url: @account.new_record? ? accounts_path : account_path(@account), html: {class: 'account-form', :multipart => true}  do |f|
+  = f.error_notification
+  .ui.stackable.grid
+    .ui.two.column.row
+      .column.padded.top
+        .ui.tiny.block.header Account Information
+        = f.input :account_number, placeholder: 'Account Number'
+        = f.input :title, placeholder: 'Tiltle'
+    .ui.one.column.row
+      .column
+        .ui.tiny.block.header Billing Address
+        = f.simple_fields_for :billing_address do |billing_address|
+          = render partial: 'addresses/address_fields', locals: { f: billing_address, type: 'billing' }
+        .links
+          = link_to_add_association 'Add Billing Address' , f, :billing_address, :partial => 'addresses/address_fields', render_options: { locals: { type: 'billing' } }
+        .ui.tiny.block.header Postal Address
+        = f.simple_fields_for :postal_address do |postal_address|
+          = render partial: 'addresses/address_fields', locals: { f: postal_address, type: 'postal' }
+        .links
+          = link_to_add_association 'Add Postal Address',f , :postal_address, :partial => 'addresses/address_fields', render_options: { locals: { type: 'postal' } }
+        .ui.tiny.block.header Email
+        = f.simple_fields_for :emails do |email|
+          = render 'emails/email_fields', :f => email
+        .links
+          = link_to_add_association 'Add Email',f , :emails, :partial => 'emails/email_fields'

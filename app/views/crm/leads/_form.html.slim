@@ -1,0 +1,31 @@
+- content_for :sub_action_bar
+  = form_submit_button 'Save', '.lead-form'
+  = link_to 'Cancel', url_for(:back), class: 'ui black button'
+= simple_form_for @lead, url: {action: @lead.new_record? ? :create : :update}, :html => {:multipart => true,class: "lead-form"}   do |f|
+  .ui.stackable.grid
+    .ui.grid
+      .column.padded.top
+        = f.input :first_name, placeholder: 'First Name'
+        = f.input :last_name, placeholder: 'Last Name'
+        = f.input :email, placeholder: 'example@xyz.com'
+        = f.input :phone, placeholder: 'Phone Number'
+        = f.input :skype, placeholder: 'Skype'
+        = f.input :description, as:  :wysi, placeholder: 'Description'
+        = f.input :technology_list, input_html: {class: 'multiple-add-taggable-field', data: {options: Core::Skill.pluck(:name)}}, label: 'Technologies', placeholder: 'Technologies'
+        = f.input :source_id, collection: Core::Source.all
+        = f.input :organization_unit_id, :collection => Core::OrganizationUnit.sort_by_ancestry(Core::OrganizationUnit.all), value_method: :id, label_method: :title_for_selects, include_blank: true, label: 'Division/Vertical'
+        .inline.field
+          label Contacts
+        .contacts
+          = f.simple_fields_for :leads_contacts do |contact|
+            = render 'crm/leads/assign_contact', :f => contact
+          .links
+            = link_to_add_association 'Add Contacts' , f, :leads_contacts, :partial => 'crm/leads/assign_contact'
+        .inline.field
+          label Attachments
+        .attachments
+          = f.simple_fields_for :attachments do |attachment|
+            - if @lead.persisted?
+              = render 'shared/show_attachments', :f => attachment
+          .links
+            = link_to_add_association 'Add Attachment', f, :attachments, :partial => 'shared/attachments_fields'

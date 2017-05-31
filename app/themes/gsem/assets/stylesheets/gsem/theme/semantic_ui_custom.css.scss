@@ -1,0 +1,57 @@
+@import 'semantic-ui';
+@import "constants";
+
+@font-face {
+  font-family: 'Icons';
+  src: font-url("semantic-ui/icons.eot");
+  src: font-url("semantic-ui/icons.eot?#iefix") format('embedded-opentype'),
+  font-url("semantic-ui/icons.svg#icons") format('svg'),
+  font-url("semantic-ui/icons.woff") format('woff'),
+  font-url("semantic-ui/icons.ttf") format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-decoration: inherit;
+  text-transform: none;
+}
+
+.ui.tabular.menu .item:first-child,
+.ui.secondary.pointing.menu .item:first-child {
+  margin-left: 20px;
+}
+
+.ui.tab {
+  padding: 10px 20px;
+}
+
+.ui.grid {
+  margin: auto;
+}
+
+.floated.right {
+  float: right;
+}
+
+.floated.left {
+  float: left;
+}
+
+.ui.table thead th:last-child,
+.ui.table thead th:first-child {
+  border-radius: 0;
+}
+
+.padded {
+  &.right {
+    padding-right: 1em;
+  }
+  &.left {
+    padding-left: 1em;
+  }
+  &.top {
+    padding-top: 1em;
+  }
+  &.bottom {
+    padding-bottom: 1em;
+  }
+}

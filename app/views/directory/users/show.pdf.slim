@@ -1,0 +1,129 @@
+#information
+  .image
+    = wicked_pdf_image_tag(@user.picture.name.url(:small)) unless @user.picture.blank?
+  .name
+    /= link_to 'Testing', 'http://www.google.com', html_options: {name: 'chapter1'}
+    = "#{@user.name} #{@user.addresses.try(:first).try(:country)}"
+    .since
+      = "Member since 2000"
+  .skill_detail
+    - @user.skills.each do |skill|
+      .skill
+        = skill.name
+  .summary
+    = @user.summery
+#portfolio_experience
+  .portfolio
+    h6
+      | Portfolio
+    - @user.projects.each do |portfolio|
+      ul
+        li
+          .title
+            = portfolio.title
+          = portfolio.url
+  .experience
+    h6
+      | Experience
+    - @user.skills_users.each do |skil|
+      ul
+        li
+          .skill_title
+            = "#{skil.skill.name} #{skil.experience}-year"
+  .amazing
+    h6
+      | The most amazing ...
+    .most_amazing
+      = @user.the_most_amazing
+    .user_name
+      = "-- #{@user.name}"
+  .availibility
+    h6
+      | Availability
+    .part_time
+      | Part-Time
+    .environment
+      | Preferred Environment:
+      .preferred_environment
+        =@user.perfered_development_environment
+
+#employment
+  .employment
+    | Employment
+  .employment_detail
+    h6
+      = "Nextbridge (Pvt) Ltd,  #{Core::Role.find(@user.primary_role_id).name rescue ''}"
+    table
+      ul
+        tr
+          td
+            li
+          td
+            | Employee Id :
+          td
+            = @user.emp_id
+        tr
+          td
+            li
+          td
+            | Job Detail :
+          td
+            - unless @user.job_title_id.blank? and @user.location_id.blank?
+              = "#{Core::JobTitle.find_by_id(@user.job_title_id).name rescue ''}, #{Core::Location.find_by_id(@user.location_id).name rescue ''}"
+        tr
+          td
+            li
+          td
+            | Email :
+          td
+            = @user.email
+        tr
+          td
+            li
+          td
+            | Education :
+          td
+            = @user.education
+#contact_information
+  .contact_information
+    | Contact Information
+  .contact_detail
+    h6
+      | Addresses
+    table
+      ul
+        - if @user.addresses.present?
+          tr
+            td
+              li
+                = "Address#1 : #{@user.addresses.first.address1},#{@user.addresses.first.city}, #{@user.addresses.first.state},#{@user.addresses.first.country}"
+          tr
+            td
+              li
+                = "Address#2 : #{@user.addresses.first.address2},#{@user.addresses.first.city}, #{@user.addresses.first.state},#{@user.addresses.first.country}"
+
+    h6
+      | Emails
+    table
+      ul
+        - @user.emails.each do |email|
+          tr
+            td
+              li
+            td
+              = "#{email.email_type} : "
+            td
+              = email.email
+
+    h6
+      | Phones
+    table
+      ul
+        - @user.phones.each do |phone|
+          tr
+            td
+              li
+            td
+              = "#{phone.phone_type} : "
+            td
+              = phone.phone

@@ -1,0 +1,5 @@
+.nested-fields
+  .fields
+    .inline.field.optional.select.type-select
+      = f.input :user_id, label: false, collection: Directory::User.all, value_method: :id, include_blank: false, wrapper: false
+      = link_to_remove_association semantic_icon('trash medium icon') , f

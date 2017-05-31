@@ -1,0 +1,9 @@
+.ui.stackable.grid
+  .ui.one.column.row
+    .column
+      = f.simple_fields_for :projects do |s|
+        = render 'projects/projects_fields', :f => s
+      .links
+        = link_to_add_association 'Add More Projects' , f, :projects, :partial => 'projects/projects_fields'
+
+= call_hook(:view_users_operations_form)

@@ -1,0 +1,19 @@
+#profile-tabs
+  ul.user-skills-ul
+    li.user-skills-li
+      a.item href="#Basic-Information"  Basic Information
+    li.user-skills-li
+      a.item href="#Skills"  Skills
+    li.user-skills-li
+      a.item href="#Portfolio"  Portfolio
+  #Basic-Information.profile-tabs.partial-leftborder
+    = render 'directory/users/basic_information', :f => f
+  #Skills.profile-tabs.partial-leftborder
+    = render 'directory/users/skill', :f => f
+  #Portfolio.profile-tabs.partial-leftborder
+    = render 'directory/users/portfolio',  :f => f
+
+
+
+
+

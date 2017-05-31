@@ -1,0 +1,6 @@
+.nested-fields
+  .fields
+    .inline.fields.optional.select.type-select
+      = f.input :system_user_id, label: false, input_html: { class:'single-taggable-field', data: { options: Core::SystemUser.all} }, include_blank: false
+      .field
+        = link_to_remove_association semantic_icon('trash large icon') , f

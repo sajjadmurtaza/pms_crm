@@ -1,0 +1,28 @@
+.ui.small.form
+  .ui.grid.gray
+    .two.column.row
+      .column
+        h3 Projects
+        hr
+        - object.projects.each do |p|
+          .field
+            b.label Project Title :
+            = " " + p.title
+          .field
+            b.label Project URL :
+            = " " + p.url
+          .field
+            b.label Project Tools & Technology :
+            = " " + p.tools_and_tech
+          .field
+            b.label Project Description :
+            = " " + p.description
+          hr
+
+
+
+
+
+
+
+

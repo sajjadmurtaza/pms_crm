@@ -1,0 +1,23 @@
+- content_for :sub_action_bar
+  = form_submit_button 'Save', '.user-form'
+  = link_to 'Cancel', url_for(:back), class: 'ui black button'
+
+= simple_form_for [:user, @user], url: @user.new_record? ? users_path : user_path(@user), html: {class: 'user-form' }  do |f|
+  .ui.grid
+    .two.column.row
+      .column
+        = f.input :first_name, placeholder: 'First Name'
+        = f.input :last_name, placeholder: 'Last Name'
+        = f.input :email, placeholder: 'example@xyz.com'
+        = f.input :emp_id, label: 'Employee Id', placeholder: 'Employee Id'
+        - if Core::SystemUser.current == @user
+          = f.input :theme, collection: ['white_blend', 'gsem', 'material_design', 'material_design_brown', 'material_design_gray', 'material_design_dark_gray', 'material_design_indigo', 'material_design_light_blue', 'material_design_purple', 'material_design_teal'], include_blank: false
+
+      .column
+        = f.simple_fields_for :picture do |img|
+          = img.input :name, label: 'Picture', as: :image_preview, input_html: {preview_version: :thumb}
+
+        = f.input :calling_name, label: 'Calling Name', placeholder: 'Calling Name'
+    = render_tabs( [{:name => 'detail', :partial => 'directory/users/detail', :label => 'Detail', :remote => false, locals: {f: f}}, {:name => 'profile', :partial => 'directory/users/profile', :label => 'Profile', :remote => false, locals: {f: f}}, {:name => 'security', :partial => 'directory/users/security', :label => 'Security', :remote => false, locals: {f: f}}])
+    /= render_tabs( [{:name => 'basic_information', :partial => 'directory/users/basic_information', :label => 'Basic Information', :remote => false, locals: {f: f}}, {:name => 'skills', :partial => 'directory/users/skill', :label => 'Skills', :remote => false, locals: {f: f}}, {:name => 'portfolio', :partial => 'directory/users/portfolio', :label => 'Portfolio', :remote => false, locals: {f: f}},{:name => 'detail', :partial => 'directory/users/detail', :label => 'Detail', :remote => false, locals: {f: f}}, {:name => 'security', :partial => 'directory/users/security', :label => 'Security', :remote => false, locals: {f: f}}])
+

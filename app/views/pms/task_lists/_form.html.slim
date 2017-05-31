@@ -1,0 +1,10 @@
+= simple_form_for task_list ,  url: task_list.new_record? ? task_lists_path : task_list_path, :html => {remote: true, class: 'ui form contact-form'}   do |f|
+  = f.input :taskable_id, :as => :hidden
+  = f.input :taskable_type, :as => :hidden
+  = f.input :title, placeholder: 'Title'
+  = f.submit "Save", class: "button"
+  - if task_list.new_record?
+    span class="cursor-pointer" onclick="$('#add_task_list').html('')" Cancel
+  - else
+    = link_to "cancel", cancel_task_list_path(task_list), remote: true
+

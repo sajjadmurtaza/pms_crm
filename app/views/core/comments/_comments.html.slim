@@ -1,0 +1,20 @@
+.object_comment_form
+  = simple_form_for Core::Comment.new, url: comments_path, html: {remote: true} do |f|
+    = f.error_notification
+    .ui.grid
+      .column
+        /.ui.top.left.attached.label = @enumeration.type.split('::').last
+        .input_field.comment_box.grey
+          | Enter Comment here...
+        .comment_form
+          = f.input :comment, as: :wysi, label: false, placeholder: 'Enter Comment here...'
+          = f.input :commentable_id, as: :hidden, input_html: {value: object.id}
+          = f.input :commentable_type, as: :hidden, input_html: {value: object.class}
+          .actions.custom_actions
+            = f.submit f.object.new_record? ? 'Create' : 'Update', class: 'ui small blue submit button ok'
+            .ui.small.button.black.comment_cancel Cancel
+
+  .object_comments
+    /div id="object_comments_#{object.id}" class = "ui comments comments-overflow"
+    - object.comments.each do |comment|
+      = render partial: 'core/comments/comment', locals: {comment: comment}

@@ -1,0 +1,76 @@
+$white: #FFFFFF;
+$black: #343434;
+$gray: #4A4A4A;
+$light-gray: #E6E6E6;
+$blue: #64a3d1;
+$light-blue: #3FAEBF;
+$container: #FFFFFF;
+
+$nav-bar-height: 40px;
+$secondary-nav-bar-height: 40px;
+$action-bar-height: 45px;
+$side-bar-width: 250px;
+
+$label-width: 150px;
+$label-margin: 10px;
+
+
+@mixin vertical-gradient($values...) {
+  $fromColor: nth($values, 1);
+  $toColor: nth($values, length($values));
+  background-color: $toColor; /* Fallback Color */
+  background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, $values); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, $values); /* FF3.6 */
+  background-image:     -ms-linear-gradient(top, $values); /* IE10 */
+  background-image:      -o-linear-gradient(top, $values); /* Opera 11.10+ */
+  background-image:         linear-gradient(top, $values);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}');
+}
+
+@mixin horizontal-gradient($values...) {
+  $fromColor: nth($values, 1);
+  $toColor: nth($values, length($values));
+  background: $toColor; /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: -moz-linear-gradient(left,  $values); /* FF3.6+ */
+  background: -webkit-linear-gradient(left,  $values); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left,  $values); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left,  $values); /* IE10+ */
+  background: linear-gradient(to right,  $values); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$fromColor}', endColorstr='#{$toColor}',GradientType=1 ); /* IE6-8 */
+}
+
+@mixin diagonal-gradient($values...) {
+  $fromColor: nth($values, 1);
+  $toColor: nth($values, length($values));
+  background: $fromColor; /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: -moz-linear-gradient(-45deg,  $values); /* FF3.6+ */
+  background: -webkit-linear-gradient(-45deg,  $values); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg,  $values); /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg,  $values); /* IE10+ */
+  background: linear-gradient(135deg,  $values); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$fromColor}', endColorstr='#{$toColor}',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+}
+
+@mixin box-shadow($values...){
+  box-shadow: $values;
+  -moz-box-shadow: $values;
+  -webkit-box-shadow: $values;
+}
+
+$break-small: 320px;
+$break-large: 1024px;
+
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: $break-small) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $break-small + 1) and (max-width: $break-large - 1) { @content; }
+  }
+  @else if $media == wide-screens {
+    @media only screen and (min-width: $break-large) { @content; }
+  }
+}

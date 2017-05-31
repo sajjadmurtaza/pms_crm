@@ -1,0 +1,24 @@
+= content_for :sidebar
+  = link_to 'Add Calendar', new_calendar_path, remote: true, class: 'ui blue small fluid button'
+  br
+
+  .ui.celled.list.calendars-list
+    - @calendars.each do |calendar|
+      .item
+        .ui.horizontal.label style="background-color: #{calendar.color}"
+          - if @checked_calendar_ids.present? and @checked_calendar_ids.include? calendar.id.to_s
+            input type="checkbox" checked= "checked" data-calendar-id=calendar.id
+          - else
+            input type="checkbox"  data-calendar-id=calendar.id
+        .content
+          .header = calendar.name
+          .actions
+            = link_to "<i class='pencil mini icon'></i>".html_safe, edit_calendar_path(calendar), remote: true
+            = link_to "<i class='share alternate icon'></i>".html_safe, share_calendar_path(calendar), remote: true
+            = link_to "<i class='remove mini icon'></i>".html_safe, calendar_path(calendar), method: :delete, remote: true, data: {confirm: 'Are you sure?'}
+
+.ui.stackable.grid
+  .ui.one.column.row
+    .column.padded.top
+      .ui
+        #calendar

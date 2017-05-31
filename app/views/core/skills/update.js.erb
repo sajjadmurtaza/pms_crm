@@ -1,0 +1,10 @@
+<% if @skill.errors.present? %>
+    setTimeout(function(){
+        Heyday.UI.showModal('Skills','<%= j render(partial: 'form') %>');
+    }, 550)
+<% else %>
+  $('#<%=@skill.id%>').replaceWith('<%=j(render(partial: 'skill' , locals: {skill: @skill}))%>')
+  $('.item-modal').modal('hide');
+ //bind default events
+  Heyday.UI.initJSElements();
+<% end %>

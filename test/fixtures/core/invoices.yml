@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  due_date: 2014-12-16
+  organization_unit_id: 1
+  project: MyText
+  task: MyText
+  cost: 1.5
+  split_type_id: 1
+
+two:
+  due_date: 2014-12-16
+  organization_unit_id: 1
+  project: MyText
+  task: MyText
+  cost: 1.5
+  split_type_id: 1

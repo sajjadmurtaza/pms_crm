@@ -1,0 +1,10 @@
+.ui.form
+  .ui.grid.gray
+    .two.column.row
+      .column
+        .ui.small.black.header Technologies
+        hr
+        -@lead.taggings.each do |tagging|
+          .field
+            b.label = "#{tagging.try(:tag).try(:name)} : "
+            = tagging.rating

@@ -1,0 +1,23 @@
+.two.fields
+  = f.input :job_title_id, :collection => Core::JobTitle.all, label: 'Job Title', placeholder: 'Job Title'
+  = f.input :location_id, :collection => Core::Location.all, label: 'Location', placeholder: 'Location'
+.two.fields
+  = f.input :education, label: 'Education', placeholder: 'Education'
+  = f.input :experience, label: 'Experience', placeholder: 'Experience In Years'
+
+= f.simple_fields_for :addresses do |address|
+  = render 'addresses/address_fields', :f => address
+
+.ui.two.column.grid
+  .column
+    = f.simple_fields_for :phones do |phone|
+      = render 'phones/phone_fields', :f => phone
+    .links
+      = link_to_add_association 'Add Phone' , f, :phones, :partial => 'phones/phone_fields'
+  .column
+    = f.simple_fields_for :emails do |email|
+      = render 'emails/email_fields', :f => email
+    .links
+      = link_to_add_association 'Add Email' , f, :emails, :partial => 'emails/email_fields'
+
+= call_hook(:view_users_information_form)

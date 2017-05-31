@@ -1,0 +1,73 @@
+= render 'sidebar'
+= content_for :sub_action_bar
+  .date-filter.floated.left
+    = render partial: 'filters', :locals => {:url => invoice_logs_path}
+  .floated.right
+    = render partial: 'shared/pagination', locals: {collection: @invoice_logs, additional_params: {filters: params[:filters]}}
+
+.ui.comments.top_margin
+  - @invoice_logs.each do |log|
+    - invoice = log.auditable
+    - if invoice
+      .comment
+        - if log.action == 'create'
+          - status = Core::InvoiceStatus.find(log.audited_changes['status_id']).value
+          - user = log.user
+          a.avatar
+            = image_tag(user.try(:picture).try(:name).try(:small).try(:url))
+          .content
+            = link_to 'New Invoice request', invoice_path(log.auditable_id)
+            span.grey
+              = " #{time_ago_in_words(log.created_at)} ago in "
+            - if invoice.project
+              span.grey = 'Project: '
+              = link_to invoice.project.title, project_path(invoice.project)
+            - else
+              span.grey = 'Lead: '
+              = link_to invoice.lead.name, lead_path(invoice.lead)
+            br
+            .text.grey
+              - date = l Date.parse(log.audited_changes['due_date'])
+              = "Due Date: #{date}"
+            .text.grey
+              = "Split: #{Core::InvoiceSplitType.find(log.audited_changes['split_type_id']).name}"
+            .text.grey
+              = "Amount: #{number_to_currency log.audited_changes['cost'].to_f}"
+
+        - elsif log.action == 'update'
+          - user = log.user
+          a.avatar
+            = image_tag(user.try(:picture).try(:name).try(:small).try(:url))
+            .content
+              = link_to 'Invoice updated', invoice_path(log.auditable_id)
+              span.grey
+                = " #{time_ago_in_words(log.created_at)} ago in "
+              - if invoice.project
+                span.grey = 'Project: '
+                = link_to invoice.project.title, project_path(invoice.project)
+              -else
+                span.grey = 'Lead: '
+                = link_to invoice.lead.name, lead_path(invoice.lead)
+
+              br
+                - log.audited_changes.keys.each do |key|
+                  .text
+                    span.grey = key.titleize
+                    span.grey &nbspchanged&nbsp
+                    span.grey &nbspfrom&nbsp
+                    - if  key.include?('_id') and key != 'organization_unit_id' and key != 'task_list_id'
+                      span = "#{log.auditable_type}#{key.titleize}".delete(' ').constantize.find(log.audited_changes[key].first)
+                      span.grey &nbspto&nbsp
+                      span = "#{log.auditable_type}#{key.titleize}".delete(' ').constantize.find(log.audited_changes[key].second)
+                    - elsif key == 'organization_unit_id'
+                      span = Core::OrganizationUnit.find(log.audited_changes[key].first).title
+                      span.grey &nbspto&nbsp
+                      span = Core::OrganizationUnit.find(log.audited_changes[key].second).title
+                    - elsif key == 'task_list_id'
+                      span = Pms::TaskList.find(log.audited_changes[key].first).title if log.audited_changes[key].first
+                      span.grey &nbspto&nbsp
+                      span = Pms::TaskList.find(log.audited_changes[key].second).title if log.audited_changes[key].second
+                    - else
+                      span = log.audited_changes[key].first
+                      span.grey &nbspto&nbsp
+                      span = log.audited_changes[key].second

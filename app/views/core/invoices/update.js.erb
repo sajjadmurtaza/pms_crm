@@ -1,0 +1,6 @@
+$('[data-invoice="<%= @invoice.id%>"]').remove();
+$('.invoices-list').prepend("<%= escape_javascript(render( partial: 'invoice', locals: {invoice: @invoice})) %>");
+
+$('#show-box').replaceWith("<%= escape_javascript(render( template: 'core/invoices/show', locals: {invoice: @invoice})) %>");
+
+Heyday.UI.initJSElements();

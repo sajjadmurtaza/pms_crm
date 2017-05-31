@@ -1,0 +1,10 @@
+<% if @role.errors.present? %>
+setTimeout(function(){
+    Heyday.UI.showModal('Role','<%= j render(partial: 'form') %>');
+}, 550)
+<% else %>
+$('#<%=@role.id%>').replaceWith('<%=j(render(partial: 'role' , locals: {role: @role}))%>')
+$('.item-modal').modal('hide');
+//bind default events
+Heyday.UI.initJSElements();
+<% end %>

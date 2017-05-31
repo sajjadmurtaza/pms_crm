@@ -1,0 +1,5 @@
+Heyday.UI.AjaxLoader.stop();
+setTimeout(function(){
+    Heyday.UI.showModal('<%= @title %>', "<%= j @action_result %>", null, null, "large");
+    Heyday.UI.initJSElements();
+}, 550);

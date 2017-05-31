@@ -1,0 +1,23 @@
+h1 Listing workspace_calendar_entries
+
+table
+  thead
+    tr
+      th Title,
+      th Description
+      th
+      th
+      th
+
+  tbody
+    - @workspace_calendar_entries.each do |workspace_calendar_entry|
+      tr
+        td = workspace_calendar_entry.title
+        td = workspace_calendar_entry.description
+        td = link_to 'Show', workspace_calendar_entry
+        td = link_to 'Edit', edit_workspace_calendar_entry_path(workspace_calendar_entry)
+        td = link_to 'Destroy', workspace_calendar_entry, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Calendar entry', new_workspace_calendar_entry_path

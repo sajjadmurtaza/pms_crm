@@ -1,0 +1,31 @@
+- @note_types = Core::NoteTypeAssociation.find_by_name(@object.class).try(:assigned_note_types)
+- unless @note_types.present?
+  = 'Please Add Some Note Types For This Entity'
+- else
+  - default = Core::NoteType.default(@object.class).nil? ? @note_types.first : Core::NoteType.default(@object.class)
+  = widget_div class: 'notes-list-widget' do
+    .notes-list-header
+      .ui.buttons
+        = link_to("<i class='add icon'></i>".html_safe + default.name, url_for_event(:new, note_type_id: default.id, noteable_id: @object.id, noteable_type: @object.class), remote: true, class: 'ui icon button')
+        .ui.dropdown.icon.button
+          i.dropdown.icon
+          .menu
+            - @note_types.all.each do |note_type|
+              = link_to(note_type.name, url_for_event(:new, note_type_id: note_type.id, noteable_id: @object.id, noteable_type: @object.class), remote: true, class: 'item')
+
+      .ui.icon.input
+        input type="text" placeholder="Search..."
+        i.search.icon
+
+      .ui.floating.labeled.icon.dropdown.button
+        i.filter.icon
+        span.text All
+        .menu
+          .item All
+          - @note_types.all.each do |note_type|
+            = link_to note_type.name, url_for_event(:search, note_type_id: note_type.id, noteable_id: @object.id, noteable_type: @object.class), class: 'item', remote: true
+
+    .ui.stacked.segment.hidden.transition#note_form
+
+    #note_list
+      = render 'list'

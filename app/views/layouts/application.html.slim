@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title Heyday
+    link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body class=params[:controller]
+    #container
+      .user_nav
+        - if current_user
+          | Logged in as #{current_user.username} | &nbsp;
+          == link_to "Log out", logout_path
+      - flash.each do |name, msg|
+        == content_tag :div, msg, :id => "flash_#{name}"
+      = yield

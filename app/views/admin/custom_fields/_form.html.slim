@@ -1,0 +1,22 @@
+= simple_form_for @custom_field, as: :custom_field, url: @custom_field.new_record? ? admin_custom_fields_path : admin_custom_field_path(@custom_field), remote: true do |f|
+  .ui.two.column.grid
+    .column
+      = f.input :name
+      = f.input :field_format, collection: Core::CustomField::FIELD_FORMATS, include_blank: false
+      = f.input :regexp
+      = f.input :default_value, as: :string
+      = f.input :min_length
+      = f.input :max_length
+    .column
+      = f.input :required
+      = f.input :editable
+      = f.input :searchable
+      = f.input :scheduleable
+      = f.input :possible_values
+      = f.input :meta
+      = f.input :type, as: :hidden
+
+  .actions
+    = f.submit class: 'ui blue button'
+    .ui.small.black.button.cancel Cancel
+

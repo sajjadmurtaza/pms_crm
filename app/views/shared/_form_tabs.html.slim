@@ -1,0 +1,10 @@
+- selected_tab = params[:tab] ? params[:tab].to_s : tabs.first[:name]
+
+.ui.pointing.secondary.tabular.menu
+  - tabs.each do |tab|
+    - caption = tab[:label].is_a?(Proc) ? tab[:label].call() : tab[:label]
+    - css_class = tab[:name] != selected_tab ? 'item ' : 'item'
+    = link_to caption.to_s, '#', { class: css_class, data: {tab: tab[:name]}}
+
+- tabs.each_with_index do |tab, index|
+  = content_tag('div', render(partial:tab[:partial], locals: {tab: tab, f: f, object: f}), {class: "ui tab", data: {tab: tab[:name]}})

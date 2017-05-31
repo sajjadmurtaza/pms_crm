@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Core system user:
+  = @calendar.core_system_user_id
+p
+  strong Name:
+  = @calendar.name
+p
+  strong Color:
+  = @calendar.color
+
+= link_to 'Edit', edit_calendar_path(@calendar)
+'|
+= link_to 'Back', calendars_path

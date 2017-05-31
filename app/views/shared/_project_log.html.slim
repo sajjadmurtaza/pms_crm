@@ -1,0 +1,41 @@
+.ui.comments
+  /-if object.try(:associated_audits).nil?
+  /  =@total_audits = object.audits
+  /-else
+  /  =@total_audits = (object.audits + object.associated_audits)
+  -if object
+    - object.sort_by(&:created_at).reverse.each do |audit|
+      - user = Core::SystemUser.find(audit.try(:user_id))
+      - if (audit.auditable_type == 'Pms::Task') and audit.audited_changes['task_list_id']
+        .comment
+          .avatar
+            =image_tag(user.try(:picture).try(:name).try(:url))
+          .content
+            - task_list = Pms::TaskList.find(audit.audited_changes['task_list_id'])
+            strong Task&nbsp
+            span.grey = "#{time_ago_in_words(audit.created_at)} ago in "
+            strong = task_list.try(:title).titleize
+            span.grey &nbspof&nbsp
+            - project = Pms::Project.find(task_list.taskable_id)
+            strong = link_to project.title, project_path(project)
+
+            .text
+              br
+              = audit.audited_changes['description'].try(:html_safe)
+            .text
+              = l audit.audited_changes['due_date'].to_date
+
+      - elsif (audit.auditable_type == 'Core::Note') and audit.audited_changes['content']
+        .comment
+          .avatar
+            =image_tag(user.try(:picture).try(:name).try(:url))
+          .content
+            - note_type = audit.audited_changes['note_type_id']
+            strong = "#{Core::NoteType.find(note_type).try(:name).titleize} "
+            span.grey = "#{time_ago_in_words(audit.created_at)} ago in "
+
+            - project = Pms::Project.find(audit.audited_changes['notable_id'])
+            strong = link_to project.title, lead_path(project)
+            .text
+              br
+              = audit.audited_changes['content'].try(:html_safe)

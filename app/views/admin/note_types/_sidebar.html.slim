@@ -1,0 +1,6 @@
+= content_for :sidebar
+  = link_to 'New Note Type', new_admin_note_type_path, class: 'ui blue fluid button', remote: true
+
+  .ui.vertical.secondary.pointing.menu
+    - Core::NoteType.all.each do |note_type|
+      = active_link_to note_type.name, admin_note_type_path(note_type), 'item'

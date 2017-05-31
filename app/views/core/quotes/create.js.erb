@@ -1,0 +1,4 @@
+<% unless @quote.errors.present? %>
+    $('.quotes-list').prepend("<%= escape_javascript(render( partial: 'quote', locals: {quote: @quote})) %>");
+    Heyday.UI.initJSElements();
+<% end %>

@@ -1,0 +1,10 @@
+= simple_form_for @note_type, url: (@note_type.new_record? ? admin_note_types_path : admin_note_type_path(@note_type)), remote: true do |f|
+  = f.input :name
+  = f.simple_fields_for :note_types_associations do |association|
+    = render 'admin/note_types/assign_association', f: association
+  .links
+    = link_to_add_association 'Add Association' , f, :note_types_associations , :partial => 'admin/note_types/assign_association'
+
+  .actions
+    = f.submit class: 'ui blue button'
+    .ui.small.black.button.cancel Cancel

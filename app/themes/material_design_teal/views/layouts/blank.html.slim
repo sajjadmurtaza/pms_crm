@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title = page_title.present? ? "#{page_title}" : 'HeyDay'
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    meta name="mobile-web-app-capable" content="yes"
+    = google_webfonts_init({ google: ['Open+Sans:300italic,400,600,300']})
+    = stylesheet_link_tag    'material_design_teal/all', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'material_design_teal/all', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+body class="#{page_classes}"
+  = yield

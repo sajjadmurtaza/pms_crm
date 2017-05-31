@@ -1,0 +1,30 @@
+.ui.stacked.segment.form-background
+  = simple_form_for task ,  url: task.new_record? ? url_for_event(:create_task) : url_for_event(:update_task), :html => {multipart: true, remote: true, class: 'ui form contact-form'} do |f|
+    .ui.grid
+      .two.column.row
+        .column
+          = f.input :description, label: false, as: :wysi, placeholder: 'Description'
+          = f.input :due_date, label: false
+          .ui.top_margin
+            = f.simple_fields_for :tasks_users do |user|
+              = render 'assign_user', :f => user
+            .links.link-align
+              = link_to_add_association 'Assign User' , f, :tasks_users, :partial => 'assign_user'
+
+          .task.attachments.ui.top_margin
+            = f.simple_fields_for :attachments do |attachment|
+              - if task.persisted?
+                = render 'shared/show_attachments', :f => attachment
+            .links.link-align
+              = link_to_add_association 'Add Attachment', f, :attachments, :partial => 'shared/attachments_fields'
+
+          = f.input :task_list_id, as: :hidden
+          = f.input :id, as: :hidden
+
+          .actions.task_action
+            = f.submit "save", class: "ui blue button"
+            - if task_list.new_record?
+              span.cursor-pointer.ui.blue.button onclick="$('#add_task_list_task_#{task_list.id}').html('')" I'm done adding tasks
+            - else
+              = link_to "I'm done adding tasks", url_for_event(:cancel, id: task_list.id), remote: true, class: 'ui button'
+

@@ -1,0 +1,30 @@
+- unless task.completed
+  div class="content action-hover" id="task_edit_#{task.id}"
+    a.author style="margin-left: -21px;"
+      = check_box_tag 'completed', task.id, task.completed, class: 'task_complete'
+      = "<b>#{task.description}</b>".html_safe
+    .metadata
+      span.date
+        - task.assigned_users.each do |user|
+          span class='tagged_user'
+            = link_to "#{user.first_name}", user_path(user), class: 'item'
+      span.date.hide-display
+        = link_to('Edit', edit_task_task_lists_path(:task_id => task.id), remote: true, class: 'edit')
+        = link_to(semantic_icon('trash medium icon'), delete_task_task_lists_path(:task_id => task.id),remote:true, data: {confirm: 'Are you sure!'}, class: 'edit')
+    .text
+      = "Due Date #{task.due_date}"
+
+
+- else
+    div class="content action-hover" id="task_edit_#{task.id}"
+      a.author style="margin-left: -21px;"
+      .metadata
+        span.date
+          = check_box_tag 'completed', task.id, task.completed, class: 'task_complete'
+          = "#{task.description} Completed"
+        span.date.hide-display
+          = link_to(semantic_icon('trash medium icon'), delete_task_task_lists_path(:task_id => task.id),remote:true, data: {confirm: 'Are you sure!'}, class: 'edit')
+
+
+
+

@@ -1,0 +1,13 @@
+#side-bar {
+  h3 {
+    margin-bottom: 0;
+  }
+  .ui.list {
+    margin-top: 5px;
+    .ui.checkbox {
+      label {
+        padding-left: 1.5em;
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.ui.large.modal
+  i.close.icon
+  .ui.black.block.header
+    = "#{current_user.name} please update your Information"
+  br
+  br
+  = simple_form_for [:user, current_user], url: current_user.new_record? ? users_path : user_path(current_user), html: {class: 'first-login-user-form' }  do |f|
+    .ui.grid
+      .two.column.row
+        - if current_user.auth_mode == Heyday::AuthManager::AuthMode::Ldap.auth_mode_name
+          .column
+            = f.input :password, disabled: true, label: 'New Password', input_html: { id: 'password' }
+            = f.input :password_confirmation, disabled: true, label: 'Confirm New Password', input_html: { id: 'password_confirmation' }
+        - else
+          .column
+            = f.input :password, label: 'New Password', input_html: { id: 'password' }
+            = f.input :password_confirmation, label: 'Confirm New Password', input_html: { id: 'password_confirmation' }
+
+        .column
+          = f.simple_fields_for :picture do |img|
+            = img.input :name, label: 'Picture', as: :image_preview, input_html: {preview_version: :thumb}
+    .actions
+      .ui
+        = form_submit_button 'Update', '.first-login-user-form'

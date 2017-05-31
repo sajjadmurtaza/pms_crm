@@ -1,0 +1,52 @@
+.task-list-widget {
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .project_align {
+    width: 173px !important;
+  }
+  .indent_tasks {
+    margin-left: 30px !important;
+  }
+  .list-top {
+    margin-top: 20px;
+  }
+  .grey-line {
+    color: #eee;
+  }
+  .task-list-title {
+    font-size: 1.4em;
+//    text-decoration: underline;
+    color: #1C5C76;
+  }
+
+  .tagged_user {
+    border-radius: 8px;
+    padding: 2px;
+    background-color: #eee;
+  }
+  .actions-margin {
+    margin-left: -136px !important;
+  }
+  .hide-display {
+    display: none !important;
+  }
+//  #pms_task_description{
+//    margin-left: 160px;
+//  }
+  .task_action{
+   padding-left: 0 !important;
+  }
+  .form-background{
+    background: #eee;
+  }
+  .link-align{
+    text-align: left !important;
+  }
+  .wysi-toolbar{
+    left: 0px !important;
+  }
+  .text-style{
+    text-decoration: line-through;
+  }
+}

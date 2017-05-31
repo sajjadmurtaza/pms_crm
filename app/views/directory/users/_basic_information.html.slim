@@ -1,0 +1,7 @@
+.ui.one.column.grid
+  .column
+    = f.input :the_most_amazing, label: 'The Most Amazing', placeholder: 'The Most Amazing'
+    = f.input :perfered_development_environment, label: 'Development Environment', placeholder: 'Development Environment'
+    = f.input :summery, as: :text, input_html:{ rows: '2'}, label: 'Summary'
+
+= call_hook(:view_users_authentication_and_authorization_form)

@@ -1,0 +1,7 @@
+.inline.field
+  = f.label :name, 'Picture'
+  label.uploader
+    = f.input :name, as: :image_preview, label: false, wrapper: false, input_html: {preview_version: :thumb}
+    i.file.icon
+    span.file-label-name
+      = (@contact.new_record? || @contact.attachment.name_identifier.nil?) ? 'Choose Avatar' : @contact.attachment.name_identifier.truncate(15)

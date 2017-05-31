@@ -1,0 +1,6 @@
+.quotes-list-header
+  .ui.buttons
+    = link_to "#{semantic_icon('add')} Quote".html_safe, new_quote_path(project_id: project_id, lead_id: lead_id), class: "ui button", remote: true
+
+  .ui.top_margin
+    = render 'core/quotes/list'

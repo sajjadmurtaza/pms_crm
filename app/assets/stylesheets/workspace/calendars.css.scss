@@ -1,0 +1,7 @@
+// Place all the styles related to the workspace/calendars controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.fc-basic-view tbody .fc-row {
+  min-height: 75px !important; /* ensure that all rows are at least this tall */
+}

@@ -1,0 +1,10 @@
+= simple_form_for comment, url: comment_path, html: {remote: true} do |f|
+  = f.error_notification
+  .ui.grid
+    .column
+      /.ui.top.left.attached.label = @enumeration.type.split('::').last
+      = f.input :comment, as: :wysi, label: false, placeholder: 'Enter Comment here...', input_html: {value: raw(comment.comment)}
+
+      .actions.custom_actions
+        = f.submit f.object.new_record? ? 'Create' : 'Update', class: 'ui small blue submit button ok'
+        = link_to 'Cancel', cancel_comment_path(comment),class: 'ui small black button', remote: true

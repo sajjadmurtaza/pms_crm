@@ -1,0 +1,23 @@
+- object.sort_by(&:created_at).reverse.each do |lead|
+  - if lead.class == Core::Note
+    .ui.comments
+      div.comment data-note=lead.id
+        a.avatar title=lead.user.name
+          = image_tag lead.user.picture.name.url(:thumb)
+        .content
+          span.author
+            strong = lead.note_type.name.titleize
+          .metadata
+            span.date
+              = "#{time_ago_in_words(lead.created_at)} ago in"
+            strong = link_to lead.notable.name, lead_path(lead.notable)
+          .text
+            = simple_format lead.content
+            - lead.custom_values.each do |val|
+              div
+                u = val.name
+                | :
+                = val.value
+            - lead.attachments.each do |attachment|
+              br
+              = link_to "<i class='ui attachment icon'></i>#{attachment.name.file.identifier}".html_safe, attachment.name.url, target: '_blank'

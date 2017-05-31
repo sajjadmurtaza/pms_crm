@@ -1,0 +1,24 @@
+h1 Listing events
+
+table
+  thead
+    tr
+      th Id
+      th Title
+      th calendar
+      th
+      th
+      th
+
+
+  tbody
+    - @events.each do |workspace_event|
+      tr
+        td = workspace_event.id
+        td = workspace_event.title
+        td = workspace_event.calendar_id
+        td = workspace_event.start
+        td
+        td = workspace_event.end
+
+br

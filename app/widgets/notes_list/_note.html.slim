@@ -1,0 +1,29 @@
+.comment data-note=note.id
+  a.avatar title=note.user.name
+    = image_tag note.user.picture.name.url(:thumb)
+  .content
+    span.author
+      strong = note.note ? ('Comment <span style='+'font-weight:normal;'+'>on </span>' + link_to(note.note.note_type.name, url_for_event(:show, note_id: note.note.id), remote: true, class: 'item')).html_safe : note.note_type.name
+    .metadata
+      span.date
+        = "#{time_ago_in_words(note.created_at)} ago"
+    .text
+      = simple_format note.content
+      - note.custom_values.each do |val|
+        div
+          = val.name
+          | :&nbsp;
+          = val.value
+    - note.attachments.each do |attachment|
+      = link_to "<i class='ui attachment icon'></i>#{attachment.name.file.identifier}".html_safe, attachment.name.url, target: '_blank', class: 'grey'
+    .actions
+      .ui.top_margin
+        - if note.user == Core::SystemUser.current
+          = link_to('Edit'.html_safe, url_for_event(:edit, id: note.id), remote: true)
+          |&nbsp|&nbsp
+          = link_to('Delete'.html_safe, url_for_event(:destroy, id: note.id), remote: true, data: {confirm: 'Are you sure!'})
+
+    - if !note.note and note.note_type.note_types_associations.where(association_id: Core::NoteTypeAssociation.find_by_name(note.notable_type).id, note_type_id: note.note_type_id).first.commentable
+      = link_to(semantic_icon('large comment'), url_for_event(:new, note_type_id: 0, noteable_id: @object.id, noteable_type: @object.class, :note_id => note.id), remote: true, class: 'item grey')
+      /= render partial: "core/comments/comments", locals: {object: note}
+  .addcomment.ui.top_margin.transition.hidden data-comment=note.id

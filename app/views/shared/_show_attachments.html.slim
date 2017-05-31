@@ -1,0 +1,5 @@
+.nested-fields
+  .fields
+    = f.input :name, label: "<i class='attachment icon'></i>".html_safe, as: :file do
+      = link_to "#{f.object.name.file.try(:identifier)}".html_safe, f.object.name.url, target: '_blank'
+      = link_to_remove_association "<i class='trash icon'></i>".html_safe, f

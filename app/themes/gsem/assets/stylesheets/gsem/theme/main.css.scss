@@ -1,0 +1,250 @@
+@import "constants";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  height: 100%;
+  font-size: 13px;
+}
+
+#status-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+
+  @include vertical-gradient(#ffffff 0%, #f5f5f5 50%, #e7e7e7 100%);
+  @include box-shadow(0px -2px 5px rgba(100, 100, 100, 0.1));
+  border-top: 1px solid $medium-gray-color;
+
+  .content {
+    padding: 0 10px;
+    line-height: 29px;
+  }
+
+  .ui.breadcrumb {
+    margin-left: 20px;
+    line-height: 30px;
+    .section {
+      margin: 0 5px;
+      font-size: 1rem;
+    }
+  }
+}
+
+#nav-bar {
+  width: $nav-bar-width;
+  height: 100%;
+  float: left;
+  display: block;
+  position: fixed;
+  left: 0;
+
+  @include horizontal-gradient(#2d343a 0%, darken(#2d343a, 5) 100%);
+  @include box-shadow(inset -2px 0px 5px rgba(50, 50, 50, 0.8));
+
+  .brand {
+    @include vertical-gradient(#2d343a 0%, darken(#2d343a, 10) 100%);
+    height: 50px;
+    line-height: 50px;
+    font-size: 22px;
+    text-align: center;
+    color: #dbdbdd;
+  }
+  > .menu {
+    background: transparent;
+    box-shadow: none;
+    margin: 0;
+
+    .item {
+      font-size: 1.3rem;
+      color: #dbdbdd;
+      border-bottom: 1px solid #1d2329;
+      border-top: 1px solid #47525b;
+      padding: 5px;
+
+      &:hover,
+      &.active,
+      &:focus {
+        background: lighten(#2d343a, 10);
+      }
+    }
+  }
+
+  @include respond-to(medium-screens) {
+    width: $nav-bar-collapsed-width;
+    > .ui.vertical.menu {
+      .item {
+        height: 4rem !important;
+        line-height: 2rem;
+
+        .text {
+          display: none;
+        }
+        .icon {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+#side-bar {
+  width: $side-bar-width;
+  height: 100%;
+  float: left;
+  display: block;
+  position: fixed;
+  left: $nav-bar-width;
+
+  @include horizontal-gradient(#e7ecf1 0%, #e7ecf0 100%);
+  @include box-shadow(inset -2px 0px 10px rgba(150, 150, 150, 0.2));
+  border-left: 1px solid #c9d0d7;
+  border-right: 1px solid #c9d0d7;
+
+  .user-status {
+    @include vertical-gradient(#e5ecf2 0%, #c7ced6 100%);
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+  }
+
+  #sub-nav {
+    position: absolute;
+    bottom: 30px;
+  }
+
+  > .menu {
+    background: transparent;
+    box-shadow: none;
+    margin: 0;
+
+    .item {
+      font-size: 1rem;
+      color: #6a6a6b;
+      border-bottom: 1px solid #c9d0d7;
+      border-top: 1px solid #f6f8f9;
+
+      .icon {
+        float: left;
+        margin-left: 0;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  @include respond-to(medium-screens) {
+    left: $nav-bar-collapsed-width;
+  }
+}
+
+#action-bar {
+  @include vertical-gradient(#e5ecf2 0%, #c7ced6 100%);
+  height: 50px;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #a6b7bb;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
+
+  left: $nav-bar-width + $side-bar-width + 2px;
+  @include respond-to(medium-screens) {
+    left: $nav-bar-collapsed-width + $side-bar-width + 2px;
+  }
+
+  h1, h2, h3, h4 {
+    padding: 0;
+    margin: 0;
+  }
+
+  .title {
+    line-height: 40px;
+    font-size: 1.4rem;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 1.0);
+  }
+
+  .action-area {
+    padding-top: 6px;
+
+    > .buttons > .button,
+    > .button {
+      padding: 5px;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+
+      &:hover {
+        background: $white;
+        @include box-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
+      }
+
+      &.active {
+        background: $white;
+        box-shadow: none !important;
+      }
+    }
+    > .button,
+    > .buttons {
+      margin-left: 10px;
+    }
+    .icon {
+      margin: 0;
+      font-size: 1.5em;
+      color: $black;
+      text-shadow: 1px 1px 1px rgba(255, 255, 255, 1.0);
+    }
+  }
+}
+
+#breadcrumb-bar {
+  @include vertical-gradient(#f1f6fa 0%, #ebf0f4 100%);
+  @include box-shadow(0px 2px 5px rgba(150, 150, 150, 0.1));
+  border-top: 1px solid #eef5fd;
+  border-bottom: 1px solid #c8ced5;
+  height: 30px;
+  line-height: 29px;
+  vertical-align: middle;
+  padding: 0 10px;
+  position: fixed;
+  right: 0;
+  top: 50px;
+  z-index: 99;
+
+  left: $nav-bar-width + $side-bar-width + 2px;
+  @include respond-to(medium-screens) {
+    left: $nav-bar-collapsed-width + $side-bar-width + 2px;
+  }
+
+  .ui.breadcrumb {
+    margin: 0;
+    .section {
+      margin: 0 5px;
+      font-size: 1rem;
+    }
+    .section:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+#container {
+  width: 100%;
+  min-height: 100%;
+  padding-left: $nav-bar-width + $side-bar-width + 2px;
+  box-sizing: border-box;
+  padding-top: 82px;
+
+  @include respond-to(medium-screens) {
+    padding-left: $nav-bar-collapsed-width + $side-bar-width + 2px;
+  }
+
+  #content {
+    padding-bottom: 50px;
+  }
+}

@@ -1,0 +1,30 @@
+- unless assignment.completed
+  div.comment id="uncompleted_task_#{assignment.id}"
+    a.avatar title=assignment.user.name
+      = image_tag assignment.user.picture.name.url(:thumb)
+      .content
+        a.author
+          = check_box_tag 'completed', assignment.id, assignment.completed, class: 'switch_status', 'data-load-task-url' => switch_task_completed_path(task_id: assignment.id)
+        span.author
+          = link_to 'Task', task_path(assignment)
+        .metadata
+          span.date
+            = " assigned #{time_ago_in_words(assignment.created_at)} ago in "
+            = link_to assignment.task_list.taskable.title, project_path(assignment.task_list.taskable) if assignment.task_list.taskable
+        .text
+          = simple_format assignment.description
+
+- else
+  div.comment.grey id="completed_task_#{assignment.id}"
+    a.avatar title=assignment.user.name
+      = image_tag assignment.user.picture.name.url(:thumb)
+      .content.task-line-strike
+        a.author
+          = check_box_tag 'completed', assignment.id, assignment.completed, class: 'switch_status', 'data-load-task-url' => switch_task_completed_path(task_id: assignment.id)
+        span.author.task-line-strike
+          = link_to 'Task', task_path(assignment)
+        .metadata
+          span.date.task-line-strike
+            = " assigned #{time_ago_in_words(assignment.created_at)} ago in "
+            = link_to assignment.task_list.taskable.title, project_path(assignment.task_list.taskable) if assignment.task_list.taskable
+

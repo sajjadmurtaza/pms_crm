@@ -1,0 +1,19 @@
+- content_for :sub_action_bar
+  /= link_to 'Edit', edit_task_list_path(@task_list), :class => 'ui blue button'
+  = link_to 'Delete', task_list_path(@task_list), method: :delete,  data: {confirm: 'Are you sure you want to delete!'}, class: 'ui blue button'
+
+.ui.form
+  .ui.grid
+    .three.column.row
+      .column
+        table.ui.basic.table
+          tbody
+            = show_for @task_list do |u|
+              = u.attribute :title
+              = u.attribute :description
+
+
+/= render_tabs( [{:name => 'task_list', :partial => '/pms/projects/task_lists', :label => 'Task List'}], @project)
+
+
+

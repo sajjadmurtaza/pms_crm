@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Title,:
+  = @workspace_calendar_entry.title,
+p
+  strong Description:
+  = @workspace_calendar_entry.description
+
+= link_to 'Edit', edit_workspace_calendar_entry_path(@workspace_calendar_entry)
+'|
+= link_to 'Back', workspace_calendar_entries_path

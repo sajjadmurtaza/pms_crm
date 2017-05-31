@@ -1,0 +1,9 @@
+.nested-fields
+  .ui.one.column.grid
+    .column
+      = f.input :title
+      = f.input :url
+      = f.input :tools_and_tech, input_html: { class: 'multiple-add-taggable-field', data: { options: Core::Skill.pluck(:name)} }, label: 'Tools & Technology '
+      = f.input :description, as: :text, input_html:{ rows: '2'}
+      .links
+        = link_to_remove_association 'Remove Project', f

@@ -1,0 +1,10 @@
+tr id="#{skill.id}"
+  td.data-block
+    .text
+      strong = skill.name
+      .ui.dropdown.item
+        i.dropdown.icon.data-actions
+        .menu
+          = link_to 'Edit', edit_skill_path(skill),remote: true, class: 'item'
+          = link_to 'Delete', skill_path(skill), data: {confirm: 'Are you sure?' ,remote: true}, method: :delete, class: 'item'
+  td.grey = skill.skill_type.try(:name)

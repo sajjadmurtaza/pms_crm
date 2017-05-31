@@ -1,0 +1,25 @@
+= simple_form_for @note, url:  create_quick_note_path , :html => {:multipart => true, :remote => true} do |f|
+  = f.input :content, label: 'Description', as: :wysi, placeholder: 'Enter Description'
+
+  = f.simple_fields_for :custom_values do |cu|
+    = cu.input :value, label: cu.object.name, as: cu.object.form_input_format, collection: cu.object.possible_values, required: cu.object.required?
+    = cu.input :id, as: :hidden
+    = cu.input :custom_field_id, as: :hidden
+    = cu.input :customized_id, as: :hidden
+    = cu.input :customized_type, as: :hidden
+
+  #attachments
+    = f.simple_fields_for :attachments do |attachment|
+      - if @note.persisted?
+        = render 'shared/show_attachments', :f => attachment
+    .links
+      = link_to_add_association 'Add Attachment', f, :attachments, :partial => 'shared/attachments_fields'
+
+  = f.input :note_type_id, as: :hidden
+  = f.input :notable_id, :as => :hidden
+  = f.input :notable_type, :as => :hidden
+  = f.input :id, :as => :hidden
+
+  .actions
+    = f.submit 'Add', class: "ui blue button"
+    .ui.negative.button Cancel

@@ -1,0 +1,44 @@
+.ui.stackable.grid
+  .ui.two.column.row
+    .column.padded.top
+      .ui.segment
+        .ui.top.left.attached.label Basic Information
+        = f.input :first_name, placeholder: 'First Name'
+        = f.input :last_name, placeholder: 'Last Name'
+        = f.input :email, placeholder: 'example@xyz.com'
+        = f.input :username, placeholder: 'User Name'
+        .password_fields
+          -unless @user.new_record?
+            = f.input :old_password,input_html: { id: 'old_password' }
+
+          = f.input :password,input_html: { id: 'password' }
+          = f.input :password_confirmation,input_html: { id: 'password_confirmation' }
+        -unless @user.new_record?
+          .link.change-password
+            == link_to '<i class="key icon"></i> Change Password'.html_safe,'javascript:void(0)',class:  'toggle'
+
+    .column.padded.top
+      .ui.segment
+        .ui.top.left.attached.label Detail Information
+        = f.input :emp_id, label: 'Employee Id', placeholder: 'Employee Id'
+        = f.input :education, label: 'Education', placeholder: 'Education'
+        = f.input :experience, label: 'Experience', placeholder: 'Experience In Years'
+        = f.input :calling_name, label: 'Calling Name', placeholder: 'Calling Name'
+        = f.input :job_title_id, :collection => Core::JobTitle.all, label: 'Job Title', placeholder: 'Job Title'
+        = f.input :location_id, :collection => Core::Location.all, label: 'Location', placeholder: 'Location'
+  .ui.one.column.row
+    .column
+      .ui.segment
+        .ui.top.left.attached.label Contact Information
+        = f.simple_fields_for :addresses do |address|
+          = render 'addresses/address_fields', :f => address
+        = f.simple_fields_for :phones do |phone|
+          = render 'phones/phone_fields', :f => phone
+        .links
+          = link_to_add_association 'Add Phone' , f, :phones, :partial => 'phones/phone_fields'
+        = f.simple_fields_for :emails do |email|
+          = render 'emails/email_fields', :f => email
+        .links
+          = link_to_add_association 'Add Email' , f, :emails, :partial => 'emails/email_fields'
+
+= call_hook(:view_users_information_form)

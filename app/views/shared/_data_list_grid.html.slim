@@ -1,0 +1,30 @@
+ruby:
+  def output_for_attribute(object, attribute)
+    if attribute.is_a? Symbol
+      object.send attribute
+    elsif attribute.is_a? String
+      object.send attribute.to_sym
+    elsif attribute.is_a? Proc
+      attribute.call(object)
+    else
+      raise ArgumentError.new("#{attribute.class} type parameters are not supported by DataList")
+    end
+  end
+
+.ui.cards
+  - @collection.each do |object|
+    .card
+      .content
+        .header = output_for_attribute(object, @builder.items[:heading][:value])
+        .meta = output_for_attribute(object, @builder.items[:sub_heading][:value])
+        .description = output_for_attribute(object, @builder.items[:text][:value])
+
+      .ui.buttons
+        = link_to @builder.default_action[:label], Rails.application.routes.url_helpers.send(@builder.default_action[:path], object), class: 'ui button'
+        - unless @builder.actions.blank?
+          .ui.dropdown.icon.button
+            i.dropdown.icon
+            .menu
+              - @builder.actions.each do |action|
+                - action[:options][:class] << ' item'
+                = link_to action[:label],  Rails.application.routes.url_helpers.send(action[:path], object), action[:options]

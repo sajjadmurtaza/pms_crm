@@ -1,0 +1,11 @@
+= simple_form_for @calendar_entry, url: {action: @calendar_entry.new_record? ? :create : :update}, :html => {:multipart => true, remote: true}   do |f|
+  = f.error_notification
+  .ui.grid
+    .column
+      = f.input :title
+      /= f.input :calendar_id, collection: Workspace::Calendar.all.where(user: current_user).collect {|c| [ c.name, c.id ]}, label: 'Select Calendar', selected: 0
+      /= f.input :start_date
+      = f.input :end_date, label: 'Date'
+      .actions
+        = f.submit f.object.new_record? ? 'Create' : 'Update', class: 'ui small blue submit button ok'
+        .ui.small.black.button.cancel Cancel

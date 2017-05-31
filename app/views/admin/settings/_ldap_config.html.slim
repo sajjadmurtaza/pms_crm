@@ -1,0 +1,13 @@
+= f.simple_fields_for :ldap_config, OpenStruct.new(f.object.ldap_config) do |l|
+  = l.input :host, label: 'Host'
+  = l.input :port,  label: 'Port'
+  = l.input :base,  label: 'Base'
+  = l.input :ou,  label: 'Organization Unit'
+  = l.input :cn,  label: 'Groups'
+
+  .ui.small.block.header Attributes
+  = l.input :login_attr, label: 'Login Attribute '
+  = l.input :group_attr, label: 'Group Attribute'
+  = l.input :orgunit_attr, label: 'Organization Unit Attribute'
+  = l.input :fullname_attr, label: 'lull Name Attribute'
+  = l.input :email_attr, label: 'Email Attribute'

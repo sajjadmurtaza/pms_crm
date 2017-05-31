@@ -1,0 +1,21 @@
+.ui.form
+  .ui.grid.gray
+    .two.column.row
+      .column
+        .field
+          b.label Primary Role
+          -if object.primary_role_id
+            br
+            = primary_role_name(object.primary_role_id)
+        .field
+          b.label Secondary Roles
+          -if object.secondary_roles
+            - user_role = object.secondary_roles.split(/,/)
+            br
+            - user_role.each do |r|
+              = Core::Role.find(r).name
+              br
+      .column
+        .field
+          b.label Username
+          = " : " + object.username

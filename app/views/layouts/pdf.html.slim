@@ -1,0 +1,18 @@
+| <!doctype html
+html
+  head
+    meta charset="utf-8" /
+    /= wicked_pdf_stylesheet_link_tag 'layout'
+    = wicked_pdf_stylesheet_link_tag 'pdf'
+  body
+    #header
+      .logo
+        = wicked_pdf_image_tag 'nxb.png', width: 93, height: 38
+      .text
+        | Exclusive access to top developers
+      .contact
+        | Call us: 0800 111 002
+    #content
+      = yield
+    #footer
+      = wicked_pdf_image_tag 'pdf_footer.png', width: '100%'

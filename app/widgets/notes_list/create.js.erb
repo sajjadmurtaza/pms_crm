@@ -1,0 +1,5 @@
+$('.notes-list-widget .notes-list').prepend("<%= escape_javascript(render( partial: 'note', locals: {note: @note})) %>");
+$('#note_pagination').html("<%= escape_javascript(render( partial: 'shared/pagination_info', locals: {collection: @notes})) if @notes.present? %>");
+"<%elem = (@note.note_id ? '[data-comment='+@note.note_id.to_s+']' : '#note_form')%>"
+$("<%=elem%>").transition('slide up');
+window.scroll(0, -$('#note_form').offset().top);

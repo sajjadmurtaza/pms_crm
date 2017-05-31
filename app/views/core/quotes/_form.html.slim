@@ -1,0 +1,21 @@
+= simple_form_for @quote, url: @quote.new_record? ? quotes_path : quote_path, remote: true, :html => {multipart: true, class: "quote-form"} do |f|
+  .ui.grid
+    .column
+      = f.input :amount, label: 'Price'
+      = f.input :description
+      = f.input :invoice_split_id, collection: Core::InvoiceSplit.all, include_blank: false
+      = f.input :status_id, collection: Core::QuoteStatus.all, selected: Core::QuoteStatus.find_by_name(Core::Quote::DEFAULT_STATUS).nil? ? Core::QuoteStatus.first.try(:id) : Core::QuoteStatus.find_by_name(Core::Quote::DEFAULT_STATUS).id
+      = f.input :quote_date
+      = f.input :lead_id, as: :hidden, value: @quote.lead_id
+      = f.input :project_id, as: :hidden, value: @quote.project_id
+
+      .attachments
+        = f.simple_fields_for :attachments do |attachment|
+          - if @quote.persisted?
+            = render 'shared/show_attachments', :f => attachment
+        .links
+          = link_to_add_association 'Add Attachment', f, :attachments, :partial => 'shared/attachments_fields'
+
+      .actions
+        = f.submit f.object.new_record? ? 'Add' : 'Update', class: "ui blue button"
+        .ui.negative.button Cancel

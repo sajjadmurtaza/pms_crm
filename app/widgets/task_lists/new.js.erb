@@ -1,0 +1,3 @@
+$('#add_task_list').html("<%= escape_javascript render(partial: 'form', locals: {task_list: @task_list}) %>").transition('slide down');
+$('#pms_task_list_title').focus();
+Heyday.UI.initJSElements();

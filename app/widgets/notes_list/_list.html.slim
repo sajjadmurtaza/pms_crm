@@ -1,0 +1,5 @@
+.floated.right.notes-pagination#note_pagination
+  /= render partial: 'shared/pagination_info', locals: {collection: @notes}
+  = render partial: 'shared/pagination_info', locals: {collection: @notes} if @notes.present?
+.ui.minimal.threaded.comments.notes-list
+  = render partial: 'note', collection: @notes.order('created_at DESC'), as: :note

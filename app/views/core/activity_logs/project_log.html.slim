@@ -1,0 +1,74 @@
+= render 'sidebar'
+
+= content_for :sub_action_bar
+  .date-filter.floated.left
+    = render partial: 'filters', :locals => {:url => project_logs_path}
+  .floated.right
+    = render partial: 'shared/pagination', locals: {collection: @project_logs, additional_params: {filters: params[:filters]}}
+
+.ui.comments.top_margin
+  - @project_logs.each do |log|
+    - if log.class == Core::Note
+      div.comment
+        a.avatar title=log.user.name
+          = image_tag log.user.picture.name.url(:thumb)
+        .content
+          span.author
+            = log.note ? ('Comment <span style='+'font-weight:normal;'+'>on </span>' + link_to(log.note.note_type.name, url_for_event(:show, source: :notes_list, note_id: log.note.id), remote: true, class: 'item')).html_safe : log.note_type.name.titleize
+            /= log.note_type.name.titleize
+          .metadata
+            span.date
+              = "#{time_ago_in_words(log.created_at)} ago in"
+            - if log.notable
+              = link_to log.notable.title, project_path(log.notable)
+          .text
+            = simple_format log.content
+            - log.custom_values.each do |val|
+              div
+                = val.name
+                | :
+                = val.value
+            - log.attachments.each do |attachment|
+              br
+              = link_to "<i class='ui attachment icon'></i>#{attachment.name.file.identifier}".html_safe, attachment.name.url, target: '_blank'
+
+    - elsif log.class == Pms::Task
+      div.comment
+        - if log.user
+          a.avatar title=log.user.try(:name)
+            = image_tag log.user.picture.name.url(:thumb)
+        .content
+          span.author
+            = link_to  'Task', task_path(log)
+          .metadata
+            span.date
+              = "#{time_ago_in_words(log.created_at)} ago in "
+          = log.try(:task_list).try(:title)
+          span.grey &nbspof&nbsp
+          - if log.task_list.taskable
+            = link_to log.task_list.taskable.title, project_path(log.task_list.taskable)
+          .text
+            = simple_format log.description
+            - log.assigned_users.each do |user|
+              .metadata
+                span.date
+                  .ui.label = user.name
+          .text
+            = "Due Date: #{l log.due_date}"
+
+    - elsif log.class == Core::Comment
+      div
+        .comment
+          .avatar
+            = image_tag log.user.picture.name.url(:thumb)
+          .content
+            span.author Comment
+            .metadata
+              span.date
+                = " #{time_ago_in_words(log.created_at)} ago in "
+            = link_to 'Task', task_path(log.commentable_id)
+            span.grey &nbspof&nbsp
+            - project = log.commentable.task_list.taskable
+            = link_to project.title, project_path(project)
+            p
+              = raw log.comment

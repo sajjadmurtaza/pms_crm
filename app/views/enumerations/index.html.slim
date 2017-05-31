@@ -1,0 +1,24 @@
+.ui.stackable.grid
+  .ui.one.column.row
+    .column.padded.top
+      .ui
+        - @enumerations.subclasses.each do |subclass|
+          /- items = @enumerations.where(:type => subclass.name)
+          - items = sub_class_data(subclass)
+          h3.data-listing
+            .data-block
+              .text
+                #action-bar
+                  strong = subclass.name.split('::').last
+                  = link_to semantic_icon('add'), new_enumeration_path(:type => subclass),remote: true, class: 'ui azure button'
+          table.ui.padded.table.celled.data-listing
+            thead
+              br
+              tr.header.large
+                th.four.wide Name
+                th  Value
+            tbody.draggable
+              = render partial: "item", collection: items.order('position asc') , locals: {subclass: subclass}
+              tr class='new_record #{subclass.name.split('::').last.to_s.underscore}'
+          br
+.new-item-content

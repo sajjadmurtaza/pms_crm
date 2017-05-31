@@ -1,0 +1,17 @@
+div id="comment_#{comment.id}"
+  .comment
+    .avatar
+      = image_tag comment.user.picture.name.url(:thumb)
+    .content
+      span.author
+        = comment.user.name
+      .metadata
+        = "#{time_ago_in_words(comment.updated_at)} ago"
+      .text
+        p
+          = raw comment.comment
+      .actions.custom_actions
+        - if comment.user == Core::SystemUser.current
+          = link_to 'Edit', edit_comment_path(comment), remote: true
+          |&nbsp|&nbsp
+          = link_to 'Delete', comment_path(comment), method: :delete, data: {confirm: 'Are you sure you want to delete?'}, remote: true

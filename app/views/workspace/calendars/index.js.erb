@@ -1,0 +1,11 @@
+<% if @checked_calendar_ids.present?
+    @checked_calendar_ids.each do |id| %>
+    $(".calendar-<%=id%>").show()
+    <% end %>
+<% end %>
+
+<% if @unChecked_calendar_ids.present?
+    @unChecked_calendar_ids.each do |id| %>
+    $(".calendar-<%=id%>").hide()
+    <% end %>
+<% end %>

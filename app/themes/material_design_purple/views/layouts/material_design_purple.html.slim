@@ -1,0 +1,65 @@
+#header
+  nav#nav-bar
+    .ui.borderless.inverted.menu
+      - current_module_chain = Heyday::MenuManager.items(:main_nav).select{|node| node.name == current_menu_item}.first
+      - current_module_chain =  current_module_chain.parentage.collect{|node| node.name } if current_module_chain.present?
+      - Heyday::MenuManager.items(:main_nav).root.children.each do |node|
+        - active_module = (current_module_chain and current_module_chain.include?(node.name) ? 'active' : '')
+        = link_to semantic_icon(node.icon) + node.caption, node.url, class: "item #{active_module}"
+
+      .right.menu
+        .ui.item.dropdown
+          .text = current_user.try(:name)
+          i.dropdown.icon
+          .ui.inverted.menu
+            = link_to 'Profile', user_path(current_user), class: 'item'
+            = link_to 'Logout', logout_path, class: 'item'
+
+  nav#secondary-nav-bar
+    .ui.secondary.pointing.blue.menu
+      a.header.item HEYDAY
+
+      - active_menu_item = Heyday::MenuManager.items(:main_nav).select{|node| node.name == current_menu_item}.first
+      - unless active_menu_item.try(:parent).blank?
+        - active_menu_item.try(:parent).children.each do |node|
+          = active_link_to semantic_icon(node.icon) + node.caption, node.url, 'item'
+      = yield(:sub_nav)
+      .right.floated#action-bar
+        = yield(:action_bar)
+
+- if content_for? :sidebar
+  .ui.grid
+    .three.wide.column
+      #side-bar.ajax-reload
+        = yield(:sidebar)
+    .thirteen.wide.column#container
+      nav#sub-action-bar.ajax-reload
+        .floated.right.action-area
+          = yield(:search_area)
+          = yield(:sub_action_bar)
+        h3.ui.header.title
+          = page_title
+          - if @metadata
+            = "&nbsp;&nbsp;".html_safe
+            .ui.label = @metadata
+        /= render_breadcrumbs(semantic_icon('right arrow divider'))
+      #content.ajax-reload = yield
+- else
+  .ui.page.grid
+    .sixteen.wide.column#container
+      nav#sub-action-bar.ajax-reload
+        .floated.right.action-area
+          = yield(:search_area)
+          = yield(:sub_action_bar)
+        h3.title = page_title
+        /= render_breadcrumbs(semantic_icon('right arrow divider'))
+      #content.ajax-reload = yield
+
+footer.ui.three.column.page.grid#status-bar
+  .column
+  .column = "&copy; #{Date.current.year} - All Rights Reserved - Microgigz".html_safe
+  .column
+
+#spinner
+
+- parent_layout 'blank'

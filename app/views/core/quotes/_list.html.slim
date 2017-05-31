@@ -1,0 +1,13 @@
+/.floated.right.notes-pagination
+/  = render partial: 'shared/pagination_info', locals: {collection: @invoices}
+table.ui.compact.table.data-listing
+  thead
+    tr
+      th.two.wide.column Status
+      th.two.wide.column Amount
+      th.three.wide.column Due Date
+      th.three.wide.column Invoice Split
+
+      th Actions
+  tbody.quotes-list
+    = render partial: 'core/quotes/quote', collection: @quotes.order('created_at DESC'), as: :quote

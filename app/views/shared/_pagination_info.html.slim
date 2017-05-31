@@ -1,0 +1,17 @@
+.pagination
+  - first = collection.offset_value + 1
+  - last = collection.last_page? ? collection.total_count : collection.offset_value + collection.limit_value
+  span.padded.left.right = "Showing records <strong>#{first}</strong> to <strong>#{last}</strong> for total <strong>#{collection.total_count}</strong>".html_safe
+  .ui.tiny.icon.buttons
+    = link_to_previous_page collection, semantic_icon('left arrow'), remote: defined?(remote) ? remote : false, class: 'ui button', params: {q: params[:q]}
+    = link_to_next_page collection, semantic_icon('right arrow'), remote: defined?(remote) ? remote : false, class: 'ui button', params: {q: params[:q]}
+    .ui.dropdown.button
+      i.dropdown.icon
+      .menu
+        - Core::Setting.per_page_options.split(',').each do |page|
+          a.item href="?per_page=#{page}"
+            - if page == params[:per_page]
+              i.icon.checkmark
+            - else
+              i.icon
+            = page

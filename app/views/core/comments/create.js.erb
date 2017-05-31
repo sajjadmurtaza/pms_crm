@@ -1,0 +1,8 @@
+<% if @comment.commentable_type == 'Core::Note' %>
+    $('.comment[data-note=<%= @comment.commentable_id%>] .object_comments').prepend($("<%= escape_javascript render(partial: "comment", locals: {comment: @comment}) %>").hide().fadeIn(1000));
+<% else %>
+    $('.object_comments').prepend($("<%= escape_javascript render(partial: "comment", locals: {comment: @comment}) %>").hide().fadeIn(1000));
+<% end %>
+$('.wysihtml5-sandbox').contents().find('body').html("");
+$(".comment_form").hide();
+$('.comment_box').show();

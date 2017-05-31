@@ -1,0 +1,77 @@
+.ui.small.form.segment
+  .ui.grid.gray
+    .two.column.row
+      .column
+        .field
+          b.label Education :
+          = ' ' + @user.user_detail.education
+        .field
+          - @user.addresses.each do |address|
+            b.label Address1 :
+            = ' ' + address.address1
+            .field
+            b.label Address2 :
+            = ' ' + address.address2
+            .field
+            b.label City :
+            = ' ' + address.city
+            .field
+            b.label State :
+            = ' ' + address.state
+            .field
+            b.label Zip :
+            = ' ' + address.zip
+            .field
+            b.label Country :
+            = ' ' + address.country
+        .field
+          b.label Phones :
+          - @user.phones.each do |phone|
+            = ' ' + phone.phone + '( ' + phone.phone_type + ' )' + ',  '
+        .field
+          b.label Emails :
+          - @user.emails.each do |email|
+            = ' ' + email.email + '( ' + email.email_type + ' )' + ',  '
+      .column
+        .field
+          b.label Job Title :
+          = @user.user_detail.job_title.name
+        .field
+          b.label Location :
+          = @user.user_detail.location.name
+/
+/- object.addresses.each do |a|
+/  .ui.small.form.segment
+/    .ui.grid.gray
+/      .two.column.row
+/        .column
+/          .field
+/            b.label Address 1 :
+/            = " " + a.address1
+/          .field
+/            b.label Address 2 :
+/            = " " + a.address2
+/          .field
+/            b.label City :
+/            = " " + a.city
+/          .field
+/            b.label Zip :
+/            = " " + a.zip
+/          .field
+/            b.label State :
+/            = " " + a.state
+/          .field
+/            b.label Country :
+/            = " " + a.country
+/
+/
+/        .column
+/          -object.phones.each do |p|
+/            .field
+/              b.label = " #{p.phone_type} Phone : "
+/              = p.phone
+/
+/          -object.emails.each do |e|
+/            .field
+/              b.label = " #{e.email_type} Email : "
+/              = e.email

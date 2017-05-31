@@ -1,0 +1,20 @@
+=@user
+= simple_form_for @event, url: {action: @event.new_record? ? :create : :update}, :html => {:multipart => true}   do |f|
+  = f.error_notification
+  .form-inputs
+    .form-inputs
+      .form-actions
+        .ui.stackable.grid
+          .ui.one.column.row
+            .column.padded.top
+              .ui
+                .ui.black.block.header Create Event
+                = f.input :title
+                = f.input :calendar_id, collection: Workspace::Calendar.all.where(system_user_id: current_user.id).collect {|c| [ c.name, c.id ]}, label: 'Select Calendar', selected: 0
+                br
+                = f.input :start
+                br
+                br
+                = f.input :end
+              .action.floated.right
+                = f.button :submit

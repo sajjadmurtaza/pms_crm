@@ -1,0 +1,4 @@
+$('.large.modal').remove();
+$('body').append('<%= j(render template: 'workspace/events/new.html.slim') %>');
+$(".large.modal").modal("show");
+

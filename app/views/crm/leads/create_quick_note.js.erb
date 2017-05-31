@@ -1,0 +1,5 @@
+<% if @note.errors.present? %>
+    setTimeout(function(){
+        Heyday.UI.showModal('Quick Note', '<%= j render 'quick_note_form' %>', null , null ,'large');
+    }, 550)
+<% end %>

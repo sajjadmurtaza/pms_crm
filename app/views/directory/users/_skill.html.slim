@@ -1,0 +1,8 @@
+- Core::SkillType.all.each do |skill_type|
+  .ui.label #{skill_type.name}
+  br
+  br
+  = f.simple_fields_for :skills_users, @user.skills_users.reject{|su| su.skill.skill_type_id != skill_type.id} do |s|
+    = render partial: 'skills/skills_fields', locals: { f: s, skill_type: skill_type }
+  .links
+    = link_to_add_association 'Add  '+skill_type.name , f, :skills_users, partial: 'skills/skills_fields', render_options: { locals: { skill_type: skill_type } }

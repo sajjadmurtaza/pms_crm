@@ -1,0 +1,2 @@
+module Core::SkillsHelper
+end

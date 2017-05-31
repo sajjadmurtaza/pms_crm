@@ -1,0 +1,158 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+.logo, .text, .image, .skill, .detail_information, .detail, .contact_information, .contact_detail, .employment, .portfolio, .amazing, .experience, .availibility{
+  display: inline;
+  float: left;
+}
+#header{
+  min-height: 63px;
+  background-color: #2557A1;
+  .logo{
+    border-right: 1px solid #94ABD8;
+    margin: 25px 0 0 10px;
+    width: 100px;
+  }
+  .text{
+    font-style: italic;
+    font-size: small;
+    color: #CBD4F1;
+    margin: 33px 0 0 15px;
+    width: 260px;
+  }
+  .contact{
+    font-size: small;
+    color: #CBD4F1;
+    display: inline;
+    float: right;
+    margin: 33px 0 0 20px;
+    width: 150px;
+  }
+}
+#information
+{
+  height: 200px;
+  background-color: #EDF3FF;
+  .image{
+    margin: 30px 0 0 15px;
+    height: 150px;
+    width: 100px;
+  }
+  .name{
+    float: left;
+    margin: 30px 0 0 20px;
+    color: #2557A1;
+    font-size: large;
+    width: 550px ;
+    .since{
+      margin-top: 5px;
+      font-size: x-small;
+    }
+  }
+  .skill_detail{
+    margin-left: 15px;
+    position: relative;
+    float: left;
+    height: 70px;
+    width: 575px;
+    overflow: hidden;
+    .skill{
+      font-size: x-small;
+      margin: 3px 0 0 5px;
+      text-wrap:none;
+      background-color: #2557A1;
+      border: 2px solid #2557A1;
+      border-radius: 3px;
+      color: #CBD4F1;
+      height: 12px;
+      padding: 2px;
+    }
+  }
+  .summary{
+    float: left;
+    margin: 3px 0 0 15px;
+    width: 550px ;
+    font-size: x-small;
+    color: #686868;
+  }
+}
+#portfolio_experience
+{
+  min-height: 120px;
+  .portfolio, .amazing, .experience, .availibility{
+    width: 25%;
+    color: #686868;
+    font-size: xx-small;
+    height: 250px;
+    overflow: hidden;
+    .title{
+      font-weight: bold;
+    }
+    .most_amazing{
+      margin: 2px 0 0 30px;
+      padding: 10px;
+      font-weight: bolder;
+    }
+    .user_name{
+      float: right;
+      margin: 0 15px 0 0;
+    }
+    .part_time{
+      margin: 5px 0 0 30px;
+      font-size:large;
+    }
+    .environment{
+      margin: 10px 0 0 10px;
+      color: #2557A1;
+      font-family: 'Times New Roman';
+      font-size: small;
+      font-weight: normal;
+      .preferred_environment{
+        color: #686868;
+        font-size: xx-small;
+        margin: 5px 5px 0 5px;
+      }
+    }
+    .most_amazing:before, .most_amazing:after{
+      content: '"';
+      margin: 2px 0 5px 5px;
+    }
+    h6{
+      margin: 5px 0 0 40px;
+      color: #2557A1;
+      font-family: 'Times New Roman';
+      font-size: small;
+      font-weight: normal;
+    }
+  }
+}
+#employment, #contact_information{
+width: 100%;
+min-height: 50px;
+max-height: auto;
+  .employment, .contact_information{
+    width: 20%;
+    margin: 20px 0 0 40px;
+    color: #2557A1;
+    font-size: small;
+    font-family: 'Times New Roman';
+    float: left;
+  }
+  .employment_detail, .contact_detail{
+    width: 70%;
+    float: left;
+    h6{
+            margin: 25px 0 0 20px;
+            font-size: x-small;
+            font-family: 'Times New Roman';
+            color: #2557A1;
+            font-weight: normal;
+          }
+  }
+}
+table{
+    font-size: x-small;
+    color: #686868;
+    margin: 0 0 0 24px;
+  }

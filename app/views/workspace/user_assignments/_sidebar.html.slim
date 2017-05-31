@@ -1,0 +1,4 @@
+= content_for :sidebar
+  .ui.vertical.secondary.pointing.menu
+    = active_link_to 'Current Tasks', user_assignments_path, 'item'
+    = active_link_to 'Completed Tasks', completed_tasks_path, 'item'

@@ -1,0 +1,7 @@
+h3 Technologies
+= f.simple_fields_for :taggings do |t|  
+  = render 'technologies/technologies_fields', :f => t
+  .links
+    = link_to_add_association 'Add Technlogies' , f, :taggings, :partial => 'technologies/technologies_fields'
+
+= call_hook(:view_leads_technologies_form)

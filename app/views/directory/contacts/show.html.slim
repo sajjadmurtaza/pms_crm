@@ -1,0 +1,68 @@
+- content_for :sub_action_bar
+  = link_to 'Edit', edit_contact_path, :class => 'ui blue button'
+  = link_to 'Delete', contact_path(@contact), method: :delete, data: {confirm: 'Are you sure you want to delete?'}, class: 'ui red button'
+  = link_to 'Close', url_for(:back), class: 'ui black button'
+
+- content_for :sidebar
+  .ui.basic.accordion
+    .title
+      h3
+        i.dropdown.icon
+        |Address
+    .content
+      - @contact.addresses.each do |address|
+        .ui.vertical.segment
+          strong = "#{address.city}, #{address.country}"
+          .text = "#{address.zip}"
+          .text = "#{address.address1}"
+          .text = "#{address.address2}"
+    .title
+      h3
+        i.dropdown.icon
+        |Company
+    .content
+      .ui.vertical.segment
+        strong = "#{@contact.company_title}"
+        .text = "#{@contact.company_phone}"
+        .text = "#{@contact.company_email}"
+
+    .title
+      h3
+        i.dropdown.icon
+        |Other
+    .content
+      - unless @contact.phones.blank?
+        .ui.vertical.segment
+          strong = 'Phones'
+          - @contact.phones.each do |phone|
+            .text = "#{phone.phone_type}: #{phone.phone}"
+      - unless @contact.phones.blank?
+        .ui.vertical.segment
+          strong = 'Emails'
+          - @contact.emails.each do |email|
+            .text = "#{email.email_type}: #{email.email}"
+
+.ui.grid
+  .two.column.row
+    .padded.top.column
+      span
+        = label_with_icon @contact.email, 'mail outline grey'
+      span
+        = label_with_icon @contact.skype, 'skype outline grey'
+      span
+        = label_with_icon @contact.phone, 'mobile outline grey'
+      p
+      - unless @contact.directory_list.blank?
+        span
+          i.icon.terminal.grey
+          - @contact.directory_list.each do |directory|
+            = "#{directory}&nbsp;".html_safe
+
+    .column
+      .field
+        = image_tag(@contact.picture.name.url(:medium)) unless @contact.picture.blank?
+
+
+
+
+= render_tabs([{name: 'notes', partial: 'shared/notes', label: 'Notes', remote: false, locals: {object: @contact}}, {name: 'history', partial: 'directory/contacts/history', label: 'History', remote: true, locals: {object: @contact}}])

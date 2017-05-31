@@ -1,0 +1,53 @@
+.ui.one.column.grid
+  .column
+    h2.ui.header
+
+    /= render_tabs([{:name => 'projects_log', :partial => 'shared/project_log', :label => 'Project', remote: false, locals: {object: @project_audits}}, {:name => 'leads_log', :partial => 'shared/lead_log', :label => 'Lead', remote: true, locals: {object: @lead_audits}}])
+    = render_tabs([{:name => 'projects_log', :partial => 'shared/project_logs', :label => 'Project', remote: false, locals: {object: @project_logs}}, {:name => 'leads_log', :partial => 'shared/lead_logs', :label => 'Lead', remote: true, locals: {object: @lead_logs}}])
+
+    /.ui.comments
+    /  .comment
+    /    .content
+    /    - @date = " "
+    /    - @audits.each do |audit|
+    /      - @user = audit.user
+    /      -if @user != nil
+    /
+    /        / ************** Audits only for current user ************** /
+    /        - if current_user.id == audit.user_id
+    /          -if @date != audit.created_at.to_s
+    /
+    /            / ************** Current User Name ************** /
+    /            a.tiny.ui.blue.header
+    /              = "#{@user.first_name} #{@user.last_name} #{audit.action} about "
+    /
+    /            / ************** Time on which audit is created ************** /
+    /            .metadata
+    /              span.date
+    /                = time_difference(audit.created_at)
+    /
+    /          - @date = audit.created_at.to_s
+    /          - @changes = audit.audited_changes
+    /
+    /          / ************** Format in which details of audits are shown ************** /
+    /          .text.ui.tiny.black.block.header
+    /            -if audit.action == 'create'
+    /              ="Created to #{audit.auditable_type}"
+    /              br
+    /              - @changes.each do |c|
+    /                = " #{c[0]} : #{c[1]}"
+    /                br
+    /
+    /            -if audit.action == 'destroy'
+    /              ="Destroyed from #{audit.auditable_type}"
+    /              br
+    /              - @changes.each do |c|
+    /                =" #{c[0]} : #{c[1]} "
+    /                br
+    /
+    /            -if audit.action == 'update'
+    /              ="Changed on #{audit.auditable_type}"
+    /              br
+    /              - @changes.each do |c|
+    /                = " #{c[0]} : #{c[1]} "
+    /                br

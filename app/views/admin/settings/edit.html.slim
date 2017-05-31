@@ -1,0 +1,10 @@
+- content_for :sub_action_bar
+  = form_submit_button 'Save', '.setting-form'
+  = link_to 'Cancel', url_for(:back), class: 'ui black button'
+
+= simple_form_for Core::Setting, as: 'settings', url: {action: :update, controller: :settings}, html: {class: 'ui form setting-form'} do |f|
+  = f.hidden_field :tab, value: params[:tab]
+  = render_tabs([{name: 'general', partial: 'admin/settings/general', label: 'General', locals: {f: f}},
+                 {name: 'display', partial: 'admin/settings/display', label: 'Display', locals: {f: f}},
+                 {name: 'notifications', partial: 'admin/settings/notifications', label: 'Notifications', locals: {f: f}},
+                 {name: 'ldap_config', partial: 'admin/settings/ldap_config', label: 'LDAP Configuration', locals: {f: f}}])

@@ -1,0 +1,6 @@
+<% if @tab %>
+$("#tab_content_<%=@tab[:name]%>").show().html("<%= escape_javascript render(partial: @tab[:partial], locals: @tab[:locals]) %>");
+Heyday.UI.initJSElements();
+<% else %>
+Heyday.reload();
+<% end %>

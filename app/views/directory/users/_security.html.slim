@@ -1,0 +1,12 @@
+.ui.two.column.grid
+  .column
+    = f.input :primary_role_id, input_html: { class: 'single-taggable-field', data: { options: Core::Role.all} }, label: 'Primary Role', placeholder: 'Add Primary Role'
+    = f.input :secondary_roles, input_html: { class: 'taggable-field', data: { options: Core::Role.all} }, label: 'Secondary Role'
+
+  .column
+    = f.input :username, placeholder: 'User Name'
+    = f.input :password,input_html: { id: 'password'}
+    = f.input :password_confirmation,input_html: { id: 'password_confirmation' }
+    = f.input :organization_unit_id, :collection => Core::OrganizationUnit.sort_by_ancestry(Core::OrganizationUnit.all),  value_method: :id, label_method: :title_for_selects,  :include_blank => true
+
+= call_hook(:view_users_authentication_and_authorization_form)

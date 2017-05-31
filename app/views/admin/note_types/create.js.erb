@@ -1,0 +1,5 @@
+<% if @success %>
+Heyday.reload();
+<% else %>
+Heyday.UI.showModal('New Note Type', '<%= j(render 'form') %>');
+<% end %>

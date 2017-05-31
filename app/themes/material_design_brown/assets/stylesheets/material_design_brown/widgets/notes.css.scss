@@ -1,0 +1,35 @@
+@import "../theme/constants";
+
+.notes-list-widget {
+  .notes-list-header {
+    margin-bottom: 20px;
+
+    > div {
+      margin-right: 15px;
+    }
+
+    .filter-width {
+      min-width: 180px;
+    }
+  }
+  .notes-pagination {
+    position: relative;
+    z-index: 1;
+    margin-top: -45px;
+  }
+  .wysi-toolbar{
+    left: 0px !important;
+  }
+
+  .link-align{
+    text-align: left !important;
+  }
+
+  .note-action{
+    padding-left: 0 !important;
+  }
+
+  .attachment-align{
+    margin-left: -160px !important;
+  }
+}

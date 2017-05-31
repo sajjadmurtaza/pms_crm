@@ -1,0 +1,13 @@
+.ui.grid
+  .one.column.row
+    - counter = 1
+    - object.skills_users.each do |skill_user|
+      - if skill_user.show_on_profile == 0
+        - next
+      .column
+        .field
+          = counter.to_s + '- '+  skill_user.skill.name + '   ( '+ skill_user.rating+' , '+ pluralize(skill_user.experience, 'Year')+' )'
+          - counter+=1
+
+
+

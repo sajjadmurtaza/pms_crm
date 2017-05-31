@@ -1,0 +1,8 @@
+.nested-fields
+  .fields
+    .inline.field.optional.select.type-select
+      label
+        i.phone.icon
+        = f.input :phone_type, label: false, collection: Core::PhoneType.all,value_method: :name,include_blank: false, wrapper: false
+      = f.input :phone, label: false, placeholder: 'Phone', wrapper: false
+      = link_to_remove_association semantic_icon('trash medium icon') , f

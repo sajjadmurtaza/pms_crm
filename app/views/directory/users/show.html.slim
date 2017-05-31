@@ -1,0 +1,62 @@
+
+- content_for :sub_action_bar
+  = link_to 'Edit', edit_user_path, :class => 'ui blue button'
+  = link_to 'Download Profile', user_path(@user, format: :pdf), class: 'ui blue button'
+  = link_to 'Delete', user_path(@user), method: :delete, data: {confirm: 'Are you sure you want to delete?'}, class: 'ui red button'
+  = link_to 'Close', url_for(:back), class: 'ui black button'
+
+.ui.form
+  .ui.grid
+    .three.column.row
+      .column
+        table.ui.basic.table
+          tbody
+            = show_for @user do |u|
+              = u.attribute :email
+              = u.attribute :emp_id, label: 'Emp ID'
+
+            - @user.phones.each do |phone|
+              = show_for phone do |p|
+                = p.attribute :phone, label: "#{phone.phone_type} Phone"
+
+            - @user.emails.each do |email|
+              = show_for email do |e|
+                = e.attribute :email, label: "#{email.email_type} Email"
+
+        .ui.basic.accordion
+          .title
+            i.dropdown.icon
+            |Address Information
+          .content
+            table.ui.basic.table
+              tbody
+                - @user.addresses.each do |address|
+                  = show_for address do |a|
+                    = a.attribute :address1
+                    = a.attribute :address2
+                    = a.attribute :city
+                    = a.attribute :zip
+                    = a.attribute :state
+                    = a.attribute :country
+
+        .ui.basic.accordion
+          .title
+            i.dropdown.icon
+            |Other Information
+          .content
+            table.ui.basic.table
+              tbody
+                = show_for @user.user_detail do |detail|
+                  = detail.association :job_title do
+                    = @user.user_detail.try(:job_title).try(:name)
+                = show_for @user do |u|
+                  = u.attribute :education
+                  = u.attribute :experience
+                = show_for @user.user_detail do |detail|
+                  = detail.association :location do
+                    = @user.user_detail.try(:location).try(:name)
+      .column
+        .field
+
+          = image_tag(@user.picture.name.url(:medium)) unless @user.picture.blank?
+= render_tabs([{:name => 'notes', :partial => 'shared/notes', :label => 'Notes', remote: false, locals: {object: @user}}, {name: 'basic_information', partial: 'directory/users/show_basic_information', label: 'Basic Information', remote: true, locals: {object: @user}}, {:name => 'skills', :partial => 'directory/users/show_skills', label: :'Skills', remote: true, locals: {object: @user}}, {:name => 'portfolio', :partial => 'directory/users/show_portfolio', :label => 'Portfolio', remote: true, locals: {object: @user}}, {:name => 'security', :partial => 'directory/users/show_security', :label => 'Security', remote: true, locals: {object: @user}}, {name: 'history', partial: 'directory/users/history', label: 'History', remote: true, locals: {object: @user}}])

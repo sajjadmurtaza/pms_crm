@@ -1,0 +1,5 @@
+.nested-fields
+  .fields
+    = f.input :name, label: false, as: :file do
+      = f.file_field :name
+      = link_to_remove_association "<i class='trash icon'></i>".html_safe, f

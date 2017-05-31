@@ -1,0 +1,101 @@
+//colors
+$color_celeste_approx: #ccc;
+$color_storm_dust_approx: #666;
+$color_tropical_blue_approx: #c8e4f8;
+$black: #000;
+$color_santas_gray_approx: #94a0b4;
+$color_aero_blue_approx: #c8f8e4;
+
+//fonts
+$font_0: arial;
+$font_1: verdana;
+$font_2: tahoma;
+
+//@extend-elements
+//original selectors
+//.ancestry-treeview li a:hover, .ancestry-treeview li a:hover+ul li a
+%extend_1 {
+  background: $color_aero_blue_approx;
+  color: $black;
+  border: 1px solid $color_santas_gray_approx;
+}
+
+
+.ancestry-treeview {
+  li {
+    margin: 0;
+    list-style-type: none;
+    position: relative;
+    padding: 5px 5px 0 5px;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      right: auto;
+      left: -10px;
+      border-left: 1px solid $color_celeste_approx;
+      bottom: 50px;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 15px;
+      width: 15px;
+      height: 20px;
+      right: auto;
+      left: -10px;
+      border-top: 1px solid $color_celeste_approx;
+    }
+    a.ancestary_link {
+      display: inline-block;
+      border: 1px solid $color_celeste_approx;
+      padding: 0px 15px;
+      text-decoration: none;
+      color: $color_storm_dust_approx;
+      font-family: $font_0, $font_1, $font_2;
+      font-size: 11px;
+      //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+      border-radius: 5px;
+      &:hover {
+        @extend %extend_1;
+      }
+      &:hover+ul {
+        li {
+          a {
+            @extend %extend_1;
+          }
+          &::after {
+            border-color: $color_santas_gray_approx;
+          }
+          &::before {
+            border-color: $color_santas_gray_approx;
+          }
+        }
+        &::before {
+          border-color: $color_santas_gray_approx;
+        }
+        ul::before {
+          border-color: $color_santas_gray_approx;
+        }
+      }
+    }
+    &.leaf a.ancestary_link {
+      background: $color_tropical_blue_approx;
+      color: $black;
+      border: 1px solid $color_santas_gray_approx;
+    }
+    &:last-child::before {
+      height: 15px;
+    }
+  }
+  > ul > li {
+    &::before {
+      border: 0;
+    }
+    &::after {
+      border: 0;
+    }
+  }
+}

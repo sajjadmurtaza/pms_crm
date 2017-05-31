@@ -1,0 +1,9 @@
+= f.input :ui_theme, collection: ['gsem', 'white_blend', 'material_design', 'material_design_brown', 'material_design_gray', 'material_design_dark_gray', 'material_design_indigo', 'material_design_light_blue', 'material_design_purple', 'material_design_teal'], include_blank: false
+= f.input :user_may_override_theme, as: :boolean
+= f.input :default_language, collection: [['English']], include_blank: false
+= f.input :start_of_week, collection: [[day_name(1), '1'], [day_name(6), '6'], [day_name(7), '7']], include_blank: false
+= f.input :date_format, collection: Core::Setting::DATE_FORMATS.collect { |f| [Date.today.strftime(f), f] }, include_blank: false
+= f.input :time_format, collection: Core::Setting::TIME_FORMATS.collect { |f| [Time.now.strftime(f), f] }, include_blank: false
+= f.input :user_format, collection: Directory::User::USER_FORMATS, include_blank: false
+
+= call_hook(:view_settings_display_form)

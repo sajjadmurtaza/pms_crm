@@ -1,0 +1,33 @@
+.ui.comments
+  /-if object.try(:associated_audits).nil?
+  /  =@total_audits = object.audits
+  /-else
+  /  =@total_audits = (object.audits + object.associated_audits)
+  -if object
+    - object.sort_by(&:created_at).reverse.each do |audit|
+      - user = Core::SystemUser.find(audit.try(:user_id))
+      .comment
+        .avatar
+          =image_tag(user.try(:picture).try(:name).try(:url))
+        .content
+          a.author = audit.action.capitalize + ' by ' + user.try(:name)
+          .metadata
+            span.date = "#{time_ago_in_words(audit.created_at)} ago"
+          .text
+            br
+            - audit.audited_changes.keys.each do |key|
+              -if audit.action == 'update'
+                = key.capitalize
+                | &nbsp;from&nbsp;
+                span.ui.label
+                  = audit.audited_changes[key].first
+                | &nbsp;to&nbsp;
+                span.ui.label
+                  = audit.audited_changes[key].last
+                br
+              -else
+                = key.capitalize
+                | &nbsp;:&nbsp;
+                span.ui.label
+                  = audit.audited_changes[key]
+                br

@@ -1,0 +1,6 @@
+= link_to "Add Task List", new_task_list_path(project_id: object.id), remote: true, class: "btn-link"
+#add_task_list
+.list-top
+.ui.piled
+  div class="ui threaded comments" id="project_task_lists"
+    = render partial: 'pms/projects/task_list', collection: object.task_lists.order('created_at desc')

@@ -1,0 +1,50 @@
+- content_for :sub_action_bar
+  = link_to 'Edit', edit_lead_path, :class => 'ui blue button'
+  = link_to 'Delete', lead_path(@lead), method: :delete, data: {confirm: 'Are you sure you want to delete?'}, class: 'ui red button'
+  = link_to 'Close', url_for(:back), class: 'ui black button'
+
+- content_for :sidebar
+  .ui.basic.accordion
+    .title
+      h3
+        i.dropdown.icon
+        |Contacts
+    .content
+      - @lead.assigned_contacts.each do |contact|
+        .ui.vertical.segment
+          strong = link_to "#{contact.name}", contact_path(contact)
+          .text = "#{contact.email}"
+
+.ui.grid.show
+  .row
+    .padded.top.column
+      span
+        = label_with_icon @lead.email, 'mail outline grey'
+      span
+        = label_with_icon @lead.phone, 'mobile outline grey'
+      span
+        = label_with_icon @lead.skype, 'skype outline grey'
+      span
+        = label_with_icon @lead.organization_unit.title, 'filter outline grey'
+      span
+        = label_with_icon @lead.source.name, 'bell outline grey'
+  .row
+    .column
+      - unless @lead.technology_list.blank?
+        span
+          i.icon.terminal.grey
+          = @lead.technology_list.join(', ')
+  .row
+    .column
+      a.grey#show style="cursor:pointer"
+      .ui.top_margin#description
+        - unless @lead.attachments.blank?
+          - @lead.attachments.each do |attachment|
+            .file.ui.top_margin
+              i.attachment.icon.grey
+              = link_to "#{attachment.name.file.identifier} ".html_safe, attachment.name.url, target: '_blank'
+
+        - unless @lead.description.blank?
+          .ui.top_margin = @lead.try(:description).html_safe
+
+= render_tabs([{name: 'notes', partial: 'shared/notes', label: 'Notes', remote: false, locals: {object: @lead}}, {name: 'quotes', partial: 'core/quotes/quotes', label: 'Quotes', remote: false, locals: {lead_id: @lead.id, project_id: @lead.try(:project).try(:id)}}, {name: 'invoices', partial: 'core/invoices/invoices', label: 'Invoices', remote: false, locals: {lead_id: @lead.id, project_id: @lead.try(:project).try(:id)}}])

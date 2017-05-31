@@ -1,0 +1,10 @@
+tr id="#{item.id}"
+  td.data-block
+    .text
+      strong = item.name
+      .ui.dropdown.item
+        i.dropdown.icon.data-actions
+        .menu
+          = link_to 'Edit', edit_enumeration_path(item, type: subclass),remote: true, class: 'item'
+          = link_to 'Delete', enumeration_path(item), data: {confirm: 'Are you sure?' ,remote: true}, method: :delete, class: 'item'
+  td.grey = item.value

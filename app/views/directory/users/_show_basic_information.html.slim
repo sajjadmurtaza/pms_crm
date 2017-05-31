@@ -1,0 +1,15 @@
+.ui.grid
+  .two.column.row
+    .column
+      table.ui.basic.table
+        tbody
+          = show_for object do |o|
+            = o.attribute :calling_name, label: 'Calling Name:'
+            = o.attribute :the_most_amazing, label: 'The Most Amazing:'
+            = o.attribute :perfered_development_environment, label: 'Preferred Development Environment:'
+
+    .column
+      table.ui.basic.table
+        tbody
+          = show_for object do |o|
+            = o.attribute :summery, label: 'Summary:'

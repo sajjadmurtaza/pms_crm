@@ -1,0 +1,51 @@
+- content_for :sub_action_bar
+  = form_submit_button 'Save', '.user-form'
+  = link_to 'Cancel', projects_path, class: 'ui black button'
+= simple_form_for @project, url: @project.new_record? ? projects_path : project_path, html: {class: 'user-form' }  do |f|
+  .ui.grid
+    .two.column.row
+      .column
+        = f.input :title, placeholder: 'Title'
+        = f.input :status_id, collection: Core::Status.all, include_blank: false
+        = f.input :percentage_done, collection: [0, 20, 40, 60, 80, 100], label: 'Completed (%)', include_blank: false
+        = f.input :start_date
+        = f.input :planned_end_date, label: 'Planned Completion Date'
+        = f.input :cost, placeholder: '$'
+      .column
+        = f.input :lead_id, input_html: {class: 'single-taggable-field', data: {options: Crm::Lead.all}}, placeholder: 'Select Lead'
+
+        .inline.field
+          label Contacts
+          .contacts
+            = f.simple_fields_for :projects_contacts do |contact|
+              = render 'pms/projects/assign_contact', :f => contact
+            .links
+              = link_to_add_association 'Add Contacts', f, :projects_contacts, :partial => 'pms/projects/assign_contact'
+
+        .inline.field
+          label Resources
+          .resources
+            = f.simple_fields_for :projects_users do |user|
+              = render 'pms/projects/assign_user', :f => user
+            .links
+              = link_to_add_association 'Add Resources', f, :projects_users, :partial => 'pms/projects/assign_user'
+
+        = f.input :account_id, input_html: {class: 'single-taggable-field', data: {options: Directory::Account.all}}, placeholder: 'Select Account'
+        = f.input :manager_id, input_html: {class: 'single-taggable-field', data: {options: Directory::User.all}}, placeholder: 'Select Manager'
+
+        .inline.field
+          label Attachments
+          .attachments
+            = f.simple_fields_for :attachments do |attachment|
+              - if @project.persisted?
+                = render 'shared/show_attachments', :f => attachment
+            .links
+              = link_to_add_association 'Add Attachment', f, :attachments, :partial => 'shared/attachments_fields'
+
+
+
+
+    = f.input :description, as: :wysi, placeholder: 'Description'
+
+
+

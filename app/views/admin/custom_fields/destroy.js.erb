@@ -1,0 +1,5 @@
+<% if @success %>
+Heyday.reload();
+<% else %>
+Heyday.UI.showModal("Can't delete", "<%= escape_javascript( @custom_field.errors.full_messages ) %>");
+<% end %>

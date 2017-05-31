@@ -1,0 +1,3 @@
+<% unless @quote.errors.present? %>
+    $('[data-quote="<%= @quote.id%>"]').remove();
+<% end %>

@@ -1,0 +1,42 @@
+nav#nav-bar
+  .brand H
+  .ui.vertical.icon.borderless.fluid.menu
+    - current_module_chain = Heyday::MenuManager.items(:main_nav).select{|node| node.name == current_menu_item}.first
+    - current_module_chain =  current_module_chain.parentage.collect{|node| node.name } if current_module_chain.present?
+    - Heyday::MenuManager.items(:main_nav).root.children.each do |node|
+      - active_module = (current_module_chain and current_module_chain.include?(node.name) ? 'active' : '')
+      = link_to semantic_icon(node.icon), node.url, class: "item #{active_module}"
+aside#side-bar
+  .user-status
+    .ui.dropdown
+      .text = current_user.try(:name)
+      i.dropdown.icon
+      .menu
+        = link_to 'Profile', edit_user_path(current_user), class: 'item'
+        = link_to 'Logout', logout_path, class: 'item'
+  #filters-block
+    = yield(:sidebar)
+  .ui.vertical.borderless.fluid.menu#sub-nav
+    - Heyday::MenuManager.items(:main_nav).select{|node| node.name == current_menu_item}.first.try(:siblings).try(:each) do |node|
+      = link_to semantic_icon(node.icon) + node.caption, node.url, class: "item"
+  = yield(:search_area)
+  = yield(:sub_nav)
+  = yield(:calendar)
+#container
+  #action-bar
+    .floated.right.action-area
+      = yield(:action_bar)
+    h3.title = page_title
+  #breadcrumb-bar
+    .floated.right
+      = yield(:sub_action_bar)
+    = render_breadcrumbs(semantic_icon('right arrow divider'))
+  #content
+    = yield
+
+footer#status-bar
+  .content = "&copy; #{Date.current.year} - All Rights Reserved - Microgigz".html_safe
+
+#spinner
+
+- parent_layout 'blank'

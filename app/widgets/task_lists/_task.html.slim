@@ -1,0 +1,32 @@
+- puts task.inspect
+- unless task.completed
+  div class="content action-hover" id="task_edit_#{task.id}"
+    a.author style="margin-left: -21px;"
+      = check_box_tag 'completed', task.id, task.completed, class: 'task_complete',id: "switch_task_complete_#{task.id}", 'data-load-event-url' => url_for_event(:switch_task_completion, task_id: task.id)
+      = link_to "<b>#{task.description}</b>".html_safe, task_path(task)
+    .metadata
+      span.date
+        - task.assigned_users.each do |user|
+          span.ui.label = user.name
+      span.date.hide-display
+        = link_to(semantic_icon('pencil small'), url_for_event(:edit_task,task_id: task.id), remote: true, class: 'edit grey')
+        = link_to(semantic_icon('trash small'), url_for_event(:delete_task,task_id: task.id),remote:true, data: {confirm: 'Are you sure!'}, class: 'edit grey')
+    .text
+      = "Due Date: #{l task.due_date}"
+    - task.attachments.each do |attachment|
+      = link_to "<i class='ui attachment icon'></i>#{attachment.name.file.identifier}".html_safe, attachment.name.url, target: '_blank', class: 'grey'
+      br
+
+- else
+    div class="content action-hover" id="task_edit_#{task.id}"
+      a.author style="margin-left: -21px;"
+      .metadata
+        span.date.text-style
+          = check_box_tag 'completed', task.id, task.completed, class: 'task_complete', id: "switch_task_complete_#{task.id}", 'data-load-event-url' => url_for_event(:switch_task_completion, task_id: task.id)
+          = "#{task.description}".html_safe
+        span.date.hide-display
+          = link_to(semantic_icon('trash medium icon'), url_for_event(:delete_task,task_id: task.id),remote:true, data: {confirm: 'Are you sure!'}, class: 'edit')
+div id="show_task_#{task.id}"
+
+
+

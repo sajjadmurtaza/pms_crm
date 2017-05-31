@@ -1,0 +1,3 @@
+$("#task_edit_<%=@task.id%>").html("<%= escape_javascript render(partial: 'task_form', locals: {task: @task, task_list: @task_list}) %>");
+Heyday.UI.initJSElements("#task_edit_<%=@task.id%>");
+$('#pms_task_description').focus();

@@ -1,0 +1,35 @@
+= simple_form_for note, :url => url_for_event(:update), :html => {:remote => true, :multipart => true, class: 'contact-form'}   do |f|
+  .ui.grid
+    .two.column.row
+      .column
+        #wysihtml5-toolbar style= "display: none; margin-left: 165px;"
+          a class="item" data-wysihtml5-command="bold"
+            i.bold.icon
+          a class="item" data-wysihtml5-command="italic"
+            i.italic.icon
+          /! Some wysihtml5 commands require extra parameters
+          /a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red"  red
+          /a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green"  green
+          /a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue"  blue
+          /! Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href)
+          a class="item" data-wysihtml5-command="createLink"
+            i.anchor.icon
+          div data-wysihtml5-dialog="createLink" style=("display: none;")
+            label
+              | Link:
+              input.text data-wysihtml5-dialog-field="href" value="http://" /
+            a data-wysihtml5-dialog-action="save"  OK
+            a data-wysihtml5-dialog-action="cancel"  Cancel
+        - if note.note_type.name == "event"
+          = f.fields_for :note_fields do |custom_f|
+            = custom_f.input :start_date, placeholder: "yyyy-mm-dd", :input_html => { :value => note.note_fields[:start_date]}
+            = custom_f.input :end_date, placeholder: "yyyy-mm-dd", :input_html => { :value => note.note_fields[:end_date]}
+        - else
+          = f.input :note_text, placeholder: 'Enter note', :input_html => { :id => "wysihtml5-textarea"}
+        = f.simple_fields_for :attachment do |note_attachment|
+          = note_attachment.input :name, label: 'Attachment', as: :image_preview, input_html: {preview_version: :thumb}
+        = f.input :id, as: :hidden
+
+        = f.submit "Update"
+        = link_to 'Cancel', url_for_event(:cancel, id: note.id), remote: true
+

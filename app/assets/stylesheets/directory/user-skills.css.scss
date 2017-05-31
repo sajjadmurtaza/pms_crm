@@ -1,0 +1,51 @@
+.ui-tabs-vertical {
+  width: 55em;
+  .ui-tabs-nav {
+    padding: .2em .1em .2em .2em;
+    float: left;
+    width: 12em;
+    li {
+      clear: left;
+      width: 100%;
+      border-bottom-width: 1px;
+      border-right-width: 0;
+      margin: 0 -1px .2em 0;
+      a {
+        display: block;
+             }
+      &.ui-tabs-active {
+        padding-bottom: 0;
+        padding-right: .1em;
+        border-right-width: 1px;
+      }
+    }
+  }
+  .ui-tabs-panel {
+    padding: 1em;
+    float: right;
+    width: 40em;
+  }
+  .user-skills-ul
+  {
+    border:none;
+    background: #ffffff;
+    color: #222222/*{fcHeader}*/;
+    font-weight: normal;
+  }
+  .user-skills-li
+  {
+   background: transparent;
+    border:none;
+  }
+  #tabs{
+    border: none;
+  }
+  .partial-leftborder
+  {
+    border-left: thin solid #E5E5E5;
+  }
+}
+.ui-widget-content
+{
+ border: none;
+}

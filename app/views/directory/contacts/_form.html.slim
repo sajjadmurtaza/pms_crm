@@ -1,0 +1,20 @@
+- content_for :sub_action_bar
+  = form_submit_button 'Save', '.contact-form'
+  = link_to 'Cancel', url_for(:back), class: 'ui black button'
+
+= simple_form_for @contact, url: {action: @contact.new_record? ? :create : :update}, :html => {:multipart => true, class: 'contact-form'}   do |f|
+  .ui.grid
+    .two.column.row
+      .column
+        = f.input :first_name, placeholder: 'First Name'
+        = f.input :last_name, placeholder: 'Last Name'
+        = f.input :email, placeholder: 'example@xyz.com'
+        = f.input :phone, placeholder: 'Phone Number'
+        = f.input :skype, placeholder: 'Skype'
+      .column
+        = f.simple_fields_for :picture do |img|
+          = img.input :name, label: 'Picture',as: :image_preview, input_html: {preview_version: :thumb}
+        = f.input :company_title, placeholder: 'Company', label: 'Company'
+        = f.input :directory_list, input_html: {class: 'multiple-add-taggable-field', data: {options: Directory::Contact.tag_counts_on(:directories).pluck(:name)}}, label: 'Directories', placeholder: 'Directories'
+
+  = render_tabs( [{:name => 'detail', :partial => 'directory/contacts/detail', :label => 'Detail', remote: false, locals:{f: f}}])

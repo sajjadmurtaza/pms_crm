@@ -1,0 +1,22 @@
+.ui.comments
+  /-if object.try(:associated_audits).nil?
+  /  =@total_audits = object.audits
+  /-else
+  /  =@total_audits = (object.audits + object.associated_audits)
+  -if object
+    - object.sort_by(&:created_at).reverse.each do |audit|
+      - user = Core::SystemUser.find(audit.try(:user_id))
+      - if audit.auditable_type == 'Core::Note' and audit.audited_changes['content']
+        .comment
+          .avatar
+            =image_tag(user.try(:picture).try(:name).try(:url))
+          .content
+            - note_type = audit.audited_changes['note_type_id']
+            strong = "#{Core::NoteType.find(note_type).try(:name).titleize} "
+            span.grey = "#{time_ago_in_words(audit.created_at)} ago in "
+
+            - note = Crm::Lead.find(audit.audited_changes['notable_id'])
+            strong = link_to note.name, lead_path(note)
+            .text
+              br
+              = audit.audited_changes['content'].try(:html_safe)

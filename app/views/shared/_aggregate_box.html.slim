@@ -1,0 +1,16 @@
+.hd-aggregate-box
+  - buckets = search.es_response.aggregations[aggregate[:key]].buckets
+  h3 = "#{aggregate[:label]}"
+  - if buckets.blank?
+    span Nothing associated.
+  - else
+    .ui.list
+      - buckets.each do |bucket|
+        .item
+          .ui.checkbox
+            - if search.aggregate_params.keys.include?(aggregate[:key]) and search.aggregate_params[aggregate[:key]].include?(bucket[:key].to_s)
+              input type="checkbox" data-aggregate-name=aggregate[:key] data-aggregate-value=bucket[:key].to_s checked="checked" class='filter-aggregate'
+            - else
+              input type="checkbox" data-aggregate-name=aggregate[:key] data-aggregate-value=bucket[:key].to_s class='filter-aggregate'
+
+            label = "#{aggregate[:collection][bucket[:key].to_s].try(:capitalize)} (#{bucket.doc_count})"

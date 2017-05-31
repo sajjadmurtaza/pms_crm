@@ -1,0 +1,1 @@
+$("#comment_<%=@comment.id%>").html($("<%= escape_javascript render(partial: "core/comments/comment", locals: {comment: @comment}) %>").hide().fadeIn(1000));

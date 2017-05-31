@@ -1,0 +1,15 @@
+= simple_form_for [:core_enumeration, @enumeration], url: {action: @enumeration.new_record? ? :create : :update}, remote: true do |f|
+  = f.error_notification
+  .ui.grid
+    .column
+      /.ui.top.left.attached.label = @enumeration.type.split('::').last
+      = f.input :name, placeholder: 'Name'
+      - if @enumeration.new_record?
+        = f.input :value, placeholder: 'Value', input_html: {value: @value}
+      - else
+        = f.input :value
+      = f.input :type, :as => :hidden, :readonly => true
+      input name='type' value='#{@enumeration.class.model_name.param_key}' type='hidden'
+      .actions
+        = f.submit f.object.new_record? ? 'Create' : 'Update', class: 'ui small blue submit button ok'
+        .ui.small.black.button.cancel Cancel

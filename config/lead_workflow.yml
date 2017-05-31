@@ -1,0 +1,55 @@
+name: Lead Flow
+actor: Lead
+
+states: 
+ - new
+ - active
+ - converted
+ - felloff
+ - sleep
+
+initial_state: new
+
+transitions: 
+ t1: [new, active]
+ t2: [active, converted]
+ t3: [active, sleep]
+ t4: [active, felloff]
+ t5: [new, felloff]
+
+actions: 
+ a1:
+  before: [t1]
+  after: []
+  action_class: SendEmailAction
+  params: 
+   subject: "'Before New Lead ' + object.first_name + object.last_name"
+   to: object.user.email
+   body: "object.try(:email) + '<br/>' + object.try(:skype) + '<br/>' + object.try(:description)"
+
+ a2:
+  before: []
+  after: [t1]
+  action_class: SendEmailAction
+  params: 
+   subject: "'Lead converting active ' + object.first_name + object.last_name"
+   to: object.user.email
+   body: "object.try(:email) + '<br/>' + object.try(:skype) + '<br/>' + object.try(:description)"
+
+ a3:
+  type: "frontend"
+  title: 'Create Project'
+  before: [t2]
+  after: []
+  action_class: CreateProjectAction
+  params:
+      lead: object
+
+ a4:
+   type: "frontend"
+   title: 'Enter Change Reason'
+   before: [t1,t3,t4,t5]
+   after: []
+   action_class: CreateReasonAction
+   params:
+       lead: object

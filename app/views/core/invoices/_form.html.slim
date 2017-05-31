@@ -1,0 +1,20 @@
+= simple_form_for @invoice, url:  @invoice.new_record? ? invoices_path : invoice_path, remote:true, :html => {class: "invoice-form"} do |f|
+  .ui.grid
+    .column
+      = f.input :organization_unit_id, collection: Core::OrganizationUnit.sort_by_ancestry(Core::OrganizationUnit.all),  value_method: :id, label_method: :title_for_selects,  :include_blank => true, selected: @invoice.lead.present? ? @invoice.lead.try(:organization_unit_id) : @invoice.project.lead.try(:organization_unit_id)
+      = f.input :invoice_project, as: :string, label: 'Project', input_html: {value: @invoice.project.nil? ? @invoice.invoice_project : @invoice.project.title}
+      = f.input :invoice_task, label: 'Task'
+      = f.input :task_list_id, label: 'Task List', collection: Pms::TaskList.where(billable: true, taskable_id: @invoice.project_id), value_method: :id, label_method: :title, selected: @invoice.try(:task_list_id), include_blank: true if @invoice.project.present?
+      = f.input :cost
+      = f.input :split_type_id, collection: Core::InvoiceSplitType.all, include_blank: false
+      - if @invoice.status.nil?
+        = f.input :status_id, collection: Core::InvoiceStatus.all, selected: Core::InvoiceStatus.find_by_name(Core::Invoice::DEFAULT_STATUS).nil? ? Core::InvoiceStatus.first.try(:id) : Core::InvoiceStatus.find_by_name(Core::Invoice::DEFAULT_STATUS).id
+      -else
+        = f.input :status_id, collection: Core::InvoiceStatus.all
+      = f.input :due_date
+      = f.input :lead_id, as: :hidden, value: @invoice.lead_id
+      = f.input :project_id, as: :hidden, value: @invoice.project_id
+
+      .actions
+        = f.submit f.object.new_record? ? 'Add' : 'Update', class: "ui blue button"
+        .ui.negative.button Cancel

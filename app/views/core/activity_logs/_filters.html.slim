@@ -1,0 +1,13 @@
+= form_tag url, method: :get, class: 'ui form'
+  .three.column.row
+    .column.floated.left
+      = text_field_tag "filters[start_date]", params[:filters][:start_date], :placeholder => "From", :class => "datepicker", :readonly => true
+    .column.floated.left.padded  
+      = text_field_tag "filters[end_date]", params[:filters][:end_date], :placeholder => "To", :class => "datepicker", :readonly => true
+    .column.floated.left
+      = submit_tag "Filter", class: "ui blue button"
+coffee:
+  $(document).ready ->
+  	#$('.datepicker').datetimepicker({format: "Y-m-d H:i"})
+    $('.datepicker').datepicker({dateFormat: "yy-mm-dd"})
+  	return

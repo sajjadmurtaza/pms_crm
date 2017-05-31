@@ -1,0 +1,71 @@
+= content_for :sidebar
+  = render 'sidebar'
+
+= content_for :action_bar
+  = link_to semantic_icon('add'), new_project_path, class: "ui button"
+  .ui.dropdown.button.sort-menu
+    i.sort.icon
+    .menu
+      = render 'shared/sorting'
+      /= sort_link(@q, :title, 'Title', {}, class: 'item')
+
+  = listing_layout_switch
+
+= content_for :sub_action_bar
+  = render partial: 'shared/pagination', locals: {collection: @projects}
+
+- if params[:listing_layout] == 'table'
+  table.ui.padded.table.data-listing
+    thead
+      tr
+        th.three.wide Title
+        th.two.wide Contacts
+        th Start Date
+        th Planned Completion on
+        th Status
+        th % Done
+        th.text_right Cost
+    tbody
+      - @projects.each do |project|
+        tr.data-block
+          td
+            .text
+              strong = link_to project.title, project_path(project)
+              .ui.pointing.dropdown
+                i.dropdown.icon.data-actions
+                .menu
+                  = link_to 'Edit', edit_project_path(project), class: 'item'
+                  = link_to 'Delete', project_path(project), method: :delete, confirm: 'Are you sure you want to delete?', class: 'item'
+          td.grey = project.assigned_contacts.blank? ? 'Not Specified' : project.assigned_contacts.join(', ')
+          td.grey = l project.start_date if project.start_date
+          td.grey = l project.planned_end_date if project.planned_end_date
+          td.grey = project.status
+          td.grey = project.percentage_done
+          td.text_right.grey = number_to_currency project.cost
+    tfoot
+      tr
+        td colspan=6
+        td.text_right
+          .text
+            strong = "Total = #{number_to_currency @projects.all.sum(:cost)}"
+
+- elsif params[:listing_layout] == 'list'
+  .ui.very.relaxed.divided.list.data-listing
+    - @projects.each do |project|
+      .item.data-block
+        .icon
+          span.grey.info-block = project.try(:status)
+        .content
+          .header
+            .text
+              strong = link_to project.title, project_path(project)
+              .ui.pointing.dropdown
+                i.dropdown.icon.data-actions
+                .menu
+                  = link_to 'Edit', edit_project_path(project), class: 'item'
+                  = link_to 'Delete', project_path(project), method: :delete, confirm: 'Are you sure you want to delete?', class: 'item'
+
+          .grey.text
+            = project.assigned_contacts.join(', ')
+          .grey.text
+            = l project.start_date if project.start_date

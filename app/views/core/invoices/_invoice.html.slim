@@ -1,0 +1,16 @@
+tr data-invoice=invoice.id
+  td
+    i class="circle large icon" style="color:#{invoice.try(:status).try(:value)}"
+  td.data-block
+    strong
+      = number_to_currency invoice.cost if invoice.cost
+  td  = l invoice.due_date if invoice.due_date
+  td  = invoice.try(:split_type)
+  td  = invoice.project.present? ? invoice.project.title : invoice.invoice_project
+  td  = invoice.task_list.try(:title)
+  td.grey
+    = link_to(semantic_icon('pencil').html_safe, edit_invoice_path(invoice), remote: true, class: 'grey')
+    | |
+    = link_to(semantic_icon('trash').html_safe, invoice_path(invoice), remote: true, data: {method: :delete, confirm: 'Are you sure?'}, class: 'grey')
+    | |
+    = link_to(semantic_icon('unhide').html_safe, invoice_path(invoice), class: 'grey')

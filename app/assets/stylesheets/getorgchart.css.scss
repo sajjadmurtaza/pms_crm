@@ -1,0 +1,1528 @@
+//colors
+$white: #ffffff;
+$color_link_water_approx: #e0ecf8;
+$white_80: rgba(255, 255, 255, 0.8);
+$color_pink_swan_approx: #bababa;
+$color_log_cabin_approx: #212121;
+$color_chicago_approx: #5c5c5c;
+$color_stack_approx: #8f8f8f;
+$color_cobalt_approx: #094ab2;
+$color_iron_approx: #d7d7d7;
+$color_ironside_gray_approx: #686868;
+$color_pumice_approx: #c7c7c7;
+$color_baltic_sea_approx: #2b2b2b;
+$color_botticelli_approx: #cedbf0;
+$color_wild_sand_approx: #f5f5f5;
+$color_carousel_pink_approx: #ffe3ea;
+$color_shiraz_approx: #ac193d;
+$color_monza_approx: #c60031;
+$color_pink_approx: #ffb9ca;
+$color_claret_approx: #851d36;
+$color_pink_lace_approx: #ffdff4;
+$color_brilliant_rose_approx: #dc4fad;
+$color_flirt_approx: #a6006e;
+$color_lavender_rose_approx: #ffafe4;
+$color_royal_heath_approx: #a73f84;
+$color_linen_approx: #ffeae5;
+$color_punch_approx: #d24726;
+$color_grenadier_approx: #d82b00;
+$color_your_pink_approx: #ffcbbf;
+$color_cognac_approx: #a3381f;
+$color_neon_carrot_approx: #ff8f32;
+$color_bamboo_approx: #d85a00;
+$color_romantic_approx: #ffd9bf;
+$color_ochre_approx: #c66f27;
+$color_hint_of_yellow_approx: #f7ffe5;
+$color_lima_approx: #82ba00;
+$color_bahia_approx: #97d800;
+$color_australian_mint_approx: #ebffbf;
+$color_vida_loca_approx: #587e00;
+$color_hint_of_green_approx: #e5ffe9;
+$color_forest_green_approx: #008a17;
+$color_malachite_approx: #00d827;
+$color_madang_approx: #bfffca;
+$color_crusoe_approx: #00510d;
+$color_tranquil_approx: #e5ffff;
+$color_pacific_blue_approx: #03b3b2;
+$color_robins_egg_blue_approx: #00d8d8;
+$color_onahau_approx: #bfffff;
+$color_teal_approx: #027e7d;
+$color_lily_white_approx: #e5fbff;
+$color_allports_approx: #008299;
+$color_french_pass_approx: #bff6ff;
+$color_deep_sea_green_approx: #01505e;
+$color_picton_blue_approx: #5db2ff;
+$color_science_blue_approx: #0073d8;
+$color_tropical_blue_approx: #bfe1ff;
+$color_steel_blue_approx: #437eb4;
+$color_lochmara_approx: #0072c6;
+$color_venice_blue_approx: #015593;
+$color_blue_chalk_approx: #e9e1ff;
+$color_daisy_bush_approx: #4617b4;
+$color_dark_blue_approx: #3600c2;
+$color_melrose_approx: #cbb7ff;
+$color_persian_indigo_approx: #361583;
+$color_violet_eggplant_approx: #8c0095;
+$color_mauve_approx: #f9a9ff;
+$color_clairvoyant_approx: #610167;
+$color_congress_blue_approx: #004b8b;
+$color_green_vogue_approx: #002c51;
+$color_solitude_approx: #e5efff;
+$color_tangaroa_approx: #001940;
+$color_jaguar_approx: #000711;
+$color_pippin_approx: #ffe5e5;
+$color_mahogany_approx: #570000;
+$color_sepia_black_approx: #280000;
+$color_chocolate_approx: #380000;
+$color_diesel_approx: #0e0000;
+$color_mystic_approx: #e7ecf0;
+$color_tuatara_approx: #343434;
+$color_rangoon_green_approx: #1a1a1a;
+$color_celeste_approx: #ccc;
+$black: #000;
+$gray: #808080;
+
+//fonts
+$font_0: Segoe UI;
+$font_1: Segoe UI Web Regular;
+$font_2: Segoe UI Symbol;
+$font_3: Helvetica Neue;
+$font_4: BBAlpha Sans;
+$font_5: S60 Sans;
+$font_6: Arial;
+$font_7: sans-serif;
+
+//@extend-elements
+//original selectors
+//.get-org-chart input, .get-org-chart select
+%extend_1 {
+  background-color: $white_80;
+  border: 1px solid #BABABA;
+  color: $color_log_cabin_approx;
+  font-family: $font_0, $font_1, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7;
+  font-size: 14px;
+  padding: 4px 8px;
+  width: 260px;
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+
+
+.get-oc-c {
+  background-color: #FFFFFF;
+}
+.get-oc-v {
+  background-color: #FFFFFF;
+}
+.get-oc-g {
+  background-color: #FFFFFF;
+}
+.get-org-chart {
+  background-color: #E0ECF8;
+  position: relative;
+  height: 100%;
+  .get-oc-c {
+    font-family: $font_0, $font_1, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7;
+    width: 100%;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    overflow: hidden;
+    svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+    .get-box {
+      fill: #094AB2;
+      stroke-width: 2px;
+      stroke: #094AB2;
+    }
+    .name {
+      fill: $color_iron_approx;
+      font-size: 20px;
+    }
+    .get-text {
+      fill: $white;
+      font-size: 20px;
+    }
+    .link {
+      stroke: $color_ironside_gray_approx;
+      fill: none;
+    }
+    .get-text-0 {
+      font-size: 30px;
+    }
+  }
+  .get-oc-tb {
+    font-family: $font_0, $font_1, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7;
+    z-index: 1;
+    height: 46px;
+    background-color: #094AB2;
+    border-bottom: 2px solid #C7C7C7;
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+    a {
+      float: left;
+      width: 26px;
+      height: 26px;
+      display: block;
+      text-decoration: none;
+      border: 0;
+      display: none;
+      &.get-left {
+        background: asset-url("org_chart.png") -182px 0;
+        float: right;
+        margin: 11px 0 0 3px;
+      }
+      &.get-right {
+        background: asset-url("org_chart.png") -130px 0;
+        float: right;
+        margin: 11px 10px 0 3px;
+      }
+      &.get-up {
+        background: asset-url("org_chart.png") -52px 0;
+        float: right;
+        margin: 11px 0 0 3px;
+      }
+      &.get-down {
+        background: asset-url("org_chart.png") -234px 0;
+        float: right;
+        margin: 11px 0 0 3px;
+      }
+      &.get-plus {
+        background: asset-url("org_chart.png") -26px 0;
+        float: right;
+        margin: 11px 10px 0 3px;
+        border: 0;
+      }
+      &.get-minus {
+        background: asset-url("org_chart.png") 0 0;
+        float: right;
+        margin: 11px 10px 0 3px;
+      }
+      &.get-add {
+        background: asset-url("org_chart.png") -260px 0;
+        float: right;
+        margin: 11px 10px 0 3px;
+      }
+      &.get-next {
+        background: asset-url("org_chart.png") -104px 0;
+        margin: 11px 3px 0 3px;
+      }
+      &.get-prev {
+        background: asset-url("org_chart.png") -156px 0;
+        margin: 11px 3px 0 3px;
+      }
+      &.get-grid-view {
+        background: asset-url("org_chart.png") -208px 0;
+        float: right;
+        margin: 11px 10px 0 3px;
+      }
+      &.get-print {
+        background: asset-url("org_chart.png") -312px 0;
+        float: right;
+        margin: 11px 10px 0 3px;
+      }
+      &.get-prev-page {
+        background: asset-url("org_chart.png") -156px 0;
+        margin: 11px 3px 0 17px;
+        display: inherit;
+      }
+      &.get-delete {
+        background: asset-url("org_chart.png") -286px 0;
+        margin: 11px 10px 0 10px;
+        float: right;
+      }
+      &.get-save {
+        background: asset-url("org_chart.png") -78px 0;
+        margin: 11px 3px 0 10px;
+        float: right;
+      }
+    }
+    input {
+      float: left;
+      margin: 8px 10px 0 8px;
+      display: none;
+    }
+    .get-disabled {
+      opacity: .2;
+      cursor: default;
+    }
+    > div {
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+  input {
+    font-family: $font_0, $font_1, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7;
+    @extend %extend_1;
+    &:focus {
+      border-color: #5C5C5C;
+      outline: medium none;
+    }
+    &:hover {
+      border-color: #8F8F8F;
+    }
+  }
+  table {
+    font-family: $font_0, $font_1, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7;
+  }
+  select {
+    @extend %extend_1;
+    margin-top: 11px;
+    &:focus {
+      border-color: #5C5C5C;
+      outline: medium none;
+    }
+    &:hover {
+      border-color: #8F8F8F;
+    }
+  }
+  .get-oc-v {
+    overflow-y: scroll;
+    width: 100%;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    .get-image-pane {
+      float: left;
+      height: 100%;
+      position: absolute;
+      top: 20px;
+      left: -200px;
+    }
+    .get-data-pane {
+      float: left;
+      position: absolute;
+      top: 20px;
+      left: 480px;
+    }
+    .get-label {
+      line-height: 23px;
+      font-size: 12px;
+      color: $color_baltic_sea_approx;
+    }
+  }
+  .get-user-logo {
+    fill: #CEDBF0;
+  }
+  .get-oc-g {
+    width: 100%;
+    overflow-y: auto;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    table {
+      width: 100%;
+    }
+    th {
+      text-align: left;
+      padding: 3px 0 3px 7px;
+      color: $white;
+      text-transform: uppercase;
+    }
+    td {
+      padding: 3px 0 3px 7px;
+      border-bottom: 1px solid #C7C7C7;
+      border-right: 1px solid #C7C7C7;
+      text-align: left;
+      font-weight: normal;
+    }
+    .get-odd td {
+      background-color: $color_wild_sand_approx;
+    }
+  }
+}
+div {
+  &.get-org-chart .get-oc-c {
+    .get-darkred .get-box {
+      fill: #AC193D;
+      stroke: #C60031;
+    }
+    .get-pink .get-box {
+      fill: #DC4FAD;
+      stroke: #A6006E;
+    }
+    .get-darkorange .get-box {
+      fill: #D24726;
+      stroke: #D82B00;
+    }
+    .get-orange .get-box {
+      fill: #FF8F32;
+      stroke: #D85A00;
+    }
+    .get-lightgreen .get-box {
+      fill: #82BA00;
+      stroke: #97D800;
+    }
+    .get-green .get-box {
+      fill: #008A17;
+      stroke: #00D827;
+    }
+    .get-lightteal .get-box {
+      fill: #03B3B2;
+      stroke: #00D8D8;
+    }
+    .get-teal .get-box {
+      fill: $color_allports_approx;
+      stroke: #00BBD8;
+    }
+    .get-lightblue .get-box {
+      fill: #5DB2FF;
+      stroke: #0073D8;
+    }
+    .get-blue .get-box {
+      fill: #0072C6;
+      stroke: #0081D8;
+    }
+    .get-darkpurple .get-box {
+      fill: #4617B4;
+      stroke: #3600C2;
+    }
+    .get-purple .get-box {
+      fill: #8C0095;
+      stroke: $color_violet_eggplant_approx;
+    }
+    .get-mediumdarkblue .get-box {
+      fill: #004B8B;
+      stroke: #007AD8;
+    }
+    .get-darkblue .get-box {
+      fill: $color_tangaroa_approx;
+      stroke: #0056D8;
+    }
+    .get-cordovan .get-box {
+      fill: $color_mahogany_approx;
+      stroke: $color_sepia_black_approx;
+    }
+    .get-darkcordovan .get-box {
+      fill: $color_chocolate_approx;
+      stroke: #0E0000;
+    }
+    .get-neutralgrey .get-box {
+      fill: $color_chicago_approx;
+      stroke: #1A1A1A;
+    }
+    .get-black .get-box {
+      fill: $black;
+      stroke: $black;
+    }
+  }
+  &.get-cassandra.get-org-chart .get-oc-c {
+    .get-darkred {
+      .get-box {
+        stroke: #AC193D;
+      }
+      .get-text {
+        fill: #AC193D;
+      }
+    }
+    .get-pink {
+      .get-box {
+        stroke: #DC4FAD;
+      }
+      .get-text {
+        fill: #DC4FAD;
+      }
+    }
+    .get-darkorange {
+      .get-box {
+        stroke: #D24726;
+      }
+      .get-text {
+        fill: #D24726;
+      }
+    }
+    .get-orange {
+      .get-box {
+        stroke: #FF8F32;
+      }
+      .get-text {
+        fill: #FF8F32;
+      }
+    }
+    .get-lightgreen {
+      .get-box {
+        stroke: #82BA00;
+      }
+      .get-text {
+        fill: #82BA00;
+      }
+    }
+    .get-green {
+      .get-box {
+        stroke: #008A17;
+      }
+      .get-text {
+        fill: #008A17;
+      }
+    }
+    .get-lightteal {
+      .get-box {
+        stroke: #03B3B2;
+      }
+      .get-text {
+        fill: #03B3B2;
+      }
+    }
+    .get-teal {
+      .get-box {
+        stroke: $color_allports_approx;
+      }
+      .get-text {
+        fill: $color_allports_approx;
+      }
+    }
+    .get-lightblue {
+      .get-box {
+        stroke: #5DB2FF;
+      }
+      .get-text {
+        fill: #5DB2FF;
+      }
+    }
+    .get-blue {
+      .get-box {
+        stroke: #0072C6;
+      }
+      .get-text {
+        fill: #0072C6;
+      }
+    }
+    .get-darkpurple {
+      .get-box {
+        stroke: #4617B4;
+      }
+      .get-text {
+        fill: #4617B4;
+      }
+    }
+    .get-purple {
+      .get-box {
+        stroke: #8C0095;
+      }
+      .get-text {
+        fill: #8C0095;
+      }
+    }
+    .get-mediumdarkblue {
+      .get-box {
+        stroke: #004B8B;
+      }
+      .get-text {
+        fill: #004B8B;
+      }
+    }
+    .get-darkblue {
+      .get-box {
+        stroke: $color_tangaroa_approx;
+      }
+      .get-text {
+        fill: $color_tangaroa_approx;
+      }
+    }
+    .get-cordovan {
+      .get-box {
+        stroke: $color_mahogany_approx;
+      }
+      .get-text {
+        fill: $color_mahogany_approx;
+      }
+    }
+    .get-darkcordovan {
+      .get-box {
+        stroke: $color_chocolate_approx;
+      }
+      .get-text {
+        fill: $color_chocolate_approx;
+      }
+    }
+    .get-neutralgrey {
+      .get-box {
+        stroke: $color_chicago_approx;
+      }
+      .get-text {
+        fill: $color_chicago_approx;
+      }
+    }
+    .get-black {
+      .get-box {
+        stroke: $black;
+      }
+      .get-text {
+        fill: $black;
+      }
+    }
+  }
+  &.get-deborah.get-org-chart {
+    .get-oc-c {
+      .get-darkred .get-box {
+        stroke: #AC193D;
+      }
+      .get-pink .get-box {
+        stroke: #DC4FAD;
+      }
+      .get-darkorange .get-box {
+        stroke: #D24726;
+      }
+      .get-orange .get-box {
+        stroke: #FF8F32;
+      }
+      .get-lightgreen .get-box {
+        stroke: #82BA00;
+      }
+      .get-green .get-box {
+        stroke: #008A17;
+      }
+      .get-lightteal .get-box {
+        stroke: #03B3B2;
+      }
+      .get-teal .get-box {
+        stroke: $color_allports_approx;
+      }
+      .get-lightblue .get-box {
+        stroke: #5DB2FF;
+      }
+      .get-blue .get-box {
+        stroke: #0072C6;
+      }
+      .get-darkpurple .get-box {
+        stroke: #4617B4;
+      }
+      .get-purple .get-box {
+        stroke: #8C0095;
+      }
+      .get-mediumdarkblue .get-box {
+        stroke: #004B8B;
+      }
+      .get-darkblue .get-box {
+        stroke: $color_tangaroa_approx;
+      }
+      .get-cordovan .get-box {
+        stroke: $color_mahogany_approx;
+      }
+      .get-darkcordovan .get-box {
+        stroke: $color_chocolate_approx;
+      }
+      .get-neutralgrey .get-box {
+        stroke: $color_chicago_approx;
+      }
+      .get-black .get-box {
+        stroke: $black;
+      }
+    }
+    .get-darkred .get-text-pane {
+      fill: #AC193D;
+      fill-opacity: .5;
+    }
+    .get-pink .get-text-pane {
+      fill: #DC4FAD;
+      fill-opacity: .5;
+    }
+    .get-darkorange .get-text-pane {
+      fill: #D24726;
+      fill-opacity: .5;
+    }
+    .get-orange .get-text-pane {
+      fill: #FF8F32;
+      fill-opacity: .5;
+    }
+    .get-lightgreen .get-text-pane {
+      fill: #82BA00;
+      fill-opacity: .5;
+    }
+    .get-green .get-text-pane {
+      fill: #008A17;
+      fill-opacity: .5;
+    }
+    .get-lightteal .get-text-pane {
+      fill: #03B3B2;
+      fill-opacity: .5;
+    }
+    .get-teal .get-text-pane {
+      fill: $color_allports_approx;
+      fill-opacity: .5;
+    }
+    .get-lightblue .get-text-pane {
+      fill: #5DB2FF;
+      fill-opacity: .5;
+    }
+    .get-blue .get-text-pane {
+      fill: #0072C6;
+      fill-opacity: .5;
+    }
+    .get-darkpurple .get-text-pane {
+      fill: #4617B4;
+      fill-opacity: .5;
+    }
+    .get-purple .get-text-pane {
+      fill: #8C0095;
+      fill-opacity: .5;
+    }
+    .get-mediumdarkblue .get-text-pane {
+      fill: #004B8B;
+      fill-opacity: .5;
+    }
+    .get-darkblue .get-text-pane {
+      fill: $color_tangaroa_approx;
+      fill-opacity: .5;
+    }
+    .get-cordovan .get-text-pane {
+      fill: $color_mahogany_approx;
+      fill-opacity: .5;
+    }
+    .get-darkcordovan .get-text-pane {
+      fill: $color_chocolate_approx;
+      fill-opacity: .5;
+    }
+    .get-neutralgrey .get-text-pane {
+      fill: $color_chicago_approx;
+      fill-opacity: .5;
+    }
+    .get-black .get-text-pane {
+      fill: $black;
+      fill-opacity: .5;
+    }
+  }
+  &.get-helen.get-org-chart .get-oc-c {
+    .get-darkred .get-text {
+      fill: #AC193D;
+    }
+    .get-pink .get-text {
+      fill: #DC4FAD;
+    }
+    .get-darkorange .get-text {
+      fill: #D24726;
+    }
+    .get-orange .get-text {
+      fill: #FF8F32;
+    }
+    .get-lightgreen .get-text {
+      fill: #82BA00;
+    }
+    .get-green .get-text {
+      fill: #008A17;
+    }
+    .get-lightteal .get-text {
+      fill: #03B3B2;
+    }
+    .get-teal .get-text {
+      fill: $color_allports_approx;
+    }
+    .get-lightblue .get-text {
+      fill: #5DB2FF;
+    }
+    .get-blue .get-text {
+      fill: #0072C6;
+    }
+    .get-darkpurple .get-text {
+      fill: #4617B4;
+    }
+    .get-purple .get-text {
+      fill: #8C0095;
+    }
+    .get-mediumdarkblue .get-text {
+      fill: #004B8B;
+    }
+    .get-darkblue .get-text {
+      fill: $color_tangaroa_approx;
+    }
+    .get-cordovan .get-text {
+      fill: $color_mahogany_approx;
+    }
+    .get-darkcordovan .get-text {
+      fill: $color_chocolate_approx;
+    }
+    .get-neutralgrey .get-text {
+      fill: $color_chicago_approx;
+    }
+    .get-black .get-text {
+      fill: $black;
+    }
+  }
+}
+.get-cassandra {
+  &.get-org-chart .get-oc-c .get-box {
+    fill: none;
+    stroke-width: 6;
+  }
+  &.get-darkred.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: #AC193D;
+    }
+    .get-text {
+      fill: #AC193D;
+    }
+  }
+  &.get-pink.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: #DC4FAD;
+    }
+    .get-text {
+      fill: #DC4FAD;
+    }
+  }
+  &.get-darkorange.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: #D24726;
+    }
+    .get-text {
+      fill: #D24726;
+    }
+  }
+  &.get-orange.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: #FF8F32;
+    }
+    .get-text {
+      fill: #FF8F32;
+    }
+  }
+  &.get-lightgreen.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: #82BA00;
+    }
+    .get-text {
+      fill: #82BA00;
+    }
+  }
+  &.get-green.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: #008A17;
+    }
+    .get-text {
+      fill: #008A17;
+    }
+  }
+  &.get-lightteal.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: #03B3B2;
+    }
+    .get-text {
+      fill: #03B3B2;
+    }
+  }
+  &.get-teal.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: $color_allports_approx;
+    }
+    .get-text {
+      fill: $color_allports_approx;
+    }
+  }
+  &.get-lightblue.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: #5DB2FF;
+    }
+    .get-text {
+      fill: #5DB2FF;
+    }
+  }
+  &.get-blue.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: #0072C6;
+    }
+    .get-text {
+      fill: #0072C6;
+    }
+  }
+  &.get-darkpurple.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: #4617B4;
+    }
+    .get-text {
+      fill: #4617B4;
+    }
+  }
+  &.get-purple.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: #8C0095;
+    }
+    .get-text {
+      fill: #8C0095;
+    }
+  }
+  &.get-mediumdarkblue.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: #004B8B;
+    }
+    .get-text {
+      fill: #004B8B;
+    }
+  }
+  &.get-darkblue.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: $color_tangaroa_approx;
+    }
+    .get-text {
+      fill: $color_tangaroa_approx;
+    }
+  }
+  &.get-cordovan.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: $color_mahogany_approx;
+    }
+    .get-text {
+      fill: $color_mahogany_approx;
+    }
+  }
+  &.get-darkcordovan.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: $color_chocolate_approx;
+    }
+    .get-text {
+      fill: $color_chocolate_approx;
+    }
+  }
+  &.get-neutralgrey.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: $color_chicago_approx;
+    }
+    .get-text {
+      fill: $color_chicago_approx;
+    }
+  }
+  &.get-black.get-org-chart .get-oc-c {
+    .get-box {
+      stroke: $black;
+    }
+    .get-text {
+      fill: $black;
+    }
+  }
+}
+.get-deborah {
+  &.get-org-chart .get-oc-c .get-box {
+    fill-opacity: 0;
+    stroke-width: 10;
+  }
+  &.get-darkred.get-org-chart {
+    .get-text-pane {
+      fill: #AC193D;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: #AC193D;
+    }
+  }
+  &.get-pink.get-org-chart {
+    .get-text-pane {
+      fill: #DC4FAD;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: #DC4FAD;
+    }
+  }
+  &.get-darkorange.get-org-chart {
+    .get-text-pane {
+      fill: #D24726;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: #D24726;
+    }
+  }
+  &.get-orange.get-org-chart {
+    .get-text-pane {
+      fill: #FF8F32;
+      fill-opacity: 0.5;
+    }
+    .get-oc-c .get-box {
+      stroke: #FF8F32;
+    }
+  }
+  &.get-lightgreen.get-org-chart {
+    .get-text-pane {
+      fill: #82BA00;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: #82BA00;
+    }
+  }
+  &.get-green.get-org-chart {
+    .get-text-pane {
+      fill: #008A17;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: #008A17;
+    }
+  }
+  &.get-lightteal.get-org-chart {
+    .get-text-pane {
+      fill: #03B3B2;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: #03B3B2;
+    }
+  }
+  &.get-teal.get-org-chart {
+    .get-text-pane {
+      fill: $color_allports_approx;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: $color_allports_approx;
+    }
+  }
+  &.get-lightblue.get-org-chart {
+    .get-text-pane {
+      fill: #5DB2FF;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: #5DB2FF;
+    }
+  }
+  &.get-blue.get-org-chart {
+    .get-text-pane {
+      fill: #0072C6;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: #0072C6;
+    }
+  }
+  &.get-darkpurple.get-org-chart {
+    .get-text-pane {
+      fill: #4617B4;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: #4617B4;
+    }
+  }
+  &.get-purple.get-org-chart {
+    .get-text-pane {
+      fill: #8C0095;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: #8C0095;
+    }
+  }
+  &.get-mediumdarkblue.get-org-chart {
+    .get-text-pane {
+      fill: #004B8B;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: #004B8B;
+    }
+  }
+  &.get-darkblue.get-org-chart {
+    .get-text-pane {
+      fill: $color_tangaroa_approx;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: $color_tangaroa_approx;
+    }
+  }
+  &.get-cordovan.get-org-chart {
+    .get-text-pane {
+      fill: $color_mahogany_approx;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: $color_mahogany_approx;
+    }
+  }
+  &.get-darkcordovan.get-org-chart {
+    .get-text-pane {
+      fill: $color_chocolate_approx;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: $color_chocolate_approx;
+    }
+  }
+  &.get-neutralgrey.get-org-chart {
+    .get-text-pane {
+      fill: $color_chicago_approx;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: $color_chicago_approx;
+    }
+  }
+  &.get-black.get-org-chart {
+    .get-text-pane {
+      fill: $black;
+      fill-opacity: .5;
+    }
+    .get-oc-c .get-box {
+      stroke: $black;
+    }
+  }
+}
+.get-helen {
+  &.get-darkred.get-org-chart .get-oc-c .get-text {
+    fill: #AC193D;
+  }
+  &.get-pink.get-org-chart .get-oc-c .get-text {
+    fill: #DC4FAD;
+  }
+  &.get-darkorange.get-org-chart .get-oc-c .get-text {
+    fill: #D24726;
+  }
+  &.get-orange.get-org-chart .get-oc-c .get-text {
+    fill: #FF8F32;
+  }
+  &.get-lightgreen.get-org-chart .get-oc-c .get-text {
+    fill: #82BA00;
+  }
+  &.get-green.get-org-chart .get-oc-c .get-text {
+    fill: #008A17;
+  }
+  &.get-lightteal.get-org-chart .get-oc-c .get-text {
+    fill: #03B3B2;
+  }
+  &.get-teal.get-org-chart .get-oc-c .get-text {
+    fill: $color_allports_approx;
+  }
+  &.get-lightblue.get-org-chart .get-oc-c .get-text {
+    fill: #5DB2FF;
+  }
+  &.get-blue.get-org-chart .get-oc-c .get-text {
+    fill: #0072C6;
+  }
+  &.get-darkpurple.get-org-chart .get-oc-c .get-text {
+    fill: #4617B4;
+  }
+  &.get-purple.get-org-chart .get-oc-c .get-text {
+    fill: #8C0095;
+  }
+  &.get-mediumdarkblue.get-org-chart .get-oc-c .get-text {
+    fill: #004B8B;
+  }
+  &.get-darkblue.get-org-chart .get-oc-c .get-text {
+    fill: $color_tangaroa_approx;
+  }
+  &.get-cordovan.get-org-chart .get-oc-c .get-text {
+    fill: $color_mahogany_approx;
+  }
+  &.get-darkcordovan.get-org-chart .get-oc-c .get-text {
+    fill: $color_chocolate_approx;
+  }
+  &.get-neutralgrey.get-org-chart .get-oc-c .get-text {
+    fill: $color_chicago_approx;
+  }
+  &.get-black.get-org-chart .get-oc-c .get-text {
+    fill: $black;
+  }
+}
+.get-darkred.get-org-chart {
+  background-color: #FFE3EA;
+  .get-oc-tb {
+    background-color: #AC193D;
+  }
+  .get-user-logo {
+    fill: #FFB9CA;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_claret_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: #AC193D;
+  }
+  .get-oc-c .get-box {
+    fill: #AC193D;
+    stroke: #C60031;
+  }
+  .get-oc-g th {
+    background-color: #AC193D;
+  }
+}
+.get-pink.get-org-chart {
+  background-color: #FFDFF4;
+  .get-oc-tb {
+    background-color: #DC4FAD;
+  }
+  .get-user-logo {
+    fill: #FFAFE4;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_royal_heath_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: #DC4FAD;
+  }
+  .get-oc-c .get-box {
+    fill: #DC4FAD;
+    stroke: #A6006E;
+  }
+  .get-oc-g th {
+    background-color: #DC4FAD;
+  }
+}
+.get-darkorange.get-org-chart {
+  background-color: #FFEAE5;
+  .get-oc-tb {
+    background-color: #D24726;
+  }
+  .get-user-logo {
+    fill: #FFCBBF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_cognac_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: #D24726;
+  }
+  .get-oc-c .get-box {
+    fill: #D24726;
+    stroke: #D82B00;
+  }
+  .get-oc-g th {
+    background-color: #D24726;
+  }
+}
+.get-orange.get-org-chart {
+  background-color: #FFEFE5;
+  .get-oc-tb {
+    background-color: #FF8F32;
+  }
+  .get-user-logo {
+    fill: #FFD9BF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_ochre_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: #FF8F32;
+  }
+  .get-oc-c .get-box {
+    fill: #FF8F32;
+    stroke: #D85A00;
+  }
+  .get-oc-g th {
+    background-color: #FF8F32;
+  }
+}
+.get-lightgreen.get-org-chart {
+  background-color: #F7FFE5;
+  .get-oc-tb {
+    background-color: #82BA00;
+  }
+  .get-user-logo {
+    fill: #EBFFBF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_vida_loca_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: #82BA00;
+  }
+  .get-oc-c .get-box {
+    fill: #82BA00;
+    stroke: #97D800;
+  }
+  .get-oc-g th {
+    background-color: #82BA00;
+  }
+}
+.get-green.get-org-chart {
+  background-color: #E5FFE9;
+  .get-oc-tb {
+    background-color: #008A17;
+  }
+  .get-user-logo {
+    fill: #BFFFCA;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_crusoe_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: #008A17;
+  }
+  .get-oc-c .get-box {
+    fill: #008A17;
+    stroke: #00D827;
+  }
+  .get-oc-g th {
+    background-color: #008A17;
+  }
+}
+.get-lightteal.get-org-chart {
+  background-color: #E5FFFF;
+  .get-oc-tb {
+    background-color: #03B3B2;
+  }
+  .get-user-logo {
+    fill: #BFFFFF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_teal_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: #03B3B2;
+  }
+  .get-oc-c .get-box {
+    fill: #03B3B2;
+    stroke: #00D8D8;
+  }
+  .get-oc-g th {
+    background-color: #03B3B2;
+  }
+}
+.get-teal.get-org-chart {
+  background-color: #E5FBFF;
+  .get-oc-tb {
+    background-color: $color_allports_approx;
+  }
+  .get-user-logo {
+    fill: #BFF6FF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_deep_sea_green_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: $color_allports_approx;
+  }
+  .get-oc-c .get-box {
+    fill: $color_allports_approx;
+    stroke: #00BBD8;
+  }
+  .get-oc-g th {
+    background-color: $color_allports_approx;
+  }
+}
+.get-lightblue.get-org-chart {
+  background-color: #E5F2FF;
+  .get-oc-tb {
+    background-color: #5DB2FF;
+  }
+  .get-user-logo {
+    fill: #BFE1FF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_steel_blue_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: #5DB2FF;
+  }
+  .get-oc-c .get-box {
+    fill: #5DB2FF;
+    stroke: #0073D8;
+  }
+  .get-oc-g th {
+    background-color: #5DB2FF;
+  }
+}
+.get-blue.get-org-chart {
+  background-color: #E5F4FF;
+  .get-oc-tb {
+    background-color: #0072C6;
+  }
+  .get-user-logo {
+    fill: #BFE5FF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_venice_blue_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: #0072C6;
+  }
+  .get-oc-c .get-box {
+    fill: #0072C6;
+    stroke: #0081D8;
+  }
+  .get-oc-g th {
+    background-color: #0072C6;
+  }
+}
+.get-darkpurple.get-org-chart {
+  background-color: #E9E1FF;
+  .get-oc-tb {
+    background-color: #4617B4;
+  }
+  .get-user-logo {
+    fill: #CBB7FF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_persian_indigo_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: #4617B4;
+  }
+  .get-oc-c .get-box {
+    fill: #4617B4;
+    stroke: #3600C2;
+  }
+  .get-oc-g th {
+    background-color: #4617B4;
+  }
+}
+.get-purple.get-org-chart {
+  background-color: #FCDDFF;
+  .get-oc-tb {
+    background-color: #8C0095;
+  }
+  .get-user-logo {
+    fill: #F9A9FF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_clairvoyant_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: #8C0095;
+  }
+  .get-oc-c .get-box {
+    fill: #8C0095;
+    stroke: $color_violet_eggplant_approx;
+  }
+  .get-oc-g th {
+    background-color: #8C0095;
+  }
+}
+.get-mediumdarkblue.get-org-chart {
+  background-color: #E5F3FF;
+  .get-oc-tb {
+    background-color: #004B8B;
+  }
+  .get-user-logo {
+    fill: #BFE3FF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_green_vogue_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: #004B8B;
+  }
+  .get-oc-c .get-box {
+    fill: #004B8B;
+    stroke: #007AD8;
+  }
+  .get-oc-g th {
+    background-color: #004B8B;
+  }
+}
+.get-darkblue.get-org-chart {
+  background-color: #E5EFFF;
+  .get-oc-tb {
+    background-color: $color_tangaroa_approx;
+  }
+  .get-user-logo {
+    fill: #BFD8FF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_jaguar_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: $color_tangaroa_approx;
+  }
+  .get-oc-c .get-box {
+    fill: $color_tangaroa_approx;
+    stroke: #0056D8;
+  }
+  .get-oc-g th {
+    background-color: $color_tangaroa_approx;
+  }
+}
+.get-cordovan.get-org-chart {
+  background-color: #FFE5E5;
+  .get-oc-tb {
+    background-color: $color_mahogany_approx;
+  }
+  .get-user-logo {
+    fill: #FFBFBF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_sepia_black_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: $color_mahogany_approx;
+  }
+  .get-oc-c .get-box {
+    fill: $color_mahogany_approx;
+    stroke: $color_sepia_black_approx;
+  }
+  .get-oc-g th {
+    background-color: $color_mahogany_approx;
+  }
+}
+.get-darkcordovan.get-org-chart {
+  background-color: #FFE5E5;
+  .get-oc-tb {
+    background-color: $color_chocolate_approx;
+  }
+  .get-user-logo {
+    fill: #FFBFBF;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_diesel_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: $color_chocolate_approx;
+  }
+  .get-oc-c .get-box {
+    fill: $color_chocolate_approx;
+    stroke: #0E0000;
+  }
+  .get-oc-g th {
+    background-color: $color_chocolate_approx;
+  }
+}
+.get-neutralgrey.get-org-chart {
+  background-color: #E7ECF0;
+  .get-oc-tb {
+    background-color: $color_tuatara_approx;
+  }
+  .get-user-logo {
+    fill: transparent;
+  }
+  .get-def-stop-1 {
+    stop-color: $color_baltic_sea_approx;
+  }
+  .get-def-stop-2 {
+    stop-color: $color_chicago_approx;
+  }
+  .get-oc-c .get-box {
+    fill: $color_tuatara_approx;
+    stroke: #1A1A1A;
+  }
+  .get-oc-g th {
+    background-color: $color_chicago_approx;
+  }
+}
+.get-black.get-org-chart {
+  background-color: #CCC;
+  .get-oc-tb {
+    background-color: $black;
+  }
+  .get-user-logo {
+    fill: $gray;
+  }
+  .get-def-stop-1 {
+    stop-color: $black;
+  }
+  .get-def-stop-2 {
+    stop-color: $black;
+  }
+  .get-oc-c .get-box {
+    fill: $black;
+    stroke: $black;
+  }
+  .get-oc-g th {
+    background-color: $black;
+  }
+}
+.get-eve.get-org-chart .get-oc-c .get-text-0 {
+  font-size: 60px;
+}
+.get-monica.get-org-chart .get-oc-c .get-text-0 {
+  font-size: 60px;
+}
+.get-vivian.get-org-chart .get-oc-c .get-text-0 {
+  font-size: 60px;
+}

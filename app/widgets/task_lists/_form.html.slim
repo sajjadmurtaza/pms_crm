@@ -1,0 +1,16 @@
+div class="#{task_list.new_record? ? '' : 'ui stacked segment form-background'}"
+
+  = simple_form_for task_list ,  url: task_list.new_record? ? url_for_event(:create) : url_for_event(:update), :html => {remote: true, class: 'ui form'}   do |f|
+    = f.input :taskable_id, as: :hidden
+    = f.input :taskable_type, as: :hidden
+    = f.input :id, as: :hidden
+    = f.input :title,label: false, placeholder: 'Give the list a Title'
+    = f.input :billable, label: false
+    .actions.task_action
+      - if task_list.new_record?
+        = f.submit "Save and add tasks", class: "ui blue button"
+        span.cursor-pointer.ui.button onclick="$('#add_task_list').html('').transition('slide up')" Cancel
+      - else
+        = f.submit "Save", class: "ui blue button"
+        = link_to 'Cancel', url_for_event(:cancel, id: task_list.id), remote: true, class: 'ui button'
+

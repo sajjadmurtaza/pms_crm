@@ -1,0 +1,14 @@
+= simple_form_for @calendar, url: {action: @calendar.new_record? ? :create : :update}, html: {multipart: true, remote: true}   do |f|
+  = f.error_notification
+  .form-inputs
+    .form-actions
+      .ui.stackable.grid
+        .ui.one.column.row
+          .column.padded.top
+            .ui
+              = f.input :name
+              = f.input :color, input_html: {class: 'colorpicker'}
+              = f.input :system_user_id, :as => :hidden, :input_html => { :value => @calendar.new_record? ? current_user.id : @calendar.user.id }
+            .actions
+              = f.submit f.object.new_record? ? 'Create' : 'Update', class: 'ui blue small submit button ok'
+              .ui.small.button.cancel Cancel

@@ -1,0 +1,17 @@
+- selected_tab = params[:tab] ? params[:tab].to_s : tabs.first[:name]
+.ui.pointing.secondary.tabular.blue.menu
+  - tabs.each do |tab|
+    - caption = tab[:label].is_a?(Proc) ? tab[:label].call() : tab[:label]
+    - css_class = tab[:name] != selected_tab ? 'item ' : 'item active'
+    - if tab[:remote]
+      - tab_key = SecureRandom.urlsafe_base64(10)
+      - Rails.cache.write("tab-#{tab_key}", tab, expires_in: 30.minutes)
+      = link_to caption.to_s, core_ui_render_tab_path(tab_key), class: css_class, remote: true, data: {tab: tab[:name]}
+    - else
+      = link_to caption.to_s, '#', class: css_class, data: {tab: tab[:name]}
+
+- tabs.each do |tab|
+  - if tab[:remote]
+    = content_tag('div', '',{class: "ui tab tab_content",id: "tab_content_#{tab[:name]}",data: {tab: tab[:name]}})
+  - else
+    = content_tag('div',render(partial: tab[:partial], locals: tab[:locals]),{class: "ui tab #{tabs.first == tab ? 'active' : ''}",id: "tab_content_#{tab[:name]}",data: {tab: tab[:name]}})

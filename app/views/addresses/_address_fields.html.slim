@@ -1,0 +1,14 @@
+.nested-fields
+  .two.fields
+    = f.input :address1, placeholder: 'Address'
+    = f.input :address2, placeholder: 'Address'
+  .two.fields
+    = f.input :country, input_html:{class: 'select'}, prompt: "Select Country"
+    = f.input :state, placeholder: 'State'
+  .two.fields
+    = f.input :zip, placeholder: 'Zip Code'
+    = f.input :city, placeholder: 'City'
+
+    - if defined? type
+      = f.input :address_type, input_html: {value: type}, :readonly=>true
+      = link_to_remove_association semantic_icon('trash medium icon') , f

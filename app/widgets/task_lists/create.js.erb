@@ -1,0 +1,4 @@
+$('#task_lists').replaceWith("<%= escape_javascript render template: "task_lists/display" %>");
+$("#add_task_list_task_<%=@task_list.id%>").html("<%= escape_javascript render(partial: 'task_form', locals: {task: @task, task_list: @task_list}) %>");
+$('#pms_task_description').focus();
+Heyday.UI.initJSElements();

@@ -1,0 +1,62 @@
+- content_for :sub_action_bar
+  = link_to 'Edit', edit_project_path(@project), :class => 'ui blue button'
+  = link_to 'Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure you want to delete!'}, class: 'ui red button'
+  = link_to 'Close', projects_path, class: 'ui black button'
+
+- content_for :sidebar
+  .ui.basic.accordion
+    .title
+      h3
+        i.dropdown.icon
+        |Contacts
+    .content
+      - @project.projects_contacts.each do |projects_contact|
+        .ui.vertical.segment
+          strong = link_to "#{projects_contact.contact.name}", contact_path(projects_contact.contact)
+          .text = "#{projects_contact.contact.email}"
+    .title
+      h3
+        i.dropdown.icon
+        |Resources
+    .content
+      - @project.projects_users.each do |projects_user|
+        .ui.vertical.segment
+          strong = link_to "#{projects_user.user.name}", user_path(projects_user.user)
+          .text = "#{projects_user.user.email}"
+
+.ui.grid.show
+  .three.column.row
+    .padded.top.column
+      table.ui.very.compact.table
+        tbody
+          = show_for @project do |u|
+            - if @project.lead.present?
+              = show_for @project.lead do |lead|
+                = lead.attribute :name, label: 'Lead'
+            - if @project.manager.present?
+              = show_for @project.manager do |manager|
+                = manager.attribute :name, label: 'Manager'
+            - if @project.account.present?
+              = show_for @project.account do |account|
+                = account.attribute :title, label: 'Account'
+
+            = u.attribute :start_date
+            = u.attribute :planned_end_date
+            = u.attribute :cost do
+              = number_to_currency @project.cost
+
+  .row
+    .column
+      a.grey#show style="cursor:pointer"
+      .ui.top_margin#description
+        - unless @project.attachments.blank?
+          - @project.attachments.each do |attachment|
+            .file.ui.top_margin
+              i.attachment.icon.grey
+              = link_to "#{attachment.name.file.identifier} ".html_safe, attachment.name.url, target: '_blank'
+
+
+        - unless @project.description.blank?
+          .ui.top_margin = @project.try(:description).html_safe
+
+= render_tabs([{name: 'notes', partial: 'shared/notes', label: 'Notes', remote: false, locals: {object: @project}},{name: 'task_list', partial: 'shared/task_lists', label: 'Tasks', remote: true, locals: {object: @project}}, {name: 'quotes', partial: 'core/quotes/quotes', label: 'Quotes', remote: false, locals: {lead_id: @project.try(:lead).try(:id), project_id: @project.id }}, {name: 'invoices', partial: 'core/invoices/invoices', label: 'Invoices', remote: false, locals: {lead_id: @project.try(:lead).try(:id), project_id: @project.id }}])

@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @core_role.name
+p
+  strong Description:
+  = @core_role.description
+
+= link_to 'Edit', edit_core_role_path(@core_role)
+'|
+= link_to 'Back', core_roles_path

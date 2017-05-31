@@ -1,0 +1,93 @@
+= content_for :sidebar
+  = render 'sidebar'
+
+= content_for :action_bar
+  = link_to semantic_icon('add'), new_lead_path, class: "ui button"
+
+  .ui.dropdown.button.sort-menu
+    i.sort.icon
+    .menu
+      = render 'shared/sorting'
+      /= sort_link(@q, :name, 'Name', {}, class: 'item')
+      /= sort_link(@q, :email, 'Email', {}, class: 'item')
+
+  = listing_layout_switch do
+    - link_to(semantic_icon('column layout'), '?listing_layout=categorized', class: "ui button #{(params[:listing_layout] == 'categorized' ? 'active' : '')}", data: {layout_type: 'categorized'})
+
+= content_for :sub_action_bar
+  = render partial: 'shared/pagination', locals: {collection: @leads}
+
+- if params[:listing_layout] == 'table'
+  table.ui.padded.table.data-listing
+    thead
+      tr
+        th.four.wide Name
+        th State
+        th Vertical/Division
+        th Email
+
+    tbody
+      - @leads.each do |lead|
+        tr.data-block
+          td
+            .text
+              strong = link_to "#{lead.first_name} #{lead.last_name}", lead_path(lead)
+              .ui.pointing.dropdown
+                i.dropdown.icon.data-actions
+                .menu
+                  = link_to 'Edit', edit_lead_path(lead), class: 'item'
+                  = link_to 'Delete', lead_path(lead), data: {method: :delete, confirm: 'Are you sure you want to delete?'}, class: 'item'
+
+          td.grey = lead.send(lead.state_column).try(:capitalize)
+          td.grey = lead.organization_unit.nil? ? 'Not Specified' : lead.organization_unit.title
+          td.grey = lead.email
+
+- elsif params[:listing_layout] == 'list'
+  .ui.very.relaxed.divided.list.data-listing
+    - @leads.each do |lead|
+      .item.data-block
+        .icon
+          span.grey.info-block = lead.send(lead.state_column).capitalize
+        .content
+          .header
+            .text
+              strong = link_to "#{lead.first_name} #{lead.last_name}", lead_path(lead)
+              - unless lead.organization_unit.nil?
+                span.grey = " — #{lead.organization_unit.title}"
+              .ui.pointing.dropdown
+                i.dropdown.icon.data-actions
+                .menu
+                  = link_to 'Edit', edit_lead_path(lead), class: 'item'
+                  = link_to 'Delete', lead_path(lead), method: :delete, confirm: 'Are you sure you want to delete?', class: 'item'
+          span.grey.info-block
+            = label_with_icon lead.email, 'mail outline'
+
+- elsif params[:listing_layout] == 'categorized'
+  table.ui.celled.table.data-listing
+    thead
+      tr
+        - LeadWorkflow.new.states.each do |state|
+          th width="20%" = state.capitalize
+    tbody
+      tr
+        - LeadWorkflow.new.states.each do |state|
+          td.state-column data-state=state style="vertical-align:top;"
+            - @leads.where(state: state).each do |lead|
+              -  note_types = Core::NoteTypeAssociation.find_by_name(lead.class).try(:assigned_note_types)
+              .ui.segment.data-block data-id="#{lead.id}"
+                h4
+                  strong = link_to "#{lead.first_name} #{lead.last_name}", lead_path(lead), class: 'item lead-heading'
+                  - unless lead.organization_unit.nil?
+                    span.grey.small-font = " — #{lead.organization_unit.title}"
+                  .ui.pointing.dropdown
+                    i.dropdown.icon.data-actions
+                    .menu
+                      - if note_types.present?
+                        - note_types.each do |note_type|
+                          = link_to note_type.name, quick_note_path(note_type_id: note_type.id, notable_id: lead.id, notable_type: lead.class), class: 'item', remote: true
+                      = link_to 'Quote', new_quote_path(project_id: lead.project.try(:id), lead_id: lead.id), class: 'item', remote: true
+                      = link_to 'Invoice', new_invoice_path(project_id: lead.project.try(:id), lead_id: lead.id), class: 'item', remote: true
+                      = link_to 'Edit', edit_lead_path(lead), class: 'item'
+                      = link_to 'Delete', lead_path(lead), method: :delete, data: {confirm: 'Are you sure you want to delete?'}, class: 'item'
+                .skype.grey = lead.skype
+                .email.grey = lead.email

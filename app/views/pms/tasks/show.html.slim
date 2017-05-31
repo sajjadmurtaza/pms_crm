@@ -1,0 +1,30 @@
+#show-box
+  .box_content
+    .ui.threaded.comments
+      .comment
+        .content
+          .metadata
+            span.date From the task list:
+          author
+            = @task.task_list.title
+            .right.floated.padded.right
+              = link_to 'Close', url_for(:back), class: 'ui black button small'
+    br
+    - unless @task.completed
+      .ui.threaded.comments
+        .comment
+          .content
+            author
+              strong
+                = @task.description.html_safe
+            .metadata
+              span.date
+                - @task.assigned_users.each do |user|
+                  span.ui.label = user.name
+            br
+            br
+            .metadata
+              = "Due Date: #{l @task.due_date}"
+    br
+    .ui.comments
+      = render partial: "core/comments/comments", locals: {comment: @comment, object: @task}

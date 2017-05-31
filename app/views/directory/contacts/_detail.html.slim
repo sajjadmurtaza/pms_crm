@@ -1,0 +1,22 @@
+.nested-fields
+  .two.fields
+    = f.input :company_email, placeholder: 'Company Email'
+    = f.input :company_phone, placeholder: 'Company Phone'
+
+= f.simple_fields_for :addresses do |address|
+  = render 'addresses/address_fields', :f => address
+
+= f.input :nick_name, placeholder: 'Nickname'
+
+.ui.two.column.grid
+  .column
+    = f.simple_fields_for :phones do |phone|
+      = render 'phones/phone_fields', :f => phone
+    .links
+      = link_to_add_association 'Add Phone' , f, :phones, :partial => 'phones/phone_fields'
+
+  .column
+    = f.simple_fields_for :emails do |email|
+      = render 'emails/email_fields', :f => email
+    .links
+      = link_to_add_association 'Add Email' , f, :emails, :partial => 'emails/email_fields'

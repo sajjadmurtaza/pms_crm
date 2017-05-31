@@ -1,0 +1,12 @@
+table.ui.compact.table.data-listing
+  thead
+    tr
+      th.one.wide.column Status
+      th.two.wide.column Amount
+      th.three.wide.column Due Date
+      th.two.wide.column Split
+      th.three.wide.column Project
+      th Task List
+      th Actions
+  tbody.invoices-list
+    = render partial: 'core/invoices/invoice', collection: @invoices.order('created_at DESC'), as: :invoice

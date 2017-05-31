@@ -1,0 +1,18 @@
+= simple_form_for @calendar, url: {action: @calendar.new_record? ? :create : :update}, html: {multipart: true, remote: true}   do |f|
+  = f.error_notification
+  .form-inputs
+    .form-actions
+      .ui.stackable.grid
+        .ui.one.column.row
+          .column.padded.top
+            .ui
+              .inline.field
+                label Users
+                .lead-contacts
+                  = f.simple_fields_for :calendars_users do |user|
+                    = render 'calendar_user', :f => user
+                  .links
+                    = link_to_add_association 'Add User', f, :calendars_users, :partial => 'calendar_user'
+            .actions
+              = f.submit 'Share', class: 'ui blue small submit button ok'
+              .ui.small.button.cancel Cancel

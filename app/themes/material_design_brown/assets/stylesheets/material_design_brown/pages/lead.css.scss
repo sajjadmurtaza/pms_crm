@@ -1,0 +1,16 @@
+
+body.crm_leads_index {
+  td.state-column {
+    padding-left: 0;
+    padding-right: 0;
+
+    .ui.segment {
+      border-radius: 0;
+      box-shadow: none;
+      border-bottom: 1px solid #EEE;
+      margin: 0;
+      padding: 0.8em;
+      min-height: 85px;
+    }
+  }
+}

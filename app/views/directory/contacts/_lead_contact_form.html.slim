@@ -1,0 +1,14 @@
+= simple_form_for @contact, url: {action: @contact.new_record? ? :create : :update}, html: {multipart: true, class: 'contact-form', remote: true}   do |f|
+  .ui.grid
+    .one.column.row
+      .column
+        = hidden_field_tag :selected_field_id,@selected_field_id
+        = f.input :first_name, placeholder: 'First Name'
+        = f.input :last_name, placeholder: 'Last Name'
+        = f.input :email, placeholder: 'example@xyz.com'
+        = f.input :phone, placeholder: 'Phone Number'
+        = f.input :skype, placeholder: 'Skype'
+
+      .actions
+        = f.submit f.object.new_record? ? 'Create' : 'Update', class: 'ui small blue submit button ok'
+        .ui.small.button.cancel Cancel

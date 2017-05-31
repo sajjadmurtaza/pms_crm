@@ -1,0 +1,6 @@
+.invoices-list-header
+  .ui.buttons
+    = link_to "#{semantic_icon('add')} Invoice".html_safe, new_invoice_path(project_id: project_id, lead_id: lead_id), class: "ui button", remote: true
+
+  .ui.top_margin
+    = render 'core/invoices/list'

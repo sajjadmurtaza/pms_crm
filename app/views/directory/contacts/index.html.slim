@@ -1,0 +1,63 @@
+= content_for :sidebar
+  = render "sidebar", url: contacts_path
+
+= content_for :action_bar
+  = link_to semantic_icon('add'), new_contact_path, class: "ui azure button"
+  .ui.dropdown.button.sort-menu
+    i.sort.icon
+    .menu
+      = render 'shared/sorting'
+  /= sort_link(@q, :first_name, 'Name', {}, class: 'item')
+  /= sort_link(@q, :email, 'Email', {}, class: 'item')
+
+  = listing_layout_switch
+
+= content_for :sub_action_bar
+  = render partial: 'shared/pagination', locals: {collection: @contacts}
+
+- if params[:listing_layout] == 'table'
+  table.ui.padded.table.data-listing
+    thead
+      tr
+        th.four.wide Name
+        th Email
+        th Phone
+        th Address
+    tbody
+      - @contacts.each do |contact|
+        tr.data-block
+          td
+            .text
+              strong = link_to contact.name, contact_path(contact)
+              .ui.pointing.dropdown
+                i.dropdown.icon.data-actions
+                .menu
+                  = link_to 'Edit', edit_contact_path(contact), class: 'item'
+                  = link_to 'Delete', contact_path(contact), method: :delete, data: {confirm: 'Are you sure you want to delete?'}, class: 'item'
+
+          td.grey = contact.email.blank? ? 'Not Specified' :contact.email
+          td.grey = contact.phone.blank? ? 'Not Specified' : contact.phone
+          td.grey = contact.addresses.first.blank? ? 'Not Specified' : contact.addresses.first
+
+- elsif params[:listing_layout] == 'list'
+  .ui.very.relaxed.divided.list.data-listing
+    - @contacts.each do |contact|
+      .item.data-block
+        .content
+          .ui.mini.left.floated.circular.image
+            = image_tag(contact.try(:picture).try(:name).try(:small).try(:url))
+          .header
+            .text
+              strong = link_to contact.name, contact_path(contact)
+              .ui.pointing.dropdown
+                i.dropdown.icon.data-actions
+                .menu
+                  = link_to 'Edit', edit_contact_path(contact), class: 'item'
+                  = link_to 'Delete', contact_path(contact), method: :delete, data: {confirm: 'Are you sure you want to delete?'}, class: 'item'
+
+          span.info-block.grey
+            = label_with_icon contact.email, 'mail outline'
+          span.info-block.grey
+            = label_with_icon contact.phone, 'mobile'
+          span.info-block.grey
+            = label_with_icon contact.phone, 'building'

@@ -1,0 +1,8 @@
+<% if @contact.errors.present? %>
+    $('.ui.modal').parent().remove();
+    Heyday.UI.showModal('New Contact','<%=j(render 'lead_contact_form')%>');
+<% else %>
+    data = {id: "<%=@contact.id%>",text: "<%=@contact.name%>"}
+    $('#<%= @selected_field_id %>').data('options').push(data)
+    $('#<%= @selected_field_id %>').select2('val','<%= @contact.id %>')
+<% end %>

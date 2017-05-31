@@ -1,0 +1,9 @@
+= simple_form_for [:core_role, @role], url: @role.new_record? ? roles_path : role_path(@role), html: {class: 'role-form', remote: true} do |f|
+  = f.error_notification
+  .ui.grid
+    .column
+      = f.input :name, placeholder: 'Role Name'
+      = f.input :description
+      .actions
+        = f.submit f.object.new_record? ? 'Create' : 'Update', class: 'ui blue small submit button ok'
+        .ui.small.black.button.cancel Cancel

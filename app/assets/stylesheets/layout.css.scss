@@ -1,0 +1,138 @@
+body {
+  background: #E5E5E5;
+}
+
+body, html {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
+}
+
+h1,h2,h3,h4,h5,h6{
+  color: #6c6c6c;
+  font-weight: lighter;
+}
+
+.right{
+  float: right;
+}
+
+.left{
+  float: left;
+}
+.mobile_only{
+   @media (min-width:768px) and (max-width: 992px) {
+     display: none;
+   }
+}
+.ui.fixed.menu.inverted.menu.navbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 8%;
+  @media only screen and (min-width: 1500px){
+    padding: 0% 13%;
+  }
+  @media (min-width: 992px) and (max-width: 1165px){
+    padding: 0 7%;
+  }
+  box-sizing: border-box;
+  background: #F4F4F4;
+  border-bottom: none;
+  box-shadow: none;
+  min-height: 52px;
+  max-height: auto;
+
+  #brand {
+    background: #555555;
+    color: #FFFFFF;
+    font-size: 22px;
+    width: 150px;
+    line-height: 15px;
+    text-align: center;
+    font-weight: normal;
+  }
+  .item {
+    height: 52px;
+    line-height: 25px;
+    color: #6C6C6C;
+    font-weight: lighter;
+
+    &:hover {
+      background-color: #E5E5E5 ;
+    }
+    &.active{
+      color: #6c6c6c !important;
+      background: #E5E5E5;
+      box-shadow: none;
+    }
+  }
+}
+.ui.inverted.navbar.menu
+{
+  background-color: #555555;
+  color: #6C6C6C;
+}
+.ui.vertical.navbar.menu
+{
+  color: #6C6C6C;
+  margin-top: 45px;
+  #brand {
+    background: #555555;
+    color: #FFFFFF;
+    font-size: 17px;
+    font-weight: bold;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #909090;
+}
+
+.filter_list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 20px;
+
+  strong {
+    text-decoration: none;
+    color: #797979;
+    font-size: 0.9em;
+    font-weight: bold;
+  }
+  a {
+    font-size: 0.9em;
+  }
+}
+.ui.page.grid
+{
+  height: 62px;
+  margin: 3rem 0 -5rem 0;
+}
+
+
+.ui.page.grid.custom_breadcrumbs {
+  font-size: 0.9em;
+  color: #7C7C7C;
+  i{
+    color: black;
+  }
+  a {
+    font-size: 0.9em;
+    color: #7C7C7C;
+  }
+  .active.section
+  {
+    font-size: 0.9em;
+    color: #7C7C7C;
+    font-weight: normal;
+  }
+
+}
+.ui.segment
+{
+  max-height: auto;
+  background-color: #FFFFFF;
+  border-radius: 0;
+}

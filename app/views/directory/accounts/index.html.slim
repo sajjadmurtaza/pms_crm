@@ -1,0 +1,58 @@
+= content_for :sidebar
+  = render 'sidebar'
+
+= content_for :action_bar
+  = link_to semantic_icon('add'), new_account_path, class: "ui button"
+  .ui.dropdown.button.sort-menu
+    i.sort.icon
+    .menu
+      = render 'shared/sorting'
+      /= sort_link(@q, :title, 'Title', {}, class: 'item')
+      /= sort_link(@q, :email, 'Email', {}, class: 'item')
+
+  = listing_layout_switch
+
+= content_for :sub_action_bar
+  = render partial: 'shared/pagination', locals: {collection: @accounts}
+
+- if params[:listing_layout] == 'table'
+  table.ui.padded.table.data-listing
+    thead
+      tr
+        th.four.wide Title
+        th Email
+        th Account No.
+
+    tbody
+      - @accounts.each do |account|
+        tr.data-block
+          td
+            .text
+              strong = link_to account.title, account_path(account)
+              .ui.pointing.dropdown
+                i.dropdown.icon.data-actions
+                .menu
+                  = link_to 'Edit', edit_account_path(account), class: 'item'
+                  = link_to 'Delete', account_path(account), method: :delete, data: {confirm: 'Are you sure you want to delete?'}, class: 'item'
+
+          td.grey = account.emails.try(:first).try(:email)
+          td.grey = account.account_number
+
+
+- elsif params[:listing_layout] == 'list'
+  .ui.very.relaxed.divided.list.data-listing
+    - @accounts.each do |account|
+      .item.data-block
+        .content
+          .header
+            .text
+              strong = link_to account.title, account_path(account)
+              .ui.pointing.dropdown
+                i.dropdown.icon.data-actions
+                .menu
+                  = link_to 'Edit', edit_account_path(account), class: 'item'
+                  = link_to 'Delete', account_path(account), method: :delete, data: {confirm: 'Are you sure you want to delete?'}, class: 'item'
+          span.info-block.grey
+            =label_with_icon account.emails.first.try(:email), 'mail outline'
+          span.info-block.grey
+            = label_with_icon account.account_number, 'user'

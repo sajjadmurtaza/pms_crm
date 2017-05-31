@@ -1,0 +1,21 @@
+#show-box
+  .box_content
+    .comment
+      .content
+        strong = "#{label_with_icon (l @invoice.due_date), 'empty calendar'}".html_safe
+        .right.floated.padded
+          = link_to 'Close', url_for(:back), class: 'ui black button small'
+        .right.floated.padded
+          = link_to 'Edit', edit_invoice_path(@invoice), class: 'ui blue button small', remote: true
+        span.grey = " — #{@invoice.organization_unit.try(:title)}".html_safe
+        .text.grey = number_to_currency @invoice.cost, precision: 2
+        .text.grey = @invoice.split_type.try(:name)
+        .text.grey = @invoice.task_list.try(:title)
+        .text
+          i class="circle large icon" style="color:#{@invoice.try(:status).try(:value)}"
+      .description.grey
+        = @invoice.invoice_project.html_safe
+      .description.grey
+        = @invoice.invoice_task.html_safe
+
+  = render_tabs([{name: 'notes', partial: 'shared/notes', label: 'Notes', remote: false, locals: {object: @invoice}}])

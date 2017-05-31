@@ -1,0 +1,7 @@
+= widget_div class: 'task-list-widget' do
+  = link_to semantic_icon('add icon'), url_for_event(:new,taskable_id: @object.id, taskable_type: @object.class), remote: true, class: "ui small blue icon button"
+  .ui.stacked.segment.hidden.transition.form-background#add_task_list
+  .list-top
+  .ui.piled
+    div class="ui threaded comments " id="task_lists"
+      = render partial: 'task_list', collection: @object.task_lists.order('created_at desc'), locals: {object: @object}

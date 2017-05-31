@@ -1,0 +1,8 @@
+<% if @calendar_entry.errors.present? %>
+    setTimeout(function(){
+        Heyday.UI.showModal('Edit Event',"<%= j(render 'form') %>");
+        Heyday.UI.initJSElements();
+    },550);
+<% else %>
+    Heyday.reload();
+<% end %>

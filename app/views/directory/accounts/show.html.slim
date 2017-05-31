@@ -1,0 +1,50 @@
+- content_for :sub_action_bar
+  = link_to 'Edit', edit_account_path, :class => 'ui blue button'
+  = link_to 'Delete', account_path(@account), method: :delete, data: {confirm: 'Are you sure you want to delete?'}, class: 'ui red button'
+  = link_to 'Close', url_for(:back), class: 'ui black button'
+
+
+.ui.grid
+  .three.column.row
+    .column
+      .ui.small.block.header Account Information
+      table.ui.basic.table
+        tbody
+          = show_for @account do |account|
+            = account.attribute :title
+            = account.attribute :account_number
+
+          - @account.emails.each do |email|
+            = show_for email do |e|
+              = e.attribute :email, label: "#{email.email_type} Email"
+
+    .column
+      .ui.small.block.header Billing Address
+      table.ui.basic.table
+        tbody
+          - @account.billing_address.where(address_type: 'billing').each do |b|
+            = show_for b do |billing|
+              = billing.attribute :address1
+              = billing.attribute :address2
+              = billing.attribute :country
+              = billing.attribute :state
+              = billing.attribute :city
+              = billing.attribute :zip
+            tr
+              td colspan='2'
+                hr
+    .column
+      .ui.small.block.header Postal Address
+      table.ui.basic.table
+        tbody
+          - @account.postal_address.where(address_type: 'postal').each do |p|
+            = show_for p do |postal|
+              = postal.attribute :address1
+              = postal.attribute :address2
+              = postal.attribute :country
+              = postal.attribute :state
+              = postal.attribute :city
+              = postal.attribute :zip
+            tr
+              td colspan='2'
+                hr

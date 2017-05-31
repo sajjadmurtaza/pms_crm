@@ -1,0 +1,10 @@
+body.sessions_new {
+  background: #dddddd;
+
+  #login-box {
+    margin-top: 12rem;
+    #invalid_credentials_notice{
+      color: #D95C5C;
+    }
+  }
+}

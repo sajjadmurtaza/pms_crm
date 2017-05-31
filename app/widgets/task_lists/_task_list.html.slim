@@ -1,0 +1,23 @@
+div class="comment"
+  .content
+    div id="task_list_edit_#{task_list.id}" class='action-hover'
+      span.author.task-list-title style="color: #{task_list.invoice.status.value if task_list.invoice}" = task_list.title
+      .metadata
+        span.date.hide-display
+          = link_to(semantic_icon('pencil'), url_for_event(:edit, id: task_list.id), remote: true, class: 'edit grey')
+          = link_to(semantic_icon('trash medium icon'), url_for_event(:destroy, id: task_list.id),remote:true, data: {confirm: 'Are you sure!'}, class: 'edit grey')
+          - if task_list.billable
+            - if task_list.invoice.present?
+              = link_to(semantic_icon('bar chart small'), invoice_path(task_list.invoice), class: 'grey')
+            -else
+              = link_to(semantic_icon('bar chart small'), new_invoice_path(project_id: task_list.taskable.id, lead_id: task_list.taskable.lead_id, task_list_id: task_list.id ), remote: true, class: 'grey' )
+
+    div class="text indent_tasks" id="task_list_incomplete_tasks_#{task_list.id}"
+      = render partial: 'task', collection: task_list.incomplete_tasks.order('created_at desc')
+    .actions.indent_tasks.list-top
+      /- if task_list.taskable.user == current_user
+      = link_to('Add a Task', url_for_event(:new_task, id: task_list.id), class: 'edit list-title', remote: true)
+    div class="text" id="add_task_list_task_#{task_list.id}"
+
+    div class="text indent_tasks" id="task_list_complete_tasks_#{task_list.id}"
+      = render partial: 'task', collection: task_list.complete_tasks.order('created_at desc')

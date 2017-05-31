@@ -1,0 +1,37 @@
+= content_for :sidebar
+  .ui.vertical.secondary.pointing.menu
+    = active_link_to 'Projects', project_logs_path, 'item'
+    = active_link_to 'Leads', lead_logs_path, 'item'
+    = active_link_to 'Invoices', invoice_logs_path, 'item'
+  = filter_box_for @search, get_filter_options
+  <br/>
+  = filter_aggregates_for @search
+  - if params[:action] == 'project_log'
+    .hd-aggregate-box
+      h3 = "Tasks"
+      - if @tasks_count == 0
+        span Nothing associated.
+      - else
+        .ui.list
+          .item
+            .ui.checkbox
+              - if @tasks_aggregate
+                input type="checkbox" data-aggregate-name="special_task" data-aggregate-value="special_task" checked="checked" class='filter-aggregate'
+              - else
+                input type="checkbox" data-aggregate-name="special_task" data-aggregate-value="special_task" class='filter-aggregate'
+
+              label = "Tasks (#{@tasks_count})"
+    .hd-aggregate-box
+      h3 = "Comments"
+      - if @comments_count == 0
+        span Nothing associated.
+      - else
+        .ui.list
+          .item
+            .ui.checkbox
+              - if @comments_aggregate
+                input type="checkbox" data-aggregate-name="special_comment" data-aggregate-value="special_comment" checked="checked" class='filter-aggregate'
+              - else
+                input type="checkbox" data-aggregate-name="special_comment" data-aggregate-value="special_comment" class='filter-aggregate'
+
+              label = "Comments (#{@comments_count})"

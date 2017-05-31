@@ -1,0 +1,1 @@
+$('#project_task_lists').html("<%= escape_javascript render(partial: 'pms/projects/task_list', collection: @project.task_lists.order('created_at desc')) %>");

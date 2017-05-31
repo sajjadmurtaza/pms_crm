@@ -1,0 +1,175 @@
+@import "constants";
+@import "colors";
+#content > form {
+  margin-top: 20px;
+}
+
+.ui.form.hd-theme {
+  .field {
+    label {
+      font-size: 1rem;
+    }
+
+    .input-experience {
+      min-width: 175px;
+    }
+
+    select {
+      margin: 0em;
+      padding: 0.58em;
+      font-size: 1em;
+      background-color: #FFFFFF;
+      border: 0 !important;
+      border: 0 !important;
+      border-bottom: 1px solid $s-indigo-300 !important;
+      outline: none;
+      color: rgba(0, 0, 0, 0.7);
+      box-shadow: 0em 0em 0em 0em rgba(0, 0, 0, 0.3) inset;
+      box-sizing: border-box;
+    }
+
+    &.inline {
+      position: static;
+
+      label {
+        width: $label-width;
+        padding-right: $label-margin;
+        margin: 0;
+        text-align: right;
+
+        &:after {
+          content: ":";
+        }
+        &.left-label-alignment {
+          text-align: left;
+        }
+      }
+
+      textarea {
+        width: auto;
+        height: auto;
+      }
+
+      select {
+        max-width: 200px;
+      }
+
+      .label.error {
+        position: absolute;
+        left: 405px;
+        top: 4px;
+        min-width: 110px;
+      }
+
+      &.wysi {
+        label {
+          float: left;
+        }
+        .wysi-toolbar {
+          position: absolute;
+          left: $label-width + (2 * $label-margin);
+        }
+        textarea {
+          margin-top: 20px;
+          width: 750px - $label-margin - $label-width;
+        }
+      }
+    }
+
+    &.hidden {
+      border: none;
+    }
+
+    a.remove_fields {
+      visibility: hidden;
+    }
+
+    &:hover, > input:focus {
+      .remove_fields, ~ .remove_fields {
+        visibility: visible;
+      }
+    }
+  }
+
+  .actions {
+    padding-left: $label-width + $label-margin;
+    opacity: 1 !important;
+    .button {
+      margin-right: 10px;
+      margin-left: 0;
+    }
+  }
+
+  input[type="color"], input[type="date"], input[type="datetime"],
+  input[type="datetime-local"], input[type="email"], input[type="month"],
+  input[type="number"], input[type="password"], input[type="search"],
+  input[type="tel"], input[type="text"], input[type="time"], input[type="url"],
+  input[type="week"], textarea,.ui.form.hd-theme .field select {
+    min-width: 250px;
+    height: 40px !important;
+    border: 0 !important;
+    border: 0 !important;
+    border-bottom: 1px solid $s-indigo-300 !important;
+  }
+
+  fieldset {
+    border: 1px solid rgba(241, 218, 218, 0.32);
+
+    legend {
+      margin-left: 1em;
+      color: #000;
+      font-weight: bold;
+    }
+  }
+
+  .ui.segment {
+    padding: 0.5em 1em;
+
+    .label {
+
+    }
+  }
+
+  .links {
+    width: 218px;
+    font-size: 0.8em;
+    &.skill-remove-link {
+      text-align: left;
+    }
+    a {
+      color: #8d8d8d;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .inline.fields .field > :first-child,
+  .inline.field > :first-child {
+    margin: 0;
+  }
+
+  .contacts, .resources{
+    margin-left: $label-width + $label-margin;
+    margin-top: -25px;
+  }
+  .attachments{
+    margin-left: $label-width + $label-margin;
+    &.task{
+      margin-left: 0;
+    }
+    .nested-fields > .fields >.inline > label {
+      text-align: left;
+      width: auto;
+    }
+  }
+
+  .ui.segment > .attached.label:first-child + * {
+    margin-top: 2.5em;
+  }
+}
+.ui.form textarea, .ui.form input[type="color"], .ui.form input[type="date"], .ui.form input[type="datetime"], .ui.form input[type="datetime-local"], .ui.form input[type="email"], .ui.form input[type="month"], .ui.form input[type="number"], .ui.form input[type="password"], .ui.form input[type="search"], .ui.form input[type="tel"], .ui.form input[type="text"], .ui.form input[type="time"], .ui.form input[type="url"], .ui.form input[type="week"]{
+  height: 40px !important;
+  border: 0 !important;
+  border-bottom: 1px solid $s-indigo-300 !important;
+}

@@ -1,0 +1,7 @@
+<% if @task.completed %>
+    $("#uncompleted_task_<%=@task.id%>").remove();
+    $('#show_completed_tasks').prepend("<%= escape_javascript render(partial: 'assignment',  locals: {assignment: @task}) %>");
+<% else %>
+       $("#completed_task_<%=@task.id%>").remove();
+        $('#show_uncompleted_tasks').prepend("<%= escape_javascript render(partial: 'assignment',  locals: {assignment: @task}) %>");
+<% end %>

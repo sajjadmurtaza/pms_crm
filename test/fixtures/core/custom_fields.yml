@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  field_format: MyString
+  regexp: MyString
+
+two:
+  type: 
+  field_format: MyString
+  regexp: MyString

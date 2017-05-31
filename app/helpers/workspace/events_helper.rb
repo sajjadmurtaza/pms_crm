@@ -1,0 +1,2 @@
+module Workspace::EventsHelper
+end

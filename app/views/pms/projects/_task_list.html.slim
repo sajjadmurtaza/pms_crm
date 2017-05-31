@@ -1,0 +1,19 @@
+div class="comment"
+  .content
+    div id="task_list_edit_#{task_list.id}" class='action-hover'
+      a.author
+        = "<b class='list-title'>#{task_list.title}</b>".html_safe
+      .metadata
+        span.date.hide-display
+          = link_to('Edit', edit_task_list_path(task_list), remote: true, class: 'edit')
+          = link_to(semantic_icon('trash medium icon'), task_list_path(task_list), method: :delete,remote:true, data: {confirm: 'Are you sure!'}, class: 'edit')
+
+    div class="text indent_tasks" id="task_list_incomplete_tasks_#{task_list.id}"
+      = render partial: 'pms/task_lists/task', collection: task_list.incomplete_tasks.order('created_at desc')
+    .actions.indent_tasks.list-top
+      - if task_list.taskable.user == current_user
+        = link_to('Add a Task', add_task_task_list_path(task_list), class: 'edit list-title', remote: true)
+    div class="text" id="add_task_list_task_#{task_list.id}"
+
+    div class="text indent_tasks" id="task_list_complete_tasks_#{task_list.id}"
+      = render partial: 'pms/task_lists/task', collection: task_list.complete_tasks.order('created_at desc')

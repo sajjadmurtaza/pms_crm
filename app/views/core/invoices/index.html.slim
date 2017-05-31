@@ -1,0 +1,71 @@
+= content_for :sidebar
+  = render 'sidebar', url: invoices_path
+
+= content_for :action_bar
+  .ui.dropdown.button.sort-menu
+    i.sort.icon
+    .menu
+      = render 'shared/sorting'
+  /= sort_link(@q, :first_name, 'Name', {}, class: 'item')
+  /= sort_link(@q, :email, 'Email', {}, class: 'item')
+
+  = listing_layout_switch
+
+= content_for :sub_action_bar
+  = render partial: 'shared/pagination', locals: {collection: @invoices}
+
+- if params[:listing_layout] == 'table'
+
+  table.ui.table.data-listing
+    thead
+      tr
+        th Status
+        th Service
+        th Against
+        th Lead/Client Name
+        th Project
+        th.text_right Amount
+    tbody.invoices-list
+
+      - @invoices.each do |invoice|
+
+        tr.clickAble data-invoice=invoice.id href="#{invoice_path(invoice)}"
+          td
+            i class="circle large icon" style="color:#{invoice.try(:status).try(:value)}"
+
+          td.grey = invoice.organization_unit.try(:title)
+          - if (invoice.lead and invoice.project) or invoice.project
+            td.grey = 'Project'
+            td.grey = invoice.project.user.try(:name)
+          - elsif invoice.lead
+            td.grey = 'Lead'
+            td.grey = invoice.lead.try(:name)
+          -else
+            td
+            td
+          td.grey = invoice.try(:project).try(:title)
+          td.text_right.grey = number_to_currency invoice.cost
+
+    tfoot
+      tr
+        td colspan=5
+        td.text_right
+          .text
+            strong = "Total = #{number_to_currency @invoices.all.sum(:cost)}"
+
+- elsif params[:listing_layout] == 'list'
+  .ui.very.relaxed.divided.list.data-listing
+    - @invoices.each do |invoice|
+      .item.data-block
+        .icon
+          i class="circle large icon" style="color:#{invoice.try(:status).try(:value)}"
+        .content
+          .header
+            .text
+              strong = link_to "#{l invoice.due_date if invoice.due_date}", invoice_path(invoice)
+              - unless invoice.organization_unit.nil?
+                span.grey = " — #{invoice.organization_unit.title}"
+          span.grey.info-block
+            = label_with_icon invoice.cost.to_s, 'small dollar grey'
+          span.grey.info-block
+            = label_with_icon invoice.split_type, 'time grey'

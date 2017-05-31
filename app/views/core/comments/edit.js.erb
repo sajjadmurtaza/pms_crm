@@ -1,0 +1,2 @@
+//$("#comment_form").hide().fadeOut(1200);
+$("#comment_<%=@comment.id%>").html($("<%= escape_javascript render(partial: "core/comments/form", locals: {comment: @comment}) %>").hide().fadeIn(1200));

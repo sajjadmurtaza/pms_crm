@@ -1,0 +1,4 @@
+.header = "Discuss <i style='font-weight:300'>#{@task.description}</i> from task list <i  style='font-weight:300'>#{@task.task_list.title}</i>".html_safe
+.content.comments
+  = render partial: "core/comments/comments", locals: {comment: @comment, object: @task}
+

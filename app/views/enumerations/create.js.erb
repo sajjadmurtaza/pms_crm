@@ -1,0 +1,10 @@
+<% if @enumeration.errors.present? %>
+    setTimeout(function(){
+        Heyday.UI.showModal('<%= @enumeration.type.split('::').last %>','<%= j render(partial: 'form') %>');
+    }, 550)
+
+<% else %>
+  $('.new_record.<%=@enumeration.type.split('::').last.underscore%>').before('<%=j(render(partial: 'item' , locals: {item: @enumeration,subclass: @enumeration.type}))%>')
+  //bind default events
+  Heyday.UI.initJSElements();
+<% end %>

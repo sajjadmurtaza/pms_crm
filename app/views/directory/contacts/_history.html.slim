@@ -1,0 +1,12 @@
+- if object.assigned_projects.present?
+
+  .ui.two.column.grid
+    .column
+      .ui.stacked.segment
+        .ui.top.attached.label Projects
+
+        - object.assigned_projects.each do |project|
+          .ui.top_margin
+            span.ui.label = project.lead.try(:organization_unit).try(:title)
+            span.ui = link_to project.title, project_path(project)
+            span.grey.small-font = " — #{project.status}"

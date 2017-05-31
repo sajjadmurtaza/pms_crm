@@ -1,0 +1,231 @@
+@import "constants";
+
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: $nav-bar-height + $secondary-nav-bar-height - 13px;
+  background: #F8F8F8;
+}
+
+body, html {
+  height: 100%;
+  font-size: 13px;
+}
+
+html.turbolinks-progress-bar::before {
+  background-color: $blue !important;
+  height: 5px !important;
+}
+
+#header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+}
+
+#side-bar{
+  padding-top: 20px;
+
+  > h3:first-child{
+    margin-top: 0;
+  }
+}
+
+#nav-bar {
+  width: 100%;
+  display: block;
+  height: $nav-bar-height;
+  background: $black;
+
+  > .menu {
+    background: $black;
+    border-radius: 0;
+    height: $nav-bar-height;
+
+    > .item {
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: $nav-bar-height;
+    }
+
+    .ui.dropdown {
+      padding: 0 10px;
+      line-height: $nav-bar-height;
+    }
+  }
+}
+
+#action-bar {
+  margin-right: 20px;
+  height: 30px;
+  padding: 5px 0;
+  box-sizing: border-box;
+
+  .button {
+    padding: 8px;
+    margin-left: 5px;
+    .icon {
+      margin: 0;
+    }
+  }
+  .ui.buttons {
+    .button:last-child {
+      margin-left: 0;
+    }
+    .button{
+      margin-left: 0;
+    }
+    .button:first-child{
+      margin-left: 5px;
+    }
+  }
+}
+
+#secondary-nav-bar {
+  width: 100%;
+  display: block;
+  height: $secondary-nav-bar-height;
+  background: $white;
+  border-bottom: 1px solid $light-gray;
+
+  .menu {
+    padding: 0;
+    margin: 0;
+    height: $secondary-nav-bar-height;
+
+    .item {
+      line-height: 24px;
+      height: $secondary-nav-bar-height !important;
+      box-sizing: border-box;
+      font-size: 1.1rem;
+
+      &.header {
+        font-size: 1.5rem;
+        letter-spacing: 0.2em;
+        color: $black !important;
+        padding-left: 0;
+        line-height: 18px;
+        font-weight: 400 !important;
+        margin-left: 14px;
+      }
+    }
+  }
+
+  .right.floated {
+    margin-right: 10px;
+  }
+}
+
+#sub-action-bar {
+  border-bottom: 1px solid $light-gray;
+  padding: 10px;
+  box-sizing: border-box;
+  background: $white;
+
+  .ui.breadcrumb {
+    margin: 0;
+    font-size: 0.8em;
+    .icon {
+      font-size: 1.1em;
+    }
+  }
+
+  .title {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 100;
+  }
+
+  .button {
+    padding: 8px;
+    margin-left: 5px;
+    .icon {
+      margin: 0;
+    }
+  }
+  .ui.buttons {
+    .button{
+      margin-left: 0;
+    }
+  }
+}
+
+#status-bar {
+  margin: 20px 0;
+  >.column{
+    text-align: center;
+  }
+}
+
+#container {
+  background: $container;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 20px;
+  min-height: 500px;
+  @include box-shadow(0 0 5px 2px rgba(0, 0, 0, 0.1));
+
+  &.ui.grid {
+    padding-top: 5px;
+    width: 80%;
+    margin-left: 10% !important;
+  }
+}
+
+#content {
+  padding-top: 0;
+}
+
+.sticky-wrapper.is-sticky {
+  #sub-action-bar {
+    z-index: 2;
+    @include box-shadow(0 1px 5px rgba(0,0,0,.2));
+    .ui.breadcrumb {
+      display: none;
+    }
+  }
+}
+#show-box{
+  width: 100%;
+  background-color: #FFFFFF;
+  margin: 2px 0 0 20px;
+  box-shadow: 0 0 15px 4px #DDDDDD;
+  >.box_content{
+    margin: 0 0 0 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .comment{
+    border: none;
+  }
+}
+
+.ui.top_margin {
+    margin-top: 10px;
+}
+
+.text_right{
+  text-align: right !important;
+}
+.task-line-strike{
+  text-decoration: line-through;
+}
+
+#show_completed_tasks,  #my_completed_tasks {
+  >.comment{
+    min-height: 3.5em;
+  }
+}
+
+.sort-menu{
+  .menu{
+    height: auto !important;
+    .item{
+      margin-left: 0px !important;
+      a{
+        text-decoration: none;
+      }
+    }
+  }
+}

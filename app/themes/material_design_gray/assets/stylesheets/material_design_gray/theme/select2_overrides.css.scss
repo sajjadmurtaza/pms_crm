@@ -1,0 +1,58 @@
+@import "constants";
+
+.select2-container-multi .select2-choices {
+  background: #FFF;
+}
+
+.select2-container-active .select2-choice,
+.select2-container-active .select2-choices,
+.select2-container-multi.select2-container-active .select2-choices {
+  border-color: $gray;
+  outline: none;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.select2-drop-active {
+  border: 1px solid $gray;
+}
+
+.select2-results .select2-highlighted {
+  background: $light-gray;
+  color: inherit;
+}
+
+.select2-results {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 4px;
+}
+
+.select2-container-multi .select2-search-choice-close {
+  right: 3px;
+  left: auto;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+  min-width: 31px;
+  margin: 2px 0 2px 2px;
+  padding: 3px 18px 3px 3px;
+  border-radius:2px;
+  background: #D0D7DF;
+  height: 1.2em;
+  line-height: 1.2em;
+  border: 2px solid #D0D7DF;
+  font-weight: 500;
+  color: #000000;
+
+  #experience, #expertise{
+    margin: 0 0 0 2px;
+    min-width: 95px;
+    border-radius: 0px;
+    height: 35px;
+  }
+  .label {
+    font-weight: 400;
+    font-style: italic;
+  }
+}

@@ -1,0 +1,33 @@
+= render 'sidebar'
+
+- content_for :sub_action_bar
+  .buttons
+    /= link_to 'Make Default', make_default_admin_note_type_path(@note_type), :class => 'ui button', remote: true unless @note_type.default?
+    = link_to 'Edit', edit_admin_note_type_path(@note_type), :class => 'ui button', remote: true
+    = link_to 'Add Custom Field', new_admin_custom_field_path(field_source: 'Note', field_meta: "[note_type:#{@note_type.id}]"), :class => 'ui blue button', remote: true
+    = link_to 'Cancel', url_for(:back), class: 'ui black button'
+
+h3.left.padded Custom Fields
+
+table.ui.padded.table.data-listing
+  thead
+    tr
+      th style="width: 30%" Name
+      th Type
+      th Required
+      th Searchable
+      th Scheduleable
+  tbody
+    - @custom_fields.each do |field|
+      tr.data-block
+        td
+          strong = field.name
+          .ui.pointing.dropdown
+            i.dropdown.icon.data-actions
+            .menu
+              = link_to 'Edit', edit_admin_custom_field_path(field), class: 'item', remote: true
+              = link_to 'Delete', admin_custom_field_path(field), method: :delete, data: {confirm: 'Are you sure you want to delete?'}, class: 'item', remote: true
+        td.grey = field.field_format
+        td.grey = field.required?
+        td.grey = field.searchable?
+        td.grey = field.scheduleable?

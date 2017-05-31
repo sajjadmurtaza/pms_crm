@@ -1,0 +1,18 @@
+- content_for :sub_action_bar
+  = link_to semantic_icon('add'), new_skill_path,remote: true, class: "ui button"
+
+.ui.stackable.grid
+  .ui.one.column.row
+    .column.padded.top
+      .ui
+        table.ui.padded.table.celled.data-listing
+          thead
+            tr.header.large
+              th.four.wide Name
+              th  Type
+          tbody.draggable
+            = render partial: 'skill' , collection: @skills
+            tr class='new-record'
+
+        br
+.new-skill-content

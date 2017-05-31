@@ -1,0 +1,31 @@
+= render 'sidebar'
+
+= content_for :sub_action_bar
+  .date-filter.floated.left
+    = render partial: 'filters', :locals => {:url => lead_logs_path}
+  .floated.right
+    = render partial: 'shared/pagination', locals: {collection: @lead_logs, additional_params: {filters: params[:filters]}}
+
+.ui.comments.top_margin
+  - @lead_logs.each do |log|
+    - if log.class == Core::Note
+      div.comment data-note=log.id
+        a.avatar title=log.user.name
+          = image_tag log.user.picture.name.url(:thumb)
+        .content
+          span.author
+            = log.note_type.name.titleize
+          .metadata
+            span.date
+              = "#{time_ago_in_words(log.created_at)} ago in"
+            = link_to log.notable.name, lead_path(log.notable)
+          .text
+            = log.content.html_safe
+            - log.custom_values.each do |val|
+              div
+                = val.name
+                | :&nbsp;
+                = val.value
+            - log.attachments.each do |attachment|
+              br
+              = link_to "<i class='ui attachment icon'></i>#{attachment.name.file.identifier}".html_safe, attachment.name.url, target: '_blank'

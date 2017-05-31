@@ -1,0 +1,15 @@
+= render 'sidebar'
+= content_for :sub_action_bar
+  = render partial: 'shared/pagination', locals: {collection: @completed_assignments}
+- @completed_assignments.each do |task|
+  .ui.comments#my_completed_tasks
+    .comment
+      a.avatar title=task.user.name
+        = image_tag task.user.picture.name.url(:thumb)
+        .content
+          span.author
+            = link_to 'Task', task_path(task)
+          .metadata
+            span.date
+              = " completed #{time_ago_in_words(task.updated_at)} ago in "
+            = link_to task.task_list.taskable.title, project_path(task.task_list.taskable) if task.task_list.taskable

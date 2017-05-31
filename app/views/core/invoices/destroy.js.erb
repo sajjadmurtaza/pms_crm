@@ -1,0 +1,3 @@
+<% unless @invoice.errors.present? %>
+    $('[data-invoice="<%= @invoice.id%>"]').remove();
+<% end %>

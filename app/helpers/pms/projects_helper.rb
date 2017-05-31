@@ -1,0 +1,2 @@
+module Pms::ProjectsHelper
+end

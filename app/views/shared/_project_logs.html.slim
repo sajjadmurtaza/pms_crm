@@ -1,0 +1,48 @@
+- object.sort_by(&:created_at).reverse.each do |project|
+  - if project.class == Core::Note
+    .ui.comments
+      div.comment data-note=project.id
+        a.avatar title=project.user.name
+          = image_tag project.user.picture.name.url(:thumb)
+        .content
+          span.author
+            strong = project.note_type.name.titleize
+          .metadata
+            span.date
+              = "#{time_ago_in_words(project.created_at)} ago in"
+            - if project.notable
+              strong = link_to project.notable.title, project_path(project.notable)
+          .text
+            = simple_format project.content
+            - project.custom_values.each do |val|
+              div
+                u = val.name
+                | :
+                = val.value
+            - project.attachments.each do |attachment|
+              br
+              = link_to "<i class='ui attachment icon'></i>#{attachment.name.file.identifier}".html_safe, attachment.name.url, target: '_blank'
+
+  /- elsif project.class == Pms::Task
+  /  strong Task
+  /  - unless project.completed
+  /    div class="content action-hover" id="task_edit_#{project.id}"
+  /      a.author style="margin-left: -21px;"
+  /        = project.description.html_safe
+  /      .metadata
+  /        span.date
+  /          - project.assigned_users.each do |user|
+  /            span.ui.label = user.name
+  /      .text
+  /        = "Due Date: #{project.due_date.try(:strftime, Core::Setting.date_format)}"
+  /
+  /  - else
+  /    div class="content action-hover" id="task_edit_#{project.id}"
+  /      a.author style="margin-left: -21px;"
+  /      .metadata
+  /        span.date.text-style
+  /          = check_box_tag 'completed', project.id, project.completed, class: 'task_complete', id: "switch_task_complete_#{project.id}", 'data-load-event-url' => url_for_event(:switch_task_completion, task_id: project.id)
+  /          = "#{project.description} Completed"
+  /        span.date.hide-display
+  /          = link_to(semantic_icon('trash medium icon'), url_for_event(:delete_task, task_id: project.id), remote: true, data: {confirm: 'Are you sure!'}, class: 'edit')
+  /  div id="show_task_#{project.id}"

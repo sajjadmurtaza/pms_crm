@@ -1,0 +1,10 @@
+tr id="#{role.id}"
+  td.data-block
+    .text
+      strong = role.name
+      .ui.dropdown.item
+        i.dropdown.icon.data-actions
+        .menu
+          = link_to 'Edit', edit_role_path(role),remote: true, class: 'item'
+          = link_to 'Delete', role_path(role), data: {confirm: 'Are you sure?' ,remote: true}, method: :delete, class: 'item'
+  td.grey = role.description

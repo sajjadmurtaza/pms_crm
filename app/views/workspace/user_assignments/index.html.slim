@@ -1,0 +1,6 @@
+= render 'sidebar'
+= content_for :sub_action_bar
+  = render partial: 'shared/pagination', locals: {collection: @assignments}
+.ui.comments.top_margin.assignments-list#show_uncompleted_tasks
+  = render partial: 'assignment', collection: @assignments, as: :assignment
+.ui.comments.top_margin.assignments-list#show_completed_tasks

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  price: 1.5
+  description: MyText
+  split_type_id: 1
+  quote_date: 2014-12-18
+  project_id: 1
+  lead_id: 1
+  reference_id: 
+  reference_type: Reference
+
+two:
+  price: 1.5
+  description: MyText
+  split_type_id: 1
+  quote_date: 2014-12-18
+  project_id: 1
+  lead_id: 1
+  reference_id: 
+  reference_type: Reference

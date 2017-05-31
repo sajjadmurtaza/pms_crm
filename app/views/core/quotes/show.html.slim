@@ -1,0 +1,19 @@
+#show-box
+  .box_content
+    .comment
+      .content
+        strong = "#{label_with_icon (l @quote.quote_date), 'empty calendar'}".html_safe
+        .right.floated.padded
+          = link_to 'Close', url_for(:back), class: 'ui black button small'
+        .right.floated.padded
+          = link_to 'Edit', edit_quote_path(@quote), class: 'ui blue button small', remote: true
+        span.grey = " — #{@quote.lead.name}".html_safe
+        .text.grey = number_to_currency @quote.amount, precision: 2
+        .text
+          br
+          = @quote.description
+        .text
+          - if @quote.attachments.present?
+            - @quote.attachments.each do |attachment|
+              br
+              = link_to "<i class='ui attachment icon'></i>#{attachment.name.file.identifier}".html_safe, attachment.name.url, target: '_blank'

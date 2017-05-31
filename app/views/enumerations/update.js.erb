@@ -1,0 +1,8 @@
+<% if @enumeration.errors.present? %>
+    setTimeout(function(){
+        Heyday.UI.showModal('<%= @enumeration.type.split('::').last %>','<%= j render(partial: 'form') %>');
+    }, 550)
+<% else %>
+  $('#<%=@enumeration.id%>').replaceWith('<%=j(render(partial: 'item' , locals: {item: @enumeration,subclass: @enumeration.type}))%>')
+  Heyday.UI.initJSElements();
+<% end %>

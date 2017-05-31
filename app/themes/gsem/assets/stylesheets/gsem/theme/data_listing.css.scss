@@ -1,0 +1,35 @@
+.data-listing {
+  .data-block {
+    .data-actions {
+      display: none;
+    }
+    &:hover {
+      .data-actions {
+        display: inline;
+      }
+    }
+  }
+}
+
+.ui.divided.list.data-listing {
+  > .item {
+    padding: 0 10px;
+
+    .content {
+      .info-block {
+        margin: 0 5px;
+      }
+
+      .header {
+
+      }
+      .header + .info-block {
+        margin-left: 0;
+      }
+    }
+
+    &:nth-child(2n) {
+      background: rgba(0, 0, 50, 0.02);
+    }
+  }
+}

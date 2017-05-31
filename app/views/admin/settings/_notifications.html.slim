@@ -1,0 +1,6 @@
+= f.input :mail_from
+= f.input :bcc_recipients, as: :boolean
+= f.input :plain_text_mail, as: :boolean
+= f.input :default_notification_option, collection: [['Only My Events']]
+
+= call_hook(:view_settings_notifications_form)

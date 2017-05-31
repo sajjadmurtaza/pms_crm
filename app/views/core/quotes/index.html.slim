@@ -1,0 +1,33 @@
+h1 Listing core_quotes
+
+table
+  thead
+    tr
+      th Price
+      th Description
+      th Split type
+      th Quote date
+      th Project
+      th Lead
+      th Reference
+      th
+      th
+      th
+
+  tbody
+    - @core_quotes.each do |core_quote|
+      tr
+        td = core_quote.price
+        td = core_quote.description
+        td = core_quote.split_type_id
+        td = core_quote.quote_date
+        td = core_quote.project_id
+        td = core_quote.lead_id
+        td = core_quote.reference
+        td = link_to 'Show', core_quote
+        td = link_to 'Edit', edit_core_quote_path(core_quote)
+        td = link_to 'Destroy', core_quote, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Quote', new_core_quote_path
